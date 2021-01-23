@@ -14,7 +14,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{hyperref}
-\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+\geometry{left=1.75cm,right=1.75cm,top=2.5cm,bottom=2.5cm}
 
 
 
@@ -118,6 +118,153 @@
 
 
 In the following section we will focus on the following nonlinear system of PDE's:
+\begin{subequations}
+\label{eq:system-Zinc}
+\begin{align}
+    \left( \theta + \frac{b_X}{1 + \kappa_X b_X^2 Y_L} \right) \partial_t X_L - \frac{\kappa_X b_X X_L}{(1+\kappa_X b_X Y_L)^2} \partial_t Y_L &=
+    \nabla \cdot ( D_X \nabla X_L - \nu X_L  ) - g_X
+    \\
+    \left( \theta + \frac{b_Y}{1 + \kappa_Y b_Y^2 X_L} \right) \partial_t Y_L - \frac{\kappa_Y b_Y Y_L}{(1+\kappa_Y b_Y X_L)^2} \partial_t X_L &=
+    \nabla \cdot ( D_Y \nabla Y_L - \nu Y_L  ) - g_Y;
+\end{align}
+where $X(r,z)$ and $Y(r,z)$ are subject to the boundary conditions:
+\begin{align}
+    D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r = a, z \in [L - \delta L_X, L],
+    \\
+    D_Y \partial_r Y_L - \nu Y_L &= -F_Y(t) &\text{at } r = a, z \in [L - \delta L_Y, L],
+\end{align}
+where $L = L_0 + G t$. For the rest of the boundary, we have zero-flux conditions; i.e., in the case \( r = x\), this is just
+\begin{align}
+    D_X \partial_r X_L - \nu X_L = 0
+    \qquad\text{and}\qquad
+    D_Y \partial_r Y_L - \nu Y_L = 0.
+\end{align}
+Moreover, $r \in [a,x]$, with $x = (\pi L_V)^{1/2}$, and $z \in [0, L_{t_{\mathrm{max}} }]$.
+\end{subequations}
+
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+\subsection{Variational formulation}
+
+To find the variational formulation of system \eqref{eq:system-Zinc}, we will use Galerkin's method. Let's begin supposing that there is a $\mathcal{C}^2 (\bar \Omega)$ solution pair $(X_L,Y_L)$ and multiply the first equation by a $v \in \mathcal{C}^1 (\bar\Omega)$ function and introduce $A_X(Y_L) = \theta + \frac{b_X}{1 + \kappa_X b_X Y_L}$ and $B_X(X_L,Y_L) = \frac{\kappa_X b_X^2 X_L}{(1+\kappa_X b_X Y_L)^2}$. We then get
+\begin{align}
+    A_X(Y_L) \partial_t X_L v - B_X(X_L,Y_L) \partial_t Y_L v = \nabla \cdot (D_X \nabla X_L - \nu X_L) v - g_X v.
+\end{align}
+Integrating this, and using the Divergence Theorem, we have
+\begin{align}
+    \int\limits_\Omega
+    A_X(Y_L) \partial_t X_L v &- B_X(X_L,Y_L) \partial_t Y_L v \dif \mu = 
+    \int\limits_\Omega
+    \nabla \cdot (D_X \nabla X_L - \nu X_L) v  \dif \mu
+    -\int\limits_\Omega g_X v \dif \mu
+    \\
+    &=
+    \int\limits_\Gamma
+    (D_X \nabla X_L - \nu X_L) \cdot \vec{n} v
+    \dif \sigma
+    -\int\limits_\Omega
+    (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
+    -\int\limits_\Omega g_X v \dif \mu;
+\end{align}
+where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector and $\sigma$ the surface measure on $\Gamma$. 
+
+Notice that we only need to analyse three segments of $\Gamma$: $\Gamma_{a_X} = \{a\}\times [L-\delta L_X,L]$, $\Gamma_{a_Y} = \{a\} \times [L - \delta L_Y, L]$, and $ \Gamma_0 = \Gamma \setminus (\Gamma_{a_X} \cup \Gamma_{a_Y})$. At $r = a$, we have that $ \vec{n} = (-1,0)$, thus
+\begin{align}
+    \int\limits_{\Gamma_{a_X}}
+    (D_X \nabla X_L - \nu X_L) \cdot \vec{n} v    \dif \sigma
+    =
+    -
+    \int\limits_{\Gamma_{a_X}}
+    (D_X \partial_r X_L - \nu X_L) v    \dif \sigma
+    =
+    -\int\limits_{\Gamma_{a_X}}
+    \alpha X_L v    \dif \sigma.
+\end{align}
+Similarly, in the equation for \(Y_L\) we have
+\begin{align}
+    \int\limits_{\Gamma_{a_Y}}
+    (D_Y \nabla Y_L - \nu Y_L) \cdot \vec{n} v    \dif \sigma
+    =
+    \int\limits_{\Gamma_{a_Y}}
+    F_Y(t) v    \dif \sigma.
+\end{align}
+For the other segments of the border, the surface area is zero. To see this, consider $r = x$, where we have that $ \vec{n} = (1,0)$, thus
+\begin{align}
+    \int\limits_{\Gamma_0 \cap \{r=x\}}
+    (D_X \nabla X_L - \nu X_L) \cdot \vec{n} v    \dif \sigma
+    =
+    \int\limits_{\Gamma_0 \cap \{r=x\}}
+    (D_X \partial_r X_L - \nu X_L) v    \dif \sigma
+    =
+    0.
+\end{align}
+
+As a result, we have that the following equation must be satisfied for every $v \in \mathcal{C}^1 (\bar\Omega)$:
+\begin{align}
+    \int\limits_\Omega
+    A_X(Y_L) \partial_t X_L v - B_X(X_L,Y_L) \partial_t Y_L v \dif \mu
+    &=
+    -\int\limits_{\Gamma_{a_X}}    \alpha X_L v    \dif \sigma
+    -\int\limits_\Omega        (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
+    -\int\limits_\Omega        g_X v \dif \mu.
+\end{align}
+Notice that by density, the weak form of the previous equation is the same over $H^1(\Omega)$.
+Similarly, the variational form for the governing equation of $Y_L$ is
+\begin{align}
+    \int\limits_\Omega
+    A_Y(X_L) \partial_t Y_L v - B_Y(Y_L,X_L) \partial_t X_L v \dif \mu
+    &=
+    \int\limits_{\Gamma_{a_Y}}     F_Y(t) v    \dif \sigma
+    -\int\limits_\Omega        (D_Y \nabla Y_L - \nu Y_L) \cdot \nabla v  \dif \mu
+    -\int\limits_\Omega        g_Y v \dif \mu 
+\end{align}
+for all \(v \in H(\Omega)\).
+
+
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+\subsection{Time discretisation}
+
+To approximate the time derivative we will use a simple backward difference. First, we will discretise the time domain; then, let the superscript $n$ denote a quantity at time $t_n$, where $n$ is an integer counting time levels; e.g. $X_L^n$ is $X_L$ evaluated at time level $n$. This yields
+\begin{equation}
+    \left(\frac{\partial X_L}{\partial t}\right)^{n+1} \approx \frac{X_L^{n+1} - X_L^n}{\Delta t}.
+\end{equation}
+Inserting this in the variational formulation, we get the approximation
+\begin{equation}
+\begin{aligned}
+    \int\limits_\Omega
+    \big(
+    A_X(Y_L^{n+1}) &(X_L^{n+1} - X_L^n) - B_X(X_L^{n+1},Y_L^{n+1}) (Y_L^{n+1} - Y_L^n)  
+    \big) v \dif \mu
+    \\
+    &+
+    \Delta t \int\limits_\Omega        (D_X \nabla X_L^{n+1} - \nu X_L^{n+1}) \cdot \nabla v  \dif \mu
+    +
+    \Delta t \int\limits_{\Gamma_{a_X^{n+1}}}    \alpha X_L^{n+1} v    \dif \sigma
+    =
+    -\Delta t \int\limits_\Omega        g_X v \dif \mu.
+\end{aligned}
+\end{equation}
+In the case of $Y_L$, we proceed with the same time scale and get
+\begin{equation}
+\begin{aligned}
+    \int\limits_\Omega
+    \big(
+        A_Y(X_L^{n+1}) & (Y_L^{n+1} - Y_L^n)  - B_Y(Y_L,X_L) (X_L^{n+1} - X_L^n)
+    \big) v \dif \mu
+    \\
+    &
+    + \Delta t\int\limits_\Omega        (D_Y \nabla Y_L^{n+1} - \nu Y_L^{n+1}) \cdot \nabla v  \dif \mu
+    =
+    \Delta t\int\limits_{\Gamma_{a_Y^{n+1}}}     F_Y(t_{n+1}) v    \dif \sigma
+    -\Delta t\int\limits_\Omega        g_Y v \dif \mu.
+\end{aligned}
+\end{equation}
+
+Notice that we further need to approximate the system at time \(t=0\). At this level, we will set \( (X_L^0,Y_L^0) \equiv (1\times 10^{-8},0)\) M.
+
 %\[
 %    \int\limits_\Omega u \pd{\varphi}{x_i} \dif x = -\int\limits_\Omega \pd{u}{x_i} \varphi \dif x,
 %\]
@@ -127,8 +274,13 @@ In the following section we will focus on the following nonlinear system of PDE'
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 
 \section*{Availability of data, material, and code}
 {

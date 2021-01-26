@@ -49,12 +49,13 @@
 \newtheorem{claim}{Claim}[subsection]
 
 
-
+\usepackage{siunitx} % for units
 
 \usepackage[font=small]{caption}
 \usepackage[font=small]{subcaption}
 \captionsetup{subrefformat=parens}
 \usepackage{booktabs} % nice headers for tables
+
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -71,6 +72,9 @@
 
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedright#1}}
 \allowdisplaybreaks
+
+
+
 
 
 \usepackage[symbol]{footmisc}
@@ -115,27 +119,31 @@
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
+\subsection{Base model}
 
 
 In the following section we will focus on the following nonlinear system of PDE's:
 \begin{subequations}
 \label{eq:system-Zinc}
 \begin{align}
-    \left( \theta + \frac{b_X}{1 + \kappa_X b_X^2 Y_L} \right) \partial_t X_L - \frac{\kappa_X b_X X_L}{(1+\kappa_X b_X Y_L)^2} \partial_t Y_L &=
+    \left( \theta + \frac{b_X}{1 + \kappa_X b_X Y_L} \right) \partial_t X_L - \frac{\kappa_X b_X^2 X_L}{(1+\kappa_X b_X Y_L)^2} \partial_t Y_L &=
     \nabla \cdot ( D_X \nabla X_L - \nu X_L  ) - g_X
+    \label{eq:sys-Zn-X-Omega}
     \\
-    \left( \theta + \frac{b_Y}{1 + \kappa_Y b_Y^2 X_L} \right) \partial_t Y_L - \frac{\kappa_Y b_Y Y_L}{(1+\kappa_Y b_Y X_L)^2} \partial_t X_L &=
+    \left( \theta + \frac{b_Y}{1 + \kappa_Y b_Y X_L} \right) \partial_t Y_L - \frac{\kappa_Y b_Y^2 Y_L}{(1+\kappa_Y b_Y X_L)^2} \partial_t X_L &=
     \nabla \cdot ( D_Y \nabla Y_L - \nu Y_L  ) - g_Y;
 \end{align}
 where $X(r,z)$ and $Y(r,z)$ are subject to the boundary conditions:
 \begin{align}
     D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r = a, z \in [L - \delta L_X, L],
+    \label{eq:sys-Zn-X-Gamma-a}
     \\
     D_Y \partial_r Y_L - \nu Y_L &= -F_Y(t) &\text{at } r = a, z \in [L - \delta L_Y, L],
 \end{align}
 where $L = L_0 + G t$. For the rest of the boundary, we have zero-flux conditions; i.e., in the case \( r = x\), this is just
 \begin{align}
     D_X \partial_r X_L - \nu X_L = 0
+    \label{eq:sys-Zn-X-Gamma-x}
     \qquad\text{and}\qquad
     D_Y \partial_r Y_L - \nu Y_L = 0.
 \end{align}
@@ -145,7 +153,7 @@ Moreover, $r \in [a,x]$, with $x = (\pi L_V)^{1/2}$, and $z \in [0, L_{t_{\mathr
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
-\subsection{Variational formulation}
+\subsubsection{Variational formulation}
 
 To find the variational formulation of system \eqref{eq:system-Zinc}, we will use Galerkin's method. Let's begin supposing that there is a $\mathcal{C}^2 (\bar \Omega)$ solution pair $(X_L,Y_L)$ and multiply the first equation by a $v \in \mathcal{C}^1 (\bar\Omega)$ function and introduce $A_X(Y_L) = \theta + \frac{b_X}{1 + \kappa_X b_X Y_L}$ and $B_X(X_L,Y_L) = \frac{\kappa_X b_X^2 X_L}{(1+\kappa_X b_X Y_L)^2}$. We then get
 \begin{align}
@@ -225,7 +233,7 @@ for all \(v \in H(\Omega)\).
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
-\subsection{Time discretisation}
+\subsubsection{Time discretisation}
 
 To approximate the time derivative we will use a simple backward difference. First, we will discretise the time domain; then, let the superscript $n$ denote a quantity at time $t_n$, where $n$ is an integer counting time levels; e.g. $X_L^n$ is $X_L$ evaluated at time level $n$. This yields
 \begin{equation}
@@ -265,9 +273,290 @@ In the case of $Y_L$, we proceed with the same time scale and get
 
 Notice that we further need to approximate the system at time \(t=0\). At this level, we will set \( (X_L^0,Y_L^0) \equiv (1\times 10^{-8},0)\) M.
 
-%\[
-%    \int\limits_\Omega u \pd{\varphi}{x_i} \dif x = -\int\limits_\Omega \pd{u}{x_i} \varphi \dif x,
-%\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Scaling}
+
+A drawback of model \eqref{eq:system-Zinc} is that numerical schemes for solving it might perform poorly if the parameters associated to the model are too small. This is actually the case, in the setting of Zinc uptake. As a result, we will scale the variables of the model appropriately. For this end, we introduce the following relations
+\[
+    r = \varepsilon_r \hat{r} + a,
+    \qquad
+    z = \varepsilon_z \hat{z},
+    \qquad
+    t = \varepsilon_t \hat{t},
+    \qquad
+    X_L = \varepsilon_M \hat{x},
+    \qquad
+    Y_L = \varepsilon_M \hat{y};
+\]
+where \( \varepsilon_r, \varepsilon_z, \varepsilon_t, \varepsilon_M\) are scaling constants to be determined, and \(\hat{r}, \hat z, \hat t, \hat x, \hat y\) are non-dimensional variables.
+Clearly, we have the relation \(X_L(r,z) = \varepsilon_M \hat{x} (\varepsilon_r \hat r + a, \varepsilon_z \hat z) = \varepsilon_M \hat{x} \big( \varepsilon_r^{-1} (r-a) , \varepsilon_z^{-1} z\big) \) and similarly \(Y_L (r,z) = \varepsilon_M \hat{y} \big( \varepsilon_r^{-1} (r-a), \varepsilon_z^{-1} z \big)\). Using this, we see that the gradient operator is also scaled as
+\[
+    \nabla X_L =
+    \begin{pmatrix}
+        \nicefrac{1}{\varepsilon_r} & 0 \\
+        0 & \nicefrac{1}{\varepsilon_z}
+    \end{pmatrix}
+    \hat{\nabla} \varepsilon_M \hat{x},
+    \qquad \text{with} \qquad
+    \hat{\nabla} = 
+    \begin{pmatrix}
+        \pd{ }{\hat r}
+        &
+        \pd{ }{\hat z}
+    \end{pmatrix}^\top .
+\]
+The scaled equations are easy to determine. For instance,  \eqref{eq:sys-Zn-X-Omega} is measured in \si{M.s^{-1}}, which are the units that \(\varepsilon_M\) and \(\varepsilon_t^{-1}\) correspond to. For the left-hand side we have that
+\begin{align}
+    \left( \theta + \frac{b_X}{1 + \kappa_X b_X Y_L} \right) \partial_t X_L &= \frac{\varepsilon_M}{\varepsilon_t} \left( \theta + \frac{b_X}{1 + \varepsilon_M \kappa_X b_X \hat{y}} \right)  \pd{\hat{x}}{\hat{t}}
+    \\
+    - \frac{\kappa_X b_X^2 X_L}{(1+\kappa_X b_X Y_L)^2} \partial_t Y_L &=
+    -\frac{\varepsilon_M}{\varepsilon_t} \frac{\varepsilon_M \kappa_X b_X^2 \hat{x}}{(1+\kappa_X b_X \varepsilon_M \hat{y})^2} \pd{\hat y}{\hat t}
+\end{align}
+The right-hand side requires some care. As \(\nu\) is measured in \si{dm.s^{-1}}, we introduce the non-dimensional quantities \( \hat{\nu}_r\) and \( \hat{\nu}_z\) such that \( \nu = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_r \) and \( \nu = \nicefrac{\varepsilon_z}{\varepsilon_t} \hat{\nu}_z \). Likewise, \(D_X\) is measured in \si{dm^2.s^{-1}}, and we can proceed as before introducing two non-dimensional constants such that \(D_{X} = \nicefrac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r}\) and \(D_{X} = \nicefrac{\varepsilon_z^2}{\varepsilon_t} \hat{D}_{X,z}\). This way, we have that
+\begin{align}
+    \nabla \cdot ( D_X \nabla X_L - \nu X_L  )
+    &=
+    \begin{pmatrix}
+        \nicefrac{1}{\varepsilon_r} & 0 \\
+        0 & \nicefrac{1}{\varepsilon_z}
+    \end{pmatrix}
+    \hat{\nabla}
+    \cdot
+    \left( 
+        D_X
+        \varepsilon_M
+        \begin{pmatrix}
+        \nicefrac{1}{\varepsilon_r} & 0 \\
+        0 & \nicefrac{1}{\varepsilon_z}
+    \end{pmatrix}
+    \hat{\nabla} \hat{x} - \nu \varepsilon_M \hat{x}
+    \right)
+    \notag
+    \\
+    &= \varepsilon_M
+    \begin{pmatrix}
+        \nicefrac{1}{\varepsilon_r} & 0 \\
+        0 & \nicefrac{1}{\varepsilon_z}
+    \end{pmatrix}
+    \hat{\nabla}
+    \cdot
+    \left( 
+        \begin{pmatrix}
+         \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{D}_{X,r} & 0 
+         \\
+        0 &  \nicefrac{\varepsilon_z}{\varepsilon_t} \hat{D}_{X,z}
+    \end{pmatrix}
+    \hat{\nabla} \hat{x} - \hat{x}
+    \begin{pmatrix}
+         \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_{r} 
+         \\
+        \nicefrac{\varepsilon_z}{\varepsilon_t} \hat{\nu}_{z}
+    \end{pmatrix}
+    \right)
+    \notag
+    \\
+    &= \frac{\varepsilon_M}{\varepsilon_t}
+    \hat{\nabla}
+    \cdot
+    \left( 
+        \begin{pmatrix}
+         \hat{D}_{X,r} & 0 
+         \\
+        0 &  \hat{D}_{X,z}
+    \end{pmatrix}
+    \hat{\nabla} \hat{x} - \hat{x}
+    \begin{pmatrix}
+         \hat{\nu}_{r} 
+         \\
+        \hat{\nu}_{z}
+    \end{pmatrix}
+    \right)
+    \label{eq:divergence-non-dimen-x}
+\end{align}
+For \(g_X\) we can proceed as we did for \eqref{eq:divergence-non-dimen-x} by noticing that its measured in \si{M.s^{-1}} and introduce the non-dimensional quantity \( \frac{\varepsilon_M}{\varepsilon_t}\hat{g}_{x} = g_X\).
+
+Similarly, in the case of the boundary conditions, we have that \eqref{eq:sys-Zn-X-Gamma-a} is equivalent to
+\[
+    D_X \partial_r X_L - \nu X_L = 
+    \frac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r} \frac{\varepsilon_M}{\varepsilon_r} \pd{\hat{x}}{\hat{r}} - \frac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_r \varepsilon_M \hat{x} = \frac{\varepsilon_r \varepsilon_M}{\varepsilon_t} \hat{\alpha} \hat{x}
+    \qquad \text{at } r = a = a + \varepsilon_r \hat{r}, \varepsilon_z \hat{z} \in [L - \delta L_X, L],
+\]
+or equivalently
+\begin{equation}
+    \label{eq:sys-Zn-nond-a}
+    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = \hat{\alpha} \hat{x}
+    \qquad \text{at } \hat{r} = 0, \hat{z} \in [\hat{L} - \delta \hat{L}_x, \hat{L}];
+\end{equation}
+where we require \( \alpha = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\alpha}\), \( \hat{L} = \varepsilon_z^{-1} L\), and \( \delta\hat{L}_x = \varepsilon_z^{-1} \delta L_X\). Finally, condition \eqref{eq:sys-Zn-X-Gamma-x} is just
+\begin{equation}
+    \label{eq:sys-Zn-nond-x}
+    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = 0
+    \qquad \text{at } \hat{r} = \frac{x-a}{\varepsilon_r}.
+\end{equation}
+
+Conditions \eqref{eq:sys-Zn-nond-a} and \eqref{eq:sys-Zn-nond-x} give us a hint of how we need to select \(\varepsilon_r\) and \(\varepsilon_z\). If we select \( \varepsilon_r = x-a\), then \( \hat{r} \) will be in the range \( [0,1]\). Similarly, if we pick \( \varepsilon_z = L_{t_{\max}}\), again \(\hat z \) will be in the range \( [0,1]\) (or \([0,-1]\) in the case \(L_0 \leq 0\), \( G\leq 0\), and \(\delta L \leq 0\)). This last selection implies that the maximum absolute value of \( \hat{L}\) should be \(1\) where we have
+\[
+    \hat{L} = \hat{L}(\hat t) = \frac{1}{\varepsilon_z} ( L_0 + G \varepsilon_t \hat t ),
+\]
+and we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat t\) in the range \( [0,1]\). As a result, we have selected scaling parameters such that the system of partial differential equations  \eqref{eq:system-Zinc} is defined in either \( [0,1]^3\) or \([0,1]\times [0,-1] \times [0,1]\).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Variational formulation}
+
+The weak form of the scaled system can be recomputed from the variational formulation presented for system \eqref{eq:system-Zinc} or again using the divergence theorem. %The resulting weak-system is as follows:
+Let us introduce the scaled constants 
+\(\hat{\kappa}_X = \varepsilon_M \kappa_X\), \(\hat{\kappa}_Y = \varepsilon_M \kappa_Y\), \(\hat{F}_y = \frac{\varepsilon_t}{\varepsilon_r \varepsilon_M} F_y \),
+the constant scaled vector 
+\(
+    \hat{\nu} = 
+    (\begin{smallmatrix}
+        \hat{\nu}_r
+        &
+        \hat{\nu}_z
+    \end{smallmatrix})^\top
+    =
+    \nu \varepsilon_t
+    (\begin{smallmatrix}
+        {\varepsilon_r}^{-1}
+        &
+        {\varepsilon_z}^{-1}
+    \end{smallmatrix})^\top,
+\) 
+and the constant matrices
+\[
+    \hat{D}_x = 
+    \begin{pmatrix}
+         \hat{D}_{X,r} & 0 
+         \\
+        0 &  \hat{D}_{X,z}
+    \end{pmatrix}
+    =
+    D_X \varepsilon_t
+    \begin{pmatrix}
+         \varepsilon_r^{-2} & 0 
+         \\
+        0 &  \varepsilon_z^{-2}
+    \end{pmatrix}
+    ,\qquad
+    \hat{D}_y = 
+    \begin{pmatrix}
+         \hat{D}_{Y,r} & 0 
+         \\
+        0 &  \hat{D}_{Y,z}
+    \end{pmatrix}
+    =
+    D_Y \varepsilon_t
+    \begin{pmatrix}
+         \varepsilon_r^{-2} & 0 
+         \\
+        0 &  \varepsilon_z^{-2}
+    \end{pmatrix}.
+\]
+This way we get that \( \hat{x}\) satisfies
+\begin{equation}
+\label{eq:non-dim-x}
+\begin{aligned}
+    \int\limits_\Omega
+    \left( \theta + \frac{b_X}{1 + \hat{\kappa}_X b_X \hat{y}} \right)  \pd{\hat{x}}{\hat{t}} v 
+    -
+    \frac{\hat{\kappa}_X b_X^2 \hat{x}}{(1+\hat{\kappa}_X b_X \hat{y})^2} \pd{\hat y}{\hat t} v
+    \dif\mu
+    &=
+    -\int\limits_\Omega 
+    \big( \hat{D}_x \hat{\nabla} \hat{x} - \hat{x}\hat{\nu}\big) \cdot \nabla v \dif\mu
+    \\
+    &\qquad\qquad
+    -\int\limits_\Omega \hat{g}_x v \dif\mu
+    -\int\limits_{\Gamma_{x}}    \hat{\alpha} \hat{x} v    \dif \sigma,
+\end{aligned}
+\end{equation}
+for all \( v\in H^1 (\Omega)\), \(\hat{t}\in (0,1)\), and
+with $\Gamma_{x} = \{0\}\times [\hat{L}-\delta \hat{L}_x,\hat{L}]$.
+
+Likewise, the weak formulation for \(\hat y\) holds as
+\begin{equation}
+\label{eq:non-dim-y}
+\begin{aligned}
+    \int\limits_\Omega
+    \left( \theta + \frac{b_Y}{1 + \hat{\kappa}_Y b_Y \hat{x}} \right)  \pd{\hat{y}}{\hat{t}} v 
+    -
+    \frac{\hat{\kappa}_Y b_Y^2 \hat{y}}{(1+\hat{\kappa}_Y b_Y \hat{x})^2} \pd{\hat x}{\hat t} v
+    \dif\mu
+    &=
+    -\int\limits_\Omega 
+    \big(\hat{D}_y \hat{\nabla} \hat{y} - \hat{y}\hat{\nu} \big) \cdot \nabla v \dif\mu
+    \\
+    &\qquad\qquad
+    -\int\limits_\Omega \hat{g}_y v \dif\mu
+    +\int\limits_{\Gamma_{y}}    \hat{F}_y (\hat t) v    \dif \sigma,
+\end{aligned}
+\end{equation}
+for all \( v\in H^1 (\Omega)\), \(\hat{t}\in (0,1)\), and
+with $\Gamma_{y} = \{0\}\times [\hat{L}-\delta \hat{L}_y,\hat{L}]$. Here, we require \( g_Y = \frac{\varepsilon_M}{\varepsilon_t} \hat{g}_y \) but notice that
+\(
+    g_Y = \frac{\rho V_{\max} Y_L}{K_M + Y_L}
+    = \varepsilon_M \frac{\rho V_{\max} \hat{y}}{K_M + \varepsilon_M \hat{y}},
+\)
+so we can identify \[ \hat{g}_y = \frac{ \varepsilon_t \rho V_{\max} \hat{y}}{K_M + \varepsilon_M \hat{y}}. \]
+Notice that this way we can use parameter \(\varepsilon_M\) to calibrate the effects of \( \hat{x}\) and \(\hat{y}\) in all of the nonlinear terms in the above equations, which is useful for numerics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Discretisation}
+Before we proceed as we did before with the time derivative, we can incorporate some information that we have regarding system \eqref{eq:system-Zinc} and its non-dimensionalised variant. We know that \(g_X = 0\) and \( \kappa_Y = 0\), as a result, equations \eqref{eq:non-dim-x} and \eqref{eq:non-dim-y} become
+\begin{align}
+    \int\limits_\Omega
+    \left( \theta + \frac{b_X}{1 + \hat{\kappa}_X b_X \hat{y}} \right)  \pd{\hat{x}}{\hat{t}} v 
+    -
+    \frac{\hat{\kappa}_X b_X^2 \hat{x}}{(1+\hat{\kappa}_X b_X \hat{y})^2} \pd{\hat y}{\hat t} v
+    \dif\mu
+    =
+    -\int\limits_\Omega 
+    \big( \hat{D}_x \hat{\nabla} \hat{x} - \hat{x}\hat{\nu}\big) \cdot \nabla v \dif\mu
+    -\int\limits_{\Gamma_{x}}    \hat{\alpha} \hat{x} v    \dif \sigma,
+    \\
+    \int\limits_\Omega
+    ( \theta + b_Y )  \pd{\hat{y}}{\hat{t}} v 
+    \dif\mu
+    =
+    -\int\limits_\Omega 
+    \big(\hat{D}_y \hat{\nabla} \hat{y} - \hat{y}\hat{\nu} \big) \cdot \nabla v \dif\mu
+    -\int\limits_\Omega \hat{g}_y v \dif\mu
+    +\int\limits_{\Gamma_{y}}    \hat{F}_y (\hat t) v    \dif \sigma.
+\end{align}
+Notice that in this case, we can solve first \(\hat{y}\) for all \(t\) and then use its values to solve the equation for \(\hat{x}\).
+
+\emph{To be continued\ldots}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

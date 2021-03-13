@@ -173,14 +173,23 @@ Please put this at the start of your report (preferably right before the
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
-\section{Biological Background}
+\section{Introduction}
 
-\subsection{Motivation}
-Nutrient deficiency is one of the most prolific problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc ($Zn$) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For example many farmers rotate planting a four crop system of brassicas, legumes, onions, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This paper will explore the benefits of intercropping different genotypes and species of grass plants to consider the benefits this may have upon nutrient uptake within their root systems.
+Nutrient deficiency is one of the most prolific problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc ($Zn$) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For example many farmers rotate planting a four crop system of brassicas, legumes, onions, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This work will explore the benefits of intercropping different genotypes and species of grass plants to consider the benefits this may have upon nutrient uptake within their root systems.
 
 One of the main nutrients plants rely upon is phosphorus ($P$) which is used in important processes such as cell membrane construction. It is therefore important to maximise plant production of new cells and leaf growth such that there is a ready supply of $P$ available in the soil. For this reason, many commercial farming programs rely on $P$ fertilisers produced from either acid- or heat-treated rock phosphate. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources. Thus, if plants can be bred or inter-cropped in a certain way to more efficiently access and use the $P$ compounds present in soil without the need of supplying the soil with additional source of $P$, this would be of great benefit to many farming and crop focused industries.
 
-In this project, we will reproduce the model of zinc uptake by rice using metal-complexing phytoside\-rophore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e. intercropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access $P$ from the soil in the form of phosphate. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
+In this project, we will reproduce the model of Zinc uptake by rice using metal-complexing phytoside\-rophore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e., inter-cropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access $P$ from the soil in the form of phosphate. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
+
+The document is structured as follows. In Section \ref{sec:Bio-background}, the mechanisms of Zinc uptake are described and the model of \cite{Ptashnyk-2011} is introduced. 
+In Section \ref{sec:Base}, the variational formulation of the model is introduced. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a scaling procedure.  In Section \ref{sec:Extension}, two extensions of the model are proposed for inter-cropping. Their variational formulation is presented along a scaling procedure for numerical computation. Then numerical experimentation of the extensions is included in Section \ref{sec:Results_Extension}. Existence results for the coupled ODE-PDE systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
+
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+\section{Biological Background}
+\label{sec:Bio-background}
 
 \begin{figure}[!htb]
   \vspace{-1cm}
@@ -319,6 +328,7 @@ These boundary conditions represent the exudation of DMA from the root surface, 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Base model}
+\label{sec:Base}
 
 In the following section we will focus on the following nonlinear system of PDEs:
 \begin{subequations}
@@ -359,7 +369,7 @@ To find the variational formulation of system \eqref{eq:system-Zinc}, we will us
 \begin{align}
     A_X(Y_L) \partial_t X_L v - B_X(X_L,Y_L) \partial_t Y_L v = \nabla \cdot (D_X \nabla X_L - \nu X_L) v - g_X v.
 \end{align}
-Integrating this with respect to the pair \(x = (r,z)\), and using the Divergence Theorem, we have
+Integrating this with respect to the pair \((r,z)\) using the Lebesgue measure \(\mu\), and using the Divergence Theorem, we have
 \begin{align}
     \int\limits_\Omega
     A_X(Y_L) \partial_t X_L v &- B_X(X_L,Y_L) \partial_t Y_L v \dif \mu = 
@@ -375,7 +385,7 @@ Integrating this with respect to the pair \(x = (r,z)\), and using the Divergenc
     (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
     -\int\limits_\Omega g_X v \dif \mu;
 \end{align}
-where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector and $\sigma$ the surface measure on $\Gamma$. 
+where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector, and $\sigma$ the surface measure on $\Gamma$. 
 
 Notice that we only need to analyse three segments of $\Gamma$: $\Gamma_{a_X} = \{a\}\times [L-\delta L_X,L]$, $\Gamma_{a_Y} = \{a\} \times [L - \delta L_Y, L]$, and $ \Gamma_0 = \Gamma \setminus (\Gamma_{a_X} \cup \Gamma_{a_Y})$. At $r = a$, we have that $ \vec{n} = (-1,0)$, thus
 \begin{align}
@@ -805,10 +815,12 @@ Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_0) = (\vareps
 
 
 
-\newpage
+%\newpage
 % -------------------------------------------------------------------------------
 
 \section{Extended model}
+\label{sec:Extension}
+
 % 	Derivation of the three equation (2 exudates) system
 We will consider a model where two plants secrete two different exudates that act on a nutrient in the soil which is then absorbed through their roots. We will follow the derivation for a model of one plant described in \cite{Ptashnyk-2011}. The main change is in modelling dynamics of an extra nutrient which results in additional term in the equation for dynamics of $X$ and a new equation for the dynamics of the second exudate.
 	
@@ -1468,6 +1480,9 @@ Observe that again we can use parameters \(\varepsilon_x\), \(\varepsilon_{1,y}\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results of the extended model}
+\label{sec:Results_Extension}
+
+
 In order to solve the system numerically, we will use the open-source computing platform
 FEniCS, a framework for PDE modeling, continuum mechanics, and physics simulations.
 FEniCS enables users to translate the mathematical problem into Python code and solve it

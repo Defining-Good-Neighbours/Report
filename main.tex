@@ -82,13 +82,13 @@
 \allowdisplaybreaks
 
 
-
+\numberwithin{equation}{section}
 
 
 \usepackage[symbol,hang,flushmargin]{footmisc}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-
+\setlength{\textfloatsep}{10pt plus 1.0pt minus 2.0pt}
 
 \linespread{1.38}
 
@@ -175,11 +175,11 @@ Please put this at the start of your report (preferably right before the
 
 \section{Introduction}
 
-Nutrient deficiency is one of the most prolific problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc ($Zn$) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For example many farmers rotate planting a four crop system of brassicas, legumes, onions, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This work will explore the benefits of intercropping different genotypes and species of grass plants to consider the benefits this may have upon nutrient uptake within their root systems.
+Nutrient deficiency is one of the most prolific problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc ($Zn$) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments \cite{calicioglu_2019}. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process \cite{fact.mr_2021}. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For example many farmers rotate planting a four crop system of brassicas, legumes, onions, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year \cite{xuan_2011}. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This work will explore the benefits of intercropping different genotypes and species of grass plants to consider the benefits this may have upon nutrient uptake within their root systems.
 
-One of the main nutrients plants rely upon is phosphorus ($P$) which is used in important processes such as cell membrane construction. It is therefore important to maximise plant production of new cells and leaf growth such that there is a ready supply of $P$ available in the soil. For this reason, many commercial farming programs rely on $P$ fertilisers produced from either acid- or heat-treated rock phosphate. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources. Thus, if plants can be bred or inter-cropped in a certain way to more efficiently access and use the $P$ compounds present in soil without the need of supplying the soil with additional source of $P$, this would be of great benefit to many farming and crop focused industries.
+One of the main nutrients plants rely upon is phosphorus ($P$) which is used in important processes such as cell membrane construction, DNA production and the production of ATP \cite{vysotskaya_2016}. It is therefore important to maximise plant production of new cells and leaf growth such that there is a ready supply of $P$ available in the soil \cite{vysotskaya_2016}. For this reason, many commercial farming programs rely on $P$ fertilisers produced from either acid- or heat-treated rock phosphate \cite{PhosporusRecoveryandRecycling}. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources \cite{fact.mr_2021}. Thus, if plants can be bred or inter-cropped in a certain way to more efficiently access and use the $P$ compounds present in soil without the need of supplying the soil with additional source of $P$, this would be of great benefit to many farming and crop focused industries.
 
-In this project, we will reproduce the model of Zinc uptake by rice using metal-complexing phytoside\-rophore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e., inter-cropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access $P$ from the soil in the form of phosphate. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
+In this project, we will reproduce the model of Zinc uptake by rice using metal-complexing phytosiderophore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e., inter-cropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access $P$ from the soil in the form of phosphate \cite{giles_richardson2018}. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
 
 The document is structured as follows. In Section \ref{sec:Bio-background}, the mechanisms of Zinc uptake are described and the model of \cite{Ptashnyk-2011} is introduced. 
 In Section \ref{sec:Base}, the variational formulation of the model is introduced. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a scaling procedure.  In Section \ref{sec:Extension}, two extensions of the model are proposed for inter-cropping. Their variational formulation is presented along a scaling procedure for numerical computation. Then numerical experimentation of the extensions is included in Section \ref{sec:Results_Extension}. Existence results for the coupled ODE-PDE systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
@@ -194,8 +194,8 @@ In Section \ref{sec:Base}, the variational formulation of the model is introduce
 \begin{figure}[!htb]
   \vspace{-1cm}
      \centering
-     \includegraphics[width=0.7\textwidth]{Phosphorus-plant-roles.jpg}
-     \caption{Different roles of phosphorus in plant systems.}
+     \includegraphics[width=0.7\textwidth]{Figures/PhosphorusPlantRoles.pdf}
+     \caption{Phosphorus is an essential nutrient for proper growth of plants with  different functions shown in the figure. Reproduced from \cite{fertilizers}.}
      \label{fig:Phos}
  \end{figure}
  
@@ -204,54 +204,48 @@ Now that we have established some motivation to this project, let us introduce a
  
 
 \subsubsection{Root exudation and absorption}
-When a plant sprouts from a seed, it puts roots out into the soil below it. For many plants, the growth of the roots results in a large system of roots. This system can contain one characteristic (or larger) primary root which is surrounded by many secondary roots and root hairs. The growth of the root hairs can be affected by the soil environment in which the plant is growing, see Fig. \ref{fig:roots}.
+When a plant sprouts from a seed, it puts roots out into the soil around and below it. For many plants, the growth of the roots results in a large system of roots.
+%, which can be characterised into first and second order roots. 
+Some root systems are made up of many first order roots which contribute equally to nutrient gathering, while others are made up of a single first order root, which dominates the system, and other smaller second order roots, which contribute in smaller amounts, along with root hairs. 
+% This system can contain one characteristic (or larger) primary root which is surrounded by many secondary roots and root hairs. 
+The growth of roots and root hairs can be affected by the soil environment in which the plant is growing, see Figure \ref{fig:roots}.
 
-% \begin{figure}{h}
-%     \centering
-%     \includegraphics[trim= 10 70 10 0,clip, width=0.6\textwidth]{rootMorphology.jpg}
-%     \caption{Root morphology in response to flooded soil, as in \cite{PURNOBASUKI20182012} which demonstrates the different root responses to varying nutrient and moisture content in the soil.}
-%     \label{fig:roots}
-% \end{figure}
-
-Each of these roots is made up of many layers of different kinds of tissue. What is important for our model is the existence of a cell wall and membrane that nutrients must pass through to be absorbed, then using the various translocation methods these are then spread around the plant. The root tip is covered by a single shell-like covering called the root cap. The root cap allows the root to push down into the soil without any important parts of its surface being damaged in the process. Because of its protective purpose, the root cap is tougher and, for our purposes, considered largely inert and thus in our model we will not account for anything being exuded or absorbed through it. Behind the root cap there is a zone of exudation within which the plant may exude certain chemicals out into the soil. These include mainly primary metabolites such as sugars, amino acids and organic acids which may interact with the soil environment in ways which benefit the plant. For example, they may work to break down compounds which can not be readily absorbed, and can then be processed by the plant. 
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.25\textwidth,trim=50 20 100 20,clip]{Zonesdiagram.png}
-%     \caption{Diagram showing the zones of various activity on an example plant root.}
-%     \label{fig:zones}
-% \end{figure}
+Each root is made up of many layers of different kinds of tissue. What is important for our model is the existence of a cell wall and membrane that nutrients must pass through to be absorbed and used by the plant for various purposes \cite{PALLARDY2008255}. The root tip is covered by a single shell-like covering called the root cap. The root cap allows the root to push down into the soil without any important parts of its surface being damaged in the process. Because of its protective purpose, the root cap is tougher than the rest of the root \cite{haberlandt1914}. For the purposes of this project, we will consider the root cap to be inactive in the processes of exudation and nutrient uptake, and we will model only the rest of the root.
+% our purposes, considered largely inert and thus in our model we will not account for anything being exuded or absorbed through it and begin our measurement of the root length etc from behind it \cite{haberlandt1914}. 
+Behind the root cap, there is a zone of exudation within which the plant may secrete certain chemicals out into the soil. These chemicals may break down nutrient compounds in the soil that cannot be absorbed directly, helping the plant to process them \cite{10.3389/fpls.2019.00157}.
+% These include mainly primary metabolites such as sugars, amino acids and organic acids which may interact with the soil environment in ways which benefit the plant \cite{10.3389/fpls.2019.00157}. For example, they may work to break down compounds which can not be readily absorbed, and can then be processed by the plant. 
 
 \begin{figure}
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.45\textwidth}
     \centering
-    \includegraphics[width=\linewidth,trim= 10 70 10 0,clip]{rootMorphology.jpg}
-    \caption{Root morphology in response to flooded soil, \\ as in \cite{PURNOBASUKI20182012} which demonstrates the different root responses\\ to varying nutrient and moisture content in the soil.}
+    \includegraphics[width=\linewidth]{Figures/rootMorphology.pdf}
+    \caption{ Different root responses to varying nutrient and moisture content in the soil, reproduced from \cite{PURNOBASUKI20182012}.}
     \label{fig:roots}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\hfill
+\begin{minipage}{.45\textwidth}
   \centering
-    \includegraphics[width=.5\linewidth,trim=50 20 100 20,clip]{Zonesdiagram.png}
+    \includegraphics[width=.6\textwidth]{Figures/ZonesDiagram-plot.pdf}
     \caption{Diagram showing the zones of various activity on an example plant root.}
     \label{fig:zones}
 \end{minipage}
 \end{figure}
 
 % There is then another zone, that of absorption. 
-Another zone of the root important for our model is the absorption zone. In some plants, the whole root may absorb nutrients, while in others, absorption is limited to a smaller portion of the root surface. This is similar to the zone of exudation which in some plants may be very large and in others is limited to a very small region just behind the root cap. See Fig. \ref{fig:zones} for a diagram of this and the other key zones of a sample root.
+Another zone of the root important for our model is the absorption zone. In some plants, the whole root may absorb nutrients, while in others, absorption is limited to a smaller portion of the root surface. This is similar to the zone of exudation which in some plants may be very large and in others is limited to a very small region 2cm behind the root cap. See Figure \ref{fig:zones} for a diagram of this and the other key zones of a sample root.
 
-Within the absorption zone, roots absorb many different kinds of particles from the soil. While the model in \cite{Ptashnyk-2011} is focusing on zinc uptake, our primary focus in this report is the uptake of phosphorus. Both of these nutrients can be highly deficient in many soil types and interact similarly with different exudates.
+Within the absorption zone, roots absorb many different elements from the soil. While the model in \cite{Ptashnyk-2011} is focusing on zinc uptake, our primary focus in this report is the uptake of phosphorus. Both of these nutrients can be highly deficient in many soil types and interact similarly with different exudates.
 
 \subsubsection{Interaction of exudates with soil}
 % Now that we have discussed the sections of the root and how they act we can consider the ways in which they interact with our soil solution. 
 % Lets consider the mechanisms at work between the root and the soil solution with interaction between our exudates and the nutrients we are considering. 
-In the case of zinc  gathering, the plant exudes a phytosiderophore, deoxymugineic acid (DMA) which acts to increase the uptake of $Zn$ from soils in the form of $Zn^{2+}$ and $Zn-DMA$ at the root surface, see Fig. \ref{fig:Zinc} for an image of this in process. In the case of phosphorus, the interaction is a little more complex. First, we have the exudation of phytase enzymes which are responsible for the process of mineralising $P$, i.e. converting the unusable organic $P$ into inorganic $P$ which can then be processed by the plant. Then studies have shown that in soil with limited $P$ availability, exudation of citrate by plant roots has improved $P$ solubalisation in soils, allowing the now inorganic $P$ to move from solid soil into our solution and thus move through the soil by the processes of diffusion and convection. Most importantly, research has shown that working in tandem, citrate and phytase have a much larger effect on $P$ absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george}.
+In the case of $Zn$  gathering, the plant exudes a phytosiderophore, deoxymugineic acid ($DMA$), which acts to increase the uptake of $Zn$ from soils in the form of $Zn^{2+}$ and $Zn-DMA$ at the root surface, see Figure \ref{fig:Zinc} for a sketch of this process. In the case of phosphorus, the interaction is a little more complex. First, studies have shown that in soil with limited $P$ availability, exudation of citrate by plant roots has improved $P$ solubilisation in soils \textcolor{red}{explain why this works} allowing the inorganic $P$ to move from solid soil into soil solution. The presence of nutrients in soil solution is critical for the plant as , where it moves by diffusion and convection which enables the root to absorb it. Then we have the exudation of phytase enzymes which are responsible for the process of mineralising $P$, i.e. converting organic $P$ into inorganic $P$ which can then be more easily processed by the plant. Most importantly, research has shown that working in tandem, citrate and phytase have a much larger effect on $P$ absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george} \textcolor{red}{figure showing this effect?}.
 
 \begin{figure}[h]
 \centering
 \begin{subfigure}[t]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{RootZincDiagram.png}
+    \includegraphics[width=\textwidth]{Figures/RootZincDiagram.pdf}
     \caption{
     % Diagram showing the exudation of DMA, shown in green, by the plant roof to improve Zinc, shown in red, solubility and cause it to move into the deficient area. This also shows the presence of microbes in the soil, shown in purple, which will consume the DMA.
     }
@@ -260,42 +254,43 @@ In the case of zinc  gathering, the plant exudes a phytosiderophore, deoxymugine
 % \hfill
 \qquad
 \begin{subfigure}[t]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{RootZincDiagram2.png}
+    \includegraphics[width=\textwidth]{Figures/RootZincDiagram2.pdf}
     \caption{
     % Diagram showing the movement of Zinc, in red, in response to DMA exudation, in green, and the consumption of DMA by microbes, in purple.
     }
     \label{fig:my_label}
 \end{subfigure}
-\caption{Diagrams showing the dynamics of the exudate DMA (green) with $Zn$ (red) in the soil; (a) DMA improves $Zn$ solubility and causes it to move into the deficient area, presence of microbes (purple); (b) movement of $Zn$ in response to DMA exudation and the consumption of DMA by microbes.}
+\caption{Diagrams showing the dynamics of the exudate $DMA$ (green) with $Zn$ (red) in the soil; (a) $DMA$ improves $Zn$ solubility and causes it to move into the deficient area, presence of microbes (purple); (b) movement of $Zn$ in response to $DMA$ exudation and the consumption of $DMA$ by microbes.}
 \end{figure}
 
 
 \subsection{Base model formulation}
-% In our initial model we expand on 
-To start with, we introduce work done by \cite{Ptashnyk-2011} which considers the way rice plants access $Zn$ in $Zn$-deficient soils. The paper models the mechanism of DMA exudation which allows rice roots to access $Zn$ and form $Zn$-DMA which is solubilised as explained in the previous sections. Let $X$ be the amount of the micronutrient metal $Zn$ and $Y$ the amount of exuded phytosiderophore DMA. First the soil is modelled as a solution of water and solid soil particles, with the equations allowing for adsorption and desorption to occur on soil surfaces as well as diffusion only within the solution and not the sorbed state. We can split $X$ and $Y$ into the amount of each in he different states, let $X_L$, $Y_L$ be the concentrations of $Zn$ and DMA in solution and $X_S$, $Y_S$ are the concentrations in soil solids. Thus we obtain the conservation equations for $X$ and $Y$ in one unit volume of soil,
-% \begin{align}
-%     \partial_t(\theta X_L+X_S)&=\nabla (D_X\nabla X_L-\nu X_L)-g_X,\\
-%     \partial_t(\theta Y_L+Y_S)&=\nabla (D_Y\nabla Y_L-\nu Y_L)-g_Y,\\
-% \end{align}
+\label{sec:bio_basemodel}
+To start with, we introduce work done by \cite{Ptashnyk-2011} which considers the way rice plants access $Zn$ in $Zn$-deficient soils. The paper models the mechanism of $DMA$ exudation which allows rice roots to access $Zn$ and form $Zn$-$DMA$ which is solubilised as explained in the previous sections. Let $X$ be the amount of the micronutrient metal $Zn$ and $Y$ the amount of exuded phytosiderophore $DMA$. All parameters following in this section are described in Table \ref{t:First-model-params}. 
+%The soil is modelled as a mixture of soil liquid and solid soil particles,
+The equations model the movement of $X$ and $Y$ by diffusion and convection through the soil pore solution, allowing for adsorption and desorption to occur on soil surfaces and diffusion only within the soil solution. 
+The concentrations of $X$ and $Y$ in the soil solution are marked by $X_L$ and $Y_L$, while their concentrations in the soil solid are $X_S$ and $Y_S$.
+%We can split $X$ and $Y$ into the amount of each in he different states, let $X_L$, $Y_L$ be the concentrations of $Zn$ and $DMA$ in solution and $X_S$, $Y_S$ are the concentrations in soil solids. 
+Thus we obtain the conservation equations for $X$ and $Y$ in unit volume of soil,
 \begin{equation}
     \begin{aligned}
-        \partial_t(\theta X_L+X_S)&=\nabla (D_X\nabla X_L-\nu X_L)-g_X,\\
-        \partial_t(\theta Y_L+Y_S)&=\nabla (D_Y\nabla Y_L-\nu Y_L)-g_Y,\\
+        \partial_t(\theta X_L+X_S)&=\nabla \cdot (D_X\nabla X_L-\nu X_L)-g_X,\\
+        \partial_t(\theta Y_L+Y_S)&=\nabla \cdot (D_Y\nabla Y_L-\nu Y_L)-g_Y.\\
     \end{aligned}
     \label{eq:1}
 \end{equation}
-with coefficients as summarised in Table \ref{t:First-model-params}. We can then derive equilibrium conditions between the soil particles and solution. At equilibrium, there will be no change in the amount of DMA or $Zn$ in solution, thus we know
+%with parameters as summarised in Table \ref{t:First-model-params}. 
+We can then derive equilibrium conditions between the soil particles and solution. Simultaneously, we know that at this equilibrium there will be no change in the amount of $DMA$ or $Zn$ in solution, thus
 \begin{equation}
     \begin{aligned}
         \partial_t X_s&=\beta_1X_L-\beta_2X_S-\beta_3X_SY_L=0,\\
-        \partial_tY_S&=\gamma_1Y_L-\gamma_2Y_S-\gamma_3Y_SX_L=0,\\
+        \partial_t Y_S&=\gamma_1Y_L-\gamma_2Y_S-\gamma_3Y_SX_L=0,\\
     \end{aligned}
     \label{eq:2}
 \end{equation}
 with $\beta_1,\beta_2,\beta_3,\gamma_1,\gamma_2,\gamma_3$ being the reaction rate coefficients.
 
-
-If we differentiate equation \eqref{eq:1} and substitute this into the system \eqref{eq:2}, we obtain our final equations
+By differentiating the resulting algebraic equations in \eqref{eq:1} and substituting the expressions for $X_S$ and $Y_S$ into the system \eqref{eq:2}, we obtain our final equations
 \begin{align}
     \left( \theta + \frac{b_X}{1 + \kappa_X b_X Y_L} \right) \partial_t X_L - \frac{\kappa_X b_X^2 X_L}{(1+\kappa_X b_X Y_L)^2} \partial_t Y_L &=
     \nabla \cdot ( D_X \nabla X_L - \nu X_L  ) - g_X,
@@ -304,24 +299,25 @@ If we differentiate equation \eqref{eq:1} and substitute this into the system \e
     \left( \theta + \frac{b_Y}{1 + \kappa_Y b_Y X_L} \right) \partial_t Y_L - \frac{\kappa_Y b_Y^2 Y_L}{(1+\kappa_Y b_Y X_L)^2} \partial_t X_L &=
     \nabla \cdot ( D_Y \nabla Y_L - \nu Y_L  ) - g_Y.
 \end{align}
-Having derived the system of equations, we must now determine the conditions on the boundary of our region of consideration.
-The concentrations of $X$ and $Y$ depend upon two spacial variables in $\R^2$, $(r,z)$ which measure radial distance from the center of the  root, and length from the soil surface respectively as shown in figure \ref{fig:geom}. 
-In this model we have the presence of a single plant root on one vertical edge (on the left-hand side of the domain) and a zero-flux boundary on the other:
+Having derived the dynamics of $X_L$ and $Y_L$ in soil, we will now insert a plant root into the system by determining boundary conditions of our domain.
+The concentrations of $X_L$ and $Y_L$ depend upon the pair of spatial variables in $(r,z) \in \mathbb{R}^2$ which measure radial distance from the center of the root and length from the soil surface respectively as shown in figure \ref{fig:geom}, respectively. Furthermore, we specify the domain by restricting to $r \in [a,x]$ where $a$ is the diameter of the root and $x$ is radius of zone of root influence. Notice that we are modelling the region starting at the surface of the root and the root itself is not part of the domain. In the vertical direction, we will restrict to $z \in [-L_{t_{max}},0]$ as we assume the root growing into the downward direction, reaching length of the active zone of the root $L_{t_{max}}$ at the end of simulation at some time $t_{max}$. Note that we consider the active zone of the root the zone up to where the root cap begins, see Fig. \ref{fig:zones}.
+The presence of a single plant root on one vertical edge (on the left-hand side of the domain) results in 
 \begin{align}
-    D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r = a, z \in [L - \delta L_X, L], \\
-    D_Y \partial_r Y_L - \nu Y_L &= -F_Y(t) &\text{at } r = a, z \in [L - \delta L_Y, L].
+    D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r &= a, z \in [-L, -(L - \delta L_X)], \label{eq:sec2_BC1} \\
+    D_Y \partial_r Y_L - \nu Y_L &= -F_Y(t) &\text{at } r &= a, z \in [-(L - \delta lt), -(L - \delta lt - \delta L_Y)].
+    \label{eq:sec2_BC2}
 \end{align}
-with
+with zero-flux boundary conditions on the other edge
 \begin{equation}
      D_X \partial_r X_L - \nu X_L = 0
     \qquad\text{and}\qquad
     D_Y \partial_r Y_L - \nu Y_L = 0 \qquad\text{at}\, r = x.
 \end{equation}
-These boundary conditions represent the exudation of DMA from the root surface, as well as the absorption of $Zn$ from the soil surrounding the root. In particular we have $F_Y(t)$, the rate of exudation of DMA, initially we keep this as a function of time however the conclusions of the aforementioned paper allow us to eventually keep it as a constant over 24 hours.
-\begin{figure}
+The boundary condition \eqref{eq:sec2_BC2} represent the exudation of $DMA$ from a region on the root surface of length $\delta L_Y$ located at distance $\delta lt$ behind the end of root cap, while the absorption of $Zn$ from the soil surrounding the root is captured by \eqref{eq:sec2_BC1} at region of length $\delta L_X$ behind the start of root cap. Although the exudation rate $F_Y(t)$ was initially modelled to be dependent of time, the conclusions of the aforementioned paper allow us to eventually keep it as a constant over 24 hours.
+\begin{figure}[!h]
     \centering
     \includegraphics[scale=0.7]{Figures/First-plot.pdf}
-    \caption{Sketch of the domain for system with one plant as in \cite{Ptashnyk-2011}. The root portrayed is curly for illustration.}
+    \caption{Sketch of the domain for system with one plant as in \cite{Ptashnyk-2011} with $L_0$ being the length of root at the beginning of simulation and $G$ being the growth rate of the root. The root portrayed is curly for illustration.}
     \label{fig:geom}
 \end{figure}
 \newpage
@@ -330,7 +326,7 @@ These boundary conditions represent the exudation of DMA from the root surface, 
 \section{Base model}
 \label{sec:Base}
 
-In the following section we will focus on the following nonlinear system of PDEs:
+For the purpose of the next sections, we now generalise the system introduced in section \ref{sec:bio_basemodel} to model a root secreting an exudate $Y$ in order to facilitate absorption of a nutrient $X$ from the soil. We will work with the system of PDEs
 \begin{subequations}
 \label{eq:system-Zinc}
 \begin{align}
@@ -341,7 +337,7 @@ In the following section we will focus on the following nonlinear system of PDEs
     \left( \theta + \frac{b_Y}{1 + \kappa_Y b_Y X_L} \right) \partial_t Y_L - \frac{\kappa_Y b_Y^2 Y_L}{(1+\kappa_Y b_Y X_L)^2} \partial_t X_L &=
     \nabla \cdot ( D_Y \nabla Y_L - \nu Y_L  ) - g_Y;
 \end{align}
-where $X(r,z)$ and $Y(r,z)$ are subject to the boundary conditions:
+where $X(r,z)$ and $Y(r,z)$ are subject to the boundary conditions
 \begin{align}
     D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r = a, z \in [L - \delta L_X, L],
     \label{eq:sys-Zn-X-Gamma-a}
@@ -355,9 +351,70 @@ where $L = L_0 + G t$. For the rest of the boundary, we have zero-flux condition
     \qquad\text{and}\qquad
     D_Y \partial_r Y_L - \nu Y_L = 0.
 \end{align}
-Moreover, $r \in [a,x]$, with $x = (\pi L_V)^{1/2}$, and $z \in [0, L_{t_{\mathrm{max}} }]$. The meaning of these parameters is presented in Table \ref{t:First-model-params}.
+Moreover, $r \in [a,x]$, 
+%with $x = (\pi L_V)^{1/2}$, % commented out because we want to keep it general 
+and $z \in [0, L_{t_{\mathrm{max}} }]$. The meaning of these parameters is presented in Table \ref{t:First-model-params}.
 \end{subequations}
 
+\begin{table}[!htb]
+\begin{center}
+\fontsize{9.5}{7}\selectfont
+\setlength{\tabcolsep}{5.pt}
+\def\arraystretch{2.0}
+\begin{tabular}{cl}
+\toprule
+    \bf Symbol & \multicolumn{1}{c}{\bf Meaning}
+    %
+    \\ \midrule
+    $\theta$ & Solution volume fraction \\
+    $f$ & Diffusion impedance factor \\
+    $D_{LX}$ & Diffusion coefficient of nutrient $X$  in free solution \\
+    $D_{LY}$ & Diffusion coefficient of exudate $Y$  in free solution \\
+    $D_X$ & Diffusion of the the nutrient $X$ in the soil, $D_X = D_{LX} \theta f$  \\  
+	$D_{Y}$ &  Diffusion of the exudate $Y$ in the soil, $D_{Y} = D_{LY} \theta f$  \\ 
+	$\nu$ & Water flux\\
+	$g_X$ & Function for the immobilisation of nutrient $X$ \\
+	$g_{Y}$ & Function for decomposition of the exudate $Y$ \\
+	$b_X$ & Buffer power of $X$ \\
+	$b_{Y}$ & Buffer power of $Y$ \\
+	$\kappa_{X}$ & $X$ - $Y$ interaction coefficient \\
+	$\kappa_{Y}$ & $Y$ - $X$ interaction coefficient\\
+	$\alpha $ & $X$-absorbing power of root \\
+	$F_{Y} $ & Rate of $Y$ exudation  \\
+	$L$ & Length of root at certain time, increases at rate $G$ \\
+	$\delta L_{X}$ & Length of $X$ uptake zone \\
+	$\delta L_{Y}$ & Length of $Y$ exudation zone  \\	
+	$a$ & Root radius \\
+	$x$ & Radius of zone of root influence \\
+\bottomrule
+\end{tabular}
+\caption{Table of parameters and their meanings for base model.
+\label{t:First-model-params}}
+\end{center}
+\end{table}
+
+\subsection{Extension to two roots}
+We can consider the model \eqref{eq:system-Zinc} and apply symmetry to the boundary conditions to obtain another root in the domain, see Fig. \ref{fig:system-Zinc}. Since we are not making any changes to the system itself, we are still limited to modelling one exudate and nutrient being absorbed. Nonetheless, the formulation of the boundary condition allows us to adjust the characteristics of the second root, namely the uptake power, exudation rate, growth rate, and exudation and uptake zones at the root. The extended set of boundary conditions is
+\begin{subequations}
+\begin{align}
+    D_X \partial_r X_L - \nu X_L &= \alpha_1 X_L & \text{at } r &= a, z \in [L_1 - \delta L_{X,1}, L_1], \\
+    D_Y \partial_r Y_L - \nu Y_L &= -F_{Y,1}(t) &\text{at } r &= a, z \in [L_1 - \delta L_{Y,1}, L_1], \\
+    D_X \partial_r X_L - \nu X_L &= \alpha_2 X_L & \text{at } r &= w+a, z \in [L_2 - \delta L_{X,2}, L_2], \\
+    D_Y \partial_r Y_L - \nu Y_L &= -F_{Y,2}(t) &\text{at } r &= w+a, z \in [L_2 - \delta L_{Y,2}, L_2],
+\end{align}
+\end{subequations}
+where the parameters bear the same meanings as in Table \ref{t:First-model-params} and belong to root 1 (on the left-hand side of the domain) or 2 (right-hand side of the domain) based on their indices. We note that in this general setting the two plants can have different growth rates, i.e. $L_1 = L_{0,1} + G_1t$, $L_2 = L_{0,2} + G_2t$, where $L_{0,1}$, $L_{0,2}$ are root lengths at the beginning of the simulation. The second root is located at $r = w+a$ where $w$ is the width of the space between the two roots. This distance can be manipulated so that the zones of root influence intersect which allows us to model intercropping and effect of the proximity of two roots on each other. For the rest of the boundary we consider zero-flux boundary conditions.
+
+
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{Figures/Second-plot.pdf}
+    \caption{Sketch of the domain for system with two plants and one exudate.}
+    \label{fig:system-Zinc}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
@@ -485,38 +542,7 @@ Notice that we further need to approximate the system at time \(t=0\). At this l
 
 
 
-\begin{table}[!htb]
-\begin{center}
-% \caption{Table of parameters and their meanings for base model.}
-\fontsize{9.5}{7}\selectfont
-\setlength{\tabcolsep}{5.pt}
-\def\arraystretch{2.0}
-\begin{tabular}{cl}
-\toprule
-    \bf Symbol & \multicolumn{1}{c}{\bf Meaning}
-    %
-    \\ \midrule
-    $D_X$ & Diffusion of the metal (e.g. Zn) in the soil, $D_X = D_{L,X} \theta f$  \\  
-	$D_{Y}$ &  Diffusion of the PS $Y$ in the soil, $D_{Y} = D_{L,Y} \theta f$  \\ 
-	$\nu$ & Water flux\\
-	$g_X$ & Function for the metal (Zn) immobilisation \\
-	$g_{Y}$ & Function for decomposition of $Y_1$ \\
-	$b_X$ & Metal buffer power \\
-	$b_{Y}$ & PS $Y$ buffer power \\
-	$\kappa_{X}$ & $X$ - $Y$ interaction coefficient \\
-	$\kappa_{Y}$ & $Y$ - $X$ interaction coefficient\\
-	$\alpha $ & Metal-absorbing power of root \\
-	$F_{Y} $ & Rate of PS $Y$ exudation over 24h \\
-	$L$ & Length of root at certain time, increases at rate $G$ \\
-	$\delta L_{X}$ & Length of metal uptake zone \\
-	$\delta L_{Y}$ & Length of PS $Y$ uptake zone  \\	
-	$a$ & Root radius of plant \\
-\bottomrule
-\end{tabular}
-\caption{Table of parameters and their meanings for base model.
-\label{t:First-model-params}}
-\end{center}
-\end{table}
+
 
 
 
@@ -543,24 +569,126 @@ The second indicator function will be used for the exudation boundary condition 
 \end{equation}
 with $d$ controlling the point behind root tip where exudation starts happening (in the experiments we used both $d = 2$ cm and $\delta L_Y = 2$ cm, i.e. the plants is exuding at a 2 cm long region located 2 cm behind the root tip).
 
-\textcolor{red}{INSERT SOME RESULTS TO SHOW THE RICE MODEL?}
-
-\textcolor{red}{SHOW EXTENSION OF THE BCS TO THE 2-ROOT SYSTEM}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.7]{Figures/Second-plot.pdf}
-    \caption{Sketch of the domain for system with two plants and one exudate.}
-    \label{fig:2roots-a}
-\end{figure}
-
 \subsection{Some results}
+Using parameters from table 1 in \cite{Ptashnyk-2011} we can consider what this two-root model tells us about rice plants grown in close proximity to each other.
+\subsubsection{Original parameters}
+ \begin{figure}[h]
+     \centering
+     \caption{Basic model with parameters from \cite{Ptashnyk-2011} applied to both roots.}
+     \begin{subfigure}[t]{0.45\textwidth}\centering
+     \includegraphics[width=\textwidth]{Figures/testpics/BasicDMA.png}
+     \caption{0.08 apart DMA after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}\centering
+     \includegraphics[width=\textwidth]{Figures/testpics/BasicZn.png}
+     \caption{0.08 apart Zn after 24 hours}
+     \end{subfigure}
+ \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+\subsubsection{Increased distance between roots}
+ \begin{figure}
+     \centering
+     \caption{Increased distance}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/0.15ApartDMA24.png}
+     \caption{0.15 apart DMA after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/0.15ApartZn24.png}
+     \caption{0.15 apart Zn after 24 hours}
+     \end{subfigure}
+ \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+\subsubsection{Increased maximum DMA exudation}
+
+ \begin{figure}
+     \centering
+     \caption{DMA increased}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedBufferDMA24.png}
+     \caption{0.08 apart, rate of DMA exudation increased by $10^{-11}$, DMA after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/BasictoComparetoDistance.png}
+     \caption{Re-scaled basic model DMA after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+ \begin{figure}
+     \centering
+     \caption{DMA increased}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedBufferZn24.png}
+     \caption{0.08 apart, rate of DMA exudation increased by $10^{-11}$, Zn after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/24rescaledZinc.png}
+     \caption{Re-scaled basic model Zn after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+\subsubsection{Increased distance between plants and maximum DMA exudation}
+
+ \begin{figure}
+     \centering
+     \caption{Distance and DMA exudation increased}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedBufferAndDistanceDMA24.png}
+     \caption{0.15 apart, rate of DMA exudation increased by $10^{-11}$, DMA after 24 hours}
+    \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/BasictoComparetoDistance.png}
+     \caption{Re-scaled basic model DMA after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+ \begin{figure}
+     \centering
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedBufferAndDistanceZn24.png}
+     \caption{0.15 apart, rate of DMA exudation increased by $10^{-11}$, Zn after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/24rescaledZinc.png}
+     \caption{Re-scaled basic model Zn after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+ \subsubsection{Increased rate of $Zn$ absorption}
+ \begin{figure}
+     \centering
+     \caption{Distance and $DMA$ exudation increased}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedZnAbsorbDMA24.png}
+     \caption{0.08 apart, rate of $Zn$ absorption increased by $0.5e^{-2}$, $DMA$ after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/BasictoComparetoDistanceZn.png}
+     \caption{Re-scaled basic model $Zn$ after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+ \begin{figure}
+     \centering
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/IncreasedZnAbsorbZn24.png}
+     \caption{0.08 apart, rate of $Zn$ absorption increased by $0.5e^{-2}$, Zn after 24 hours}
+     \end{subfigure}
+     \begin{subfigure}[t]{0.45\textwidth}
+     \includegraphics[width=\textwidth]{Figures/testpics/24rescaledZinc.png}
+     \caption{Re-scaled basic model Zn after 24 hours for comparison}
+     \end{subfigure}
+ \end{figure}
+
 
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Scaling}
+\subsection{Non-dimensionalisation}
 \label{2-Base-Scaling}
 
 A drawback of model \eqref{eq:system-Zinc} is that numerical schemes for solving it might perform poorly if the parameters associated to the model are too small. This is actually the case, in the setting of Zinc uptake. As a result, we will scale the variables of the model appropriately. For this end, we introduce the following relations
@@ -695,7 +823,7 @@ and we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Scaled variational formulation}
+\subsubsection{Non-dimensionalised variational formulation}
 
 The weak form of the scaled system can be recomputed from the variational formulation presented for system \eqref{eq:system-Zinc} or again using the divergence theorem. %The resulting weak-system is as follows:
 Let us introduce the scaled constants 
@@ -830,7 +958,7 @@ Our domain will be a rectangle with a root of plant that secretes exudate $Y_1$ 
 	\partial_t(\theta Y_{L,1} + Y_{S,1}) &= \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_1} \\
 	\partial_t(\theta Y_{L,2} + Y_{S,2}) &= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}, \label{y2_1}		
 \end{align}
-with the involved parameters presented in Table \ref{t:Second-model-params}. Next, we specify the equations for equilibration between the nutrients in the solid and in the solution assuming $Y_1$ and $Y_2$ do not interact with each other. This is represented with the following system of ordinary differential equations
+with the involved parameters presented in Table \ref{t:Second-model-params}. Next, we specify the equations for interaction between the nutrients in the solid and in the solution assuming $Y_1$ and $Y_2$ do not interact with each other. This is represented with the following system of ordinary differential equations
 \begin{align}
 	\partial X_S &= \beta_1 X_L - \beta_2 X_S - \beta_3 X_S Y_{L,1} - \beta_4 X_S Y_{L,2}, \\
 	\partial Y_{S,1} &= \gamma_1 Y_{L,1} - \gamma_2 Y_{S,2} - \gamma_3 Y_{S,1} X_L, \\
@@ -887,7 +1015,7 @@ The set of equations above can be modified by dividing the numerator and denomin
 	= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}, \label{eq:generalised-y_2_t}
 \end{align}
 \end{subequations}
-where $b_X = \beta_1 / \beta_2$, $b_{Y,1} = \gamma_1 / \gamma_2$, $b_{Y,2} = \xi_1 / \xi_2$, $\kappa_{X,1} = \beta_3 / \beta_1$, $\kappa_{X,2} = \beta_4 / \beta_1$, $\kappa_{Y,1} = \gamma_3 / \gamma_1$, $\kappa_{Y,1} = \xi_3 / \xi_1$ are parameters presented also in Table \ref{t:Second-model-params}.
+where $b_X = \beta_1 / \beta_2$, $b_{Y,1} = \gamma_1 / \gamma_2$, $b_{Y,2} = \xi_1 / \xi_2$, $\kappa_{X,1} = \beta_3 / \beta_1$, $\kappa_{X,2} = \beta_4 / \beta_1$, $\kappa_{Y,1} = \gamma_3 / \gamma_1$, $\kappa_{Y,1} = \xi_3 / \xi_1$ are parameters presented in Table \ref{t:Second-model-params}.
 	
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1139,7 +1267,7 @@ and on the right-hand side of the domain (plant 2) we add the exudation of $Y_1$
 \end{align}
 \end{subequations}
 
-For our simulations we assume that both exudates at both plants are secreted 2cm behind the root tip. The exudation rates and secretion zone parameters are explained in Table \ref{t:Boundary-additional-parameters} and the situation in the domain is shown in Fig. \ref{fig:2roots-b}.
+For our simulations we assume that both exudates at both plants are secreted 2cm behind the root tip. The exudation rates and secretion zone parameters are explained in Table \ref{t:Boundary-additional-parameters} and the situation in the domain is shown in Figure \ref{fig:2roots-b}.
 
 	
 \begin{table}[!htb]
@@ -1218,7 +1346,7 @@ The discretisation of \eqref{sys:two-plants-2-weak} is similar to the one of \eq
 %\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Scaling}
+\subsection{Non-dimensionalisation}
 
 Similarly as we did in Section \ref{2-Base-Scaling}, 
 we will scale the variables of the model appropriately. Again, we introduce the following relations
@@ -1483,12 +1611,7 @@ Observe that again we can use parameters \(\varepsilon_x\), \(\varepsilon_{1,y}\
 \label{sec:Results_Extension}
 
 
-In order to solve the system numerically, we will use the open-source computing platform
-FEniCS, a framework for PDE modeling, continuum mechanics, and physics simulations.
-FEniCS enables users to translate the mathematical problem into Python code and solve it
-efficiently using the finite element method. The main benefits of this software are that the code
-is close to the mathematical formulation and that the implementation of the model does not
-get much more difficult as the complexity of the model increases.
+In order to solve the system numerically, we will use the open-source computing platform FEniCS, a framework for PDE modeling, continuum mechanics, and physics simulations \cite{fenics}. FEniCS enables users to translate the mathematical problem into Python code and solve it efficiently using the finite element method. The main benefits of this software are that the code is close to the mathematical formulation and that the implementation of the model does not get much more difficult as the complexity of the model increases.
 % \begin{itemize}
 %     \item mention negative values at some point in the simulation (numeric errors?)
 % \end{itemize}
@@ -1497,7 +1620,7 @@ get much more difficult as the complexity of the model increases.
 
 
 \subsection{Parameters for barley-tobacco combination}
-In this section, we discuss the selection of parameters in Table \ref{t:Second-model-params} for an approximate model of root dynamics between barley and tobacco plants.
+In this section, we discuss the selection of parameters in Table \ref{t:Second-model-params} to model the dynamics between exudates of barley and tobacco plants and $P$ in the soil.
 
 \begin{table}[!htb]
 \begin{center}
@@ -1555,13 +1678,14 @@ In this section, we discuss the selection of parameters in Table \ref{t:Second-m
 \end{table}
 
 \subsubsection{Soil parameters}
-Similarly to the model for rice \cite{Ptashnyk-2011} which needs to be submerged in water (with $\theta=0.7$ corresponding to $70\%$ water content in soil), we choose $\theta$ in the range $0.2$ to $0.3$ which should be in accordance with real-life conditions in which tobacco and barley are cultivated, along with estimated soil bulk density $\rho=1.2$ kg/dm$^{-3}$. We keep the impedance factor the same as in \cite{Ptashnyk-2011}, i.e. $f=0.5$.
+We choose the water content in soil $\theta$ to be in the range $0.2$ to $0.3$ which should be in accordance with real-life conditions in which tobacco and barley are cultivated, along with estimated soil bulk density $\rho=1.2$ kg/dm$^{-3}$. We keep the impedance factor the same as in \cite{Ptashnyk-2011}, i.e. $f=0.5$.
 
 \subsubsection{Diffusion coefficients}
-We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{LX} = 9 \times 10^{-8}$ dm$^2$s$^{-1}$ and from \cite{McKayFletcher-2019} where $D_{LX} = 7 \times 10^{-8}$ dm$^2$s$^{-1}$. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{LY,2} = 2.1 \times 10^{-8}$ dm$^2$s$^{-1}$. We estimate phytase diffusion to be half of citrate diffusion as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{LX}f\theta$, $D_{Y,1} = D_{LY,1}f\theta$, and $D_{Y,2} = D_{LY,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, experiments in \cite{Ptashnyk-2011} shown that the value of this coefficient doesn't have much impact on the dynamics so we don't include it in the simulations.
+We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{LX} = 9 \times 10^{-8}$ dm$^2$s$^{-1}$ and from \cite{McKayFletcher-2019} where $D_{LX} = 7 \times 10^{-8}$ dm$^2$s$^{-1}$. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{LY,2} = 2.1 \times 10^{-8}$ dm$^2$s$^{-1}$. We estimate phytase diffusion to be half of phosphate diffusion, i.e. $D_{LY,1}$ in the range $3.5-4.5 \times 10^{-8}$dm$^2$s$^{-1}$, as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{LX}f\theta$, $D_{Y,1} = D_{LY,1}f\theta$, and $D_{Y,2} = D_{LY,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, following the findings in \cite{Ptashnyk-2011} we consider $\nu=0$. 
 
 \subsubsection{Parameters for sorption, mutual interaction, and decomposition}
-From the derivation of the extended model we recall that the phosphate buffer power is $b_X = \beta_1 / \beta_2$, where $\beta_1$, $\beta_2$ are parameters for adsorption and desorption to and from soil particles, respectively. The typical range for $b_X$ is taken from \cite{Ptashnyk-2010}. For further derivation we take $\beta_1$, $\beta_2$ from \cite{Ptashnyk-2010} where $\beta_1 = 3.7 \times 10^{-6}$ s$^{-1}$, $\beta_2 = 4.68 \times 10^{-9}$ s$^{-1}$. For simplicity we assume $b_{Y,1}=b_{Y,2} = 1$. The parameter for $X-Y_2$ interaction is $\kappa_{X,2} = \beta_4 / \beta_1$ where $\beta_4$ is phosphate enhanced desorption from soil solid due to absorbed citrate. The value $\beta_4 = 3.41 \times 10^{-4}$ is from \cite{McKayFletcher-2019} and it gives us $\kappa_{X,2} = 92.16$ dm$^3$ mol$^{-1}$. We estimate the coefficient for $X-Y_1$ interaction, $\kappa_{X,1}$, to be 5-fold smaller than $\kappa_{X,2}$. Furthermore, we consider the parameters for interaction of the exudates with phosphate ($\kappa_{Y,1}$ and $\kappa_{Y,2}$) to be negligible as the amount the exudates reacting with the soil is much larger than the amount of phosphate taken by the roots. 
+From the derivation of the extended model we recall that the phosphate buffer power is $b_X = \beta_1 / \beta_2$, where $\beta_1$, $\beta_2$ are parameters for adsorption and desorption to and from soil particles, respectively. The typical range for $b_X$ is taken from \cite{Ptashnyk-2010}. For further derivation we take $\beta_1$, $\beta_2$ from \cite{Ptashnyk-2010} where $\beta_1 = 3.7 \times 10^{-6}$ s$^{-1}$, $\beta_2 = 4.68 \times 10^{-9}$ s$^{-1}$. For simplicity we assume $b_{Y,1}=b_{Y,2} = 1$. The parameter for $X-Y_2$ interaction is $\kappa_{X,2} = \beta_4 / \beta_1$ where $\beta_4$ is phosphate enhanced desorption from soil solid due to absorbed citrate. The value $\beta_4 = 3.41 \times 10^{-4}$ is from \cite{McKayFletcher-2019} and it gives us $\kappa_{X,2} = 92.16$ dm$^3$ mol$^{-1}$. We estimate the coefficient for $X-Y_1$ interaction, $\kappa_{X,1}$, to be 5-fold smaller than $\kappa_{X,2}$. Furthermore, we consider the parameters for interaction of the exudates with phosphate ($\kappa_{Y,1}$ and $\kappa_{Y,2}$) to be zero. 
+%as the amount the exudates reacting with the soil is much larger than the amount of phosphate taken by the roots. 
 
 Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the soil that involve decomposition of phosphate, i.e. $g_X = 0$. For the decomposition of citrate we might consider a Michaelis-Menten-type term $g_{Y,2} = V_{max} Y_{L,2} / (K_M + Y_{L,2})$, however, sorption of citrate to soil particles causes up to 99\% reduction in biodegradation rate \cite{McKayFletcher-2019}. We therefore choose $V_{max} = 0$ and experiment with non-zero values similar to those in \cite{Ptashnyk-2011}. For phytase we also set $g_{Y,2} = 0$ since we assume no microbial consumption of this nutrient.
 
@@ -1569,7 +1693,7 @@ Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the 
 The coefficients for exudation rates in barley are taken from \cite{Ruiz-2020} \textcolor{red}{Add conversion details (from nkat)?} Tobacco exudation rates were obtained from \cite{giles_george} where we tried to estimate the root surface by using root radius being half of barley root radius (i.e. $a_2 = 2.5 \times 10^{-3}$) and the length of the root 100 dm, approximating the root(s) as a cylinder. However, this way both $F_{Y,1,2}$ and $F_{Y,2,2}$ were of order $10^{-6}$ which is much larger than the order of magnitude of $F_{Y,1,1}$ and $F_{Y,2,1}$ being $10^{-10}$. The relatively large exudation rates caused issues in the numerical simulations (the values of phosphate were blowing up). We therefore considered all of the exudation rates in the system to be of order $10^{-10}$, i.e. we multiplied the calculated values for $F_{Y,1,2}$ and $F_{Y,2,2}$ by $10^{-4}$.
 
 \subsubsection{Geometry of the domain}
-The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Fig. \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ dm. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2cm long exudation zone to be 2cm behind the root tip (i.e. before the root cap).
+The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Figure \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ dm. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2cm long exudation zone to be 2cm behind the root tip (i.e. before the root cap).
 
 % \begin{table}[!htb]
 % \begin{center}
@@ -1647,7 +1771,7 @@ Description and analysis of the results TBD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \FloatBarrier
 \subsubsection{Original parameters}
-
+put table of parameters used
 \begin{figure}[!htb]
 \centering
 \begin{subfigure}[t]{0.3\textwidth}
@@ -1664,7 +1788,7 @@ Description and analysis of the results TBD
     \includegraphics[trim=100 100 70 100,width=\textwidth]{Figures/Y2.png}
     \caption{Citrate ($Y_2$)}
 \end{subfigure}
-\caption{Concentrations of the nutrients between the two roots after 24 hours.}
+\caption{Concentrations of the nutrients in the soil solution between the two roots after 24 hours.}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1817,148 +1941,11 @@ $F_{Y,1,1}*10\text{ and } D_{Y1}*1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% &
 \end{center}
 \end{table}
 
+
+
+\textcolor{red}{How realistic the predictions are?}
 \newpage
 \clearpage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% \newpage
-% \clearpage
-% \section{Figures}
-% \begin{figure}[h]
-%     \centering
-%     \caption{Basic}
-%     \begin{subfigure}[t]{\textwidth}\centering
-%     \includegraphics[width=0.6\textwidth]{Basic24DMA.png}
-%     \caption{0.08 apart DMA after 24 hours}
-%     \end{subfigure}
-%     %
-%     \begin{subfigure}[t]{\textwidth}\centering
-%     \includegraphics[width=0.6\textwidth]{Basic24Zn.png}
-%     \caption{0.08 apart Zn after 24 hours}
-%     \end{subfigure}
-% \end{figure}
-
-% \newpage
-% \begin{figure}
-%     \centering
-%     \caption{Increased distance}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{0.13ApartDMA24.png}
-%     \caption{0.15 apart DMA after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{BasictoComparetoDistance.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \caption{Increased distance}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{0.13ApartZn24.png}
-%     \caption{0.15 apart Zn after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{BasictoComparetoDistanceZn.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-
-% \begin{figure}
-%     \centering
-%     \caption{DMA increased}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedBufferDMA24.png}
-%     \caption{0.08 apart, rate of DMA exudation increased by $10^{-11}$, DMA after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{BasictoComparetoDistance.png}
-%     \caption{Re-scaled basic model DMA after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \caption{DMA increased}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedBufferZn24.png}
-%     \caption{0.08 apart, rate of DMA exudation increased by $10^{-11}$, Zn after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{24rescaledZinc.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \caption{Distance and DMA exudation increased}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedBufferAndDistanceDMA24.png}
-%     \caption{0.15 apart, rate of DMA exudation increased by $10^{-11}$, DMA after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{BasictoComparetoDistance.png}
-%     \caption{Re-scaled basic model DMA after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedBufferAndDistanceZn24.png}
-%     \caption{0.15 apart, rate of DMA exudation increased by $10^{-11}$, Zn after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{24rescaledZinc.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \caption{Distance and DMA exudation increased}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedZnAbsorbDMA24.png}
-%     \caption{0.08 apart, rate of Zn absorption increased by $0.5e^{-2}$, DMA after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{BasictoComparetoDistanceZn.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}
-%     \centering
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{IncreasedZnAbsorbZn24.png}
-%     \caption{0.08 apart, rate of Zn absorption increased by $0.5e^{-2}$, Zn after 24 hours}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.45\textwidth}
-%     \includegraphics[width=\textwidth]{24rescaledZinc.png}
-%     \caption{Re-scaled basic model Zn after 24 hours for comparison}
-%     \end{subfigure}
-% \end{figure}
-
-
-
-
-
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1969,20 +1956,22 @@ $F_{Y,1,1}*10\text{ and } D_{Y1}*1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% &
 
 Taking into account the extensions of the original system from \cite{Ptashnyk-2011}, a more general version of system \eqref{eq:system-Zinc} is studied in this section. 
 
+Let \(\Omega \subset \R^2\) be a rectangular domain, where we identify \(\Gamma := \partial \Omega\). Let \( Q := \Omega \times (0,T)\) for some fixed time \(T >0\).
 Here, let \(y(x,t)\) and \(s(x,t)\) be vector functions from \(\Omega \times [0,T]\) in \(\R^{n}\) where for convenience we write \( x = (r,z) \in \Omega\) and also \(\Sigma = \Gamma \times (0,T)\). For each \(\ell \in \llb1,n\rrb\), let us define the uniformly elliptic operator \(L^\ell\) as
 \[
 	L^\ell y^\ell = \nabla \cdot (a^\ell \nabla y^\ell) + b^\ell \cdot \nabla y^\ell
 	= \sum_{i=1}^{2}  \sum_{j=1}^2 \pd{ }{x_i} \big( a_{i,j}^\ell \pd{ }{x_j} y^\ell \big) + \sum_{i=1}^2 b_i^\ell \pd{ }{x_i} y^\ell,
 \]
-where \(a^\ell\), \(b^\ell \in L^\infty (Q)\), with \(a^\ell\) a diagonal matrix such that \(a_{i,i} \geq 0\) and
-\[
-	\sum_{i=1}^{2}  \sum_{j=1}^2 a_{i,j}^\ell (x,t) \xi_i \xi_j \geq \theta |\xi|^2,
-\]
-for some \(\theta > 0\) and all \((x,t) \in Q\), \( \xi \in \R^2\).
+where \(a^\ell\), \(b^\ell \in L^\infty (Q)\), with \(a^\ell\) a matrix such that \(a^\ell_{i,i} \geq 0\) and
+\(
+	%\sum_{i=1}^{2}  \sum_{j=1}^2 a_{i,j}^\ell (x,t) \xi_i \xi_j \geq \theta |\xi|^2,
+	\xi^\top (a^\ell (x,t) \xi) \geq \Theta |\xi|^2
+\)
+for some \(\Theta > 0\) and all \((x,t) \in Q\), \( \xi \in \R^2\).
 %
-Moreover, let \(F: \R^n \to \R^n\) such that each component \( F^\ell \) belongs to\( \in C^1 (\R) \cap L^\infty (\R)\), is Lipschitz continuous, and non negative for non negative arguments, and let \(h\in L^2 (\R^n,[0,T]) \) affine on \(y\), and such that \(h(0,t) \leq M \) for all \(t\).
-Now, let \(G \in C^\infty(\R^{2n}, \R^n)\) be bilinear such that each \( G^\ell(s,\cdot)\) is linear in \( y\) for fixed \(s\), and each \( G^\ell (\cdot, y)\) depends linearly only on \( s^\ell\) for fixed \(y\). Also, we assume that \(-G\) has the positiveness property that \(-G^\ell (0, y) \geq 0\) if \( y\geq 0\) component-wise. We will present a precise form for \(h\) and \(G\) later.
-Finally, let the initial conditions be \( y_0, s_0^\ell \in L^\infty (\Omega)\).
+Moreover, let \(F: \R^n \to \R^n\) such that each component \( F^\ell \) belongs to \( C^1 (\R) \cap L^\infty (\R)\), is Lipschitz continuous, and non negative for non negative arguments, and let \(h\in L^2 (\R^n,[0,T]) \) affine on \(y\), and such that \(h(0,t) \leq M \) for all \(t\).
+Now, let \(G \in C^\infty(\R^{n+1}, \R^n)\) be bilinear such that each \( G^\ell(s,\cdot)\) is linear in \( y\) for fixed \(s\), and each \( G^\ell (\cdot, y)\) depends linearly only on \( s^\ell\) for fixed \(y\). Also, we assume that \(-G\) has the positiveness property that \(-G^\ell (0, y) \geq 0\) if \( y\geq 0\) component-wise. We will present a precise form for \(h\) and \(G\) later.
+Finally, let the initial conditions be \( y_0, s_0^\ell \in L^\infty (\Omega)\) and non-negative.
 
 We look after the solution of the system
 \begin{subequations}
@@ -2011,12 +2000,12 @@ We are interested in particular for \(G\) to be in the form
 \label{eq:form_of_G}
 	G^\ell (s^\ell,y) = \beta_0^\ell s^\ell - \gamma^\ell y^\ell + \sum_{\substack{1\le i\le n\\ i\neq \ell}} \beta_i^\ell y^i s^\ell,
 \end{equation}
-where for the positivity assumption we will require \( \gamma^\ell > 0\). We will further assume that \(\beta_i^\ell \geq 0\) for all \(i \in \llb 0,n\rrb \setminus\{\ell\}\). Similarly, each component of \(h\) can be written as
+where for the positivity assumption we will require \( \gamma^\ell > 0\). We will further assume that \(\beta_i^\ell \geq 0\) for all \(i \in \llb 1,n\rrb \setminus\{\ell\}\) and \(\beta_0^\ell \geq 0\). Similarly, each component of \(h\) can be written as
 \begin{equation}
 \label{eq:form_of_h}
 	h^\ell(y^\ell,x,t) = \alpha^\ell (x,t) y^\ell + \nu^\ell (x,t),
 \end{equation}
-with \(\nu^\ell \) a bounded function, and both \(\alpha^\ell \) and \(\nu^\ell \) integrable. Without loosing generality, let us assume further that \(\alpha^\ell \) and \(\nu^\ell \) are continuous by parts and that \(\alpha^\ell \) is bounded as well. Finally, let us assume that \( \nu^\ell \geq 0\).
+with \(\nu^\ell \) a bounded function, and both \(\alpha^\ell \) and \(\nu^\ell \) integrable. Without loosing generality, let us assume further that \(\alpha^\ell \) and \(\nu^\ell \) are continuous and that \(\alpha^\ell \) is bounded as well. Finally, let us assume that \( \nu^\ell \geq 0\).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2037,14 +2026,14 @@ for a fixed \(\vartheta > 0\).
 The existence of a solution of \eqref{eq:pde-ode-sys-a} is equivalent to the existence
 of a fixed point of \(K\) defined on 
 %\(L^2 \big( (0,T), (H^1(\Omega))^n \big) \cap Y \), 
-\(Y\),
+\(Y\) %,
 %
 %
 %\( L^2 (0,T,Z)\) with \(Z = \big( (H^1(\Omega))^n \times (L^2(\Omega))^n \big) \cap \big(L^\infty(\Omega)\big)^{2n}\) and its derivative in \(L^2 (0,T, Z^*) \). 
 %\( L^2 (0,T,Y)\), with \(Y = \big(H^1(\Omega) \cap L^\infty(\Omega)\big)^{n}\) 
 %
 %
-and its derivative in \(L^2 ( 0,T;(H^1(\Omega))^{*n} )\),
+%and its derivative in \(L^2 ( 0,T;(H^1(\Omega))^{*n} )\),
 by \( y_m = K(y_{m-1}) \), where \(y_m\) is a solution of the system
 \begin{subequations}
 \label{sys:de-coupled}
@@ -2078,11 +2067,11 @@ Observe that for any given \(y_{m-1} \in Y \), then the ODE system \eqref{sys:de
 %
 Carathéodory's theorem gives us that there exists a unique solution \(s_m \in H^{1} ( 0,T;(L^2(\Omega))^{n}  )\) for some \(T\).
 	%
-	We can improve this regularity. Recalling \eqref{eq:form_of_G}, for any \(y_{m-1} \in \R^n\), \(-G(s_m,y_{m-1})\) can be written as
+	We can improve this regularity. Recalling \eqref{eq:form_of_G}, for any \(y_{m-1} \in Y\), \(-G(s_m,y_{m-1})\) can be written as
 	\[
 		-G(s_m,y_{m-1}) = B(y_{m-1})s_m + C(y_{m-1})
 	\]
-	with \(C\) a vector and \(B\) a diagonal matrix. As \(B(y)(t_1)\) commutes with \( B(y)(t_2)\), for any \(t_1, t_2 \in \R\) (as it is a diagonal matrix), we further have that there is a global \(H^1 (0,T;(L^2(\Omega))^n )\) solution given by
+	with \(C\) a vector and \(B\) a diagonal matrix. As \(B(y)(t_1)\) commutes with \( B(y)(t_2)\), for any \(t_1, t_2 \in \R\) (as it is a diagonal matrix), we further have that there is a \(H^1 (0,T;(L^2(\Omega))^n )\) solution given by
 	\[
 		s_m(t) = e^{\overline{B}(t)} s_0 + \int\limits_0^t e^{\overline{B}(t)- \overline{B}(r)} C(y_{m-1}) \dif r
 	\]
@@ -2101,8 +2090,8 @@ Carathéodory's theorem gives us that there exists a unique solution \(s_m \in H
 		\qquad\text{and}\qquad
 		C^\ell (y_{m-1}) = \gamma^\ell y_{m-1}^\ell,
 	\]
-	where we have to recall that \( \gamma_i^\ell \geq 0\) and \( y_{m-1}^i \in Y\). As a result, \eqref{eq:solution_of_ode} yields an always non negative solution \( s_m \in L^\infty (Q)\).
-	If we did not have a closed expression for \(s_m\), we could have argued via the work of \cite{Horvath-1998} on positiveness for ODE systems, which requires the positiveness assumption for \(-G\) and \(s_0\). In any case, we have got that \( s_m^\ell \in H^1(0,T;L^2(\Omega) ) \cap L^\infty (Q)\) and \(s_m^\ell \geq 0\) for each \(\ell\in \llb 1,n\rrb\).
+	where we have to recall that \( \gamma_i^\ell \geq 0\) and \( y_{m-1} \in Y\). As a result, \eqref{eq:solution_of_ode} yields an always non negative solution \( s_m \in L^\infty (Q)\).
+	If we did not have a closed expression for \(s_m\), we could have argued via the work of \cite{Horvath-1998} on positiveness for ODE systems, which requires the positiveness assumption for \(-G\) and \(s_0\). In any case, we have got that \( s_m^\ell \in H^1(0,T;L^2(\Omega) ) \cap L^\infty (Q)\) and \(s_m^\ell \geq 0\) for each \(\ell\in \llb 1,n\rrb\) whenever \(y_{m-1} \in Y\).
 
 
 
@@ -2113,35 +2102,31 @@ Carathéodory's theorem gives us that there exists a unique solution \(s_m \in H
 \vspace{0.5\baselineskip}
 
 
-Next we turn to the linear system \eqref{sys:de-coupled-pde}, \eqref{sys:de-coupled-pde-b}, \eqref{sys:de-coupled-pde-i} of parabolic differential equations. Further, as we already have \(s_m\), it is now \emph{decoupled} from the ODE system. Following \cite{Evans-2010}, we consider a different viewpoint by associating with \(u\) a mapping \( \mathbf{u} : [0,T] \to V\), such that \( \mathbf{u}(t)(x) = u(x,t)\), with \(V\) an appropriate Banach space. 
+Next we turn to the linear system \eqref{sys:de-coupled-pde}, \eqref{sys:de-coupled-pde-b}, \eqref{sys:de-coupled-pde-i} of parabolic differential equations. Further, as we already have \(s_m\), it is now \emph{decoupled} from the ODE system. 
+%Following \cite{Evans-2010}, we consider a different viewpoint by associating with \(u\) a mapping \( \mathbf{u} : [0,T] \to V\), such that \( \mathbf{u}(t)(x) = u(x,t)\), with \(V\) an appropriate Banach space. 
 
 We say that a vector function \(y_m\) is a weak solution of \eqref{sys:de-coupled-pde} with boundary conditions \eqref{sys:de-coupled-pde-b} and initial conditions \eqref{sys:de-coupled-pde-i} if each \(y^\ell_m \in L^2(0,T;H^1(\Omega)) \) and \( \pd{y_m^\ell}{t} \in L^2(0,T;(H^1(\Omega))^*) \)  satisfy
-	\begin{align}
-		\int\limits_0^T \int\limits_\Omega \pd{\by_m^\ell}{t} v  \dif x \dif t
-		&=
-		\int\limits_0^T 
-		\big( h^\ell (\by_m^\ell,x,t), v\big)_{L^2 (\Gamma)} -  \big( a^\ell \nabla \by_m^\ell + \by_m^\ell b^\ell , \nabla v\big)_{L^2(\Omega)}  \dif t
-		\notag
-		\\
-		&\qquad\qquad\,\,\,
-		+
-		\int\limits_0^T \big(-\by_m^\ell F^\ell(\by_{m-1}^\ell) + G^\ell(\mathbf{s}_m^\ell,\mathbf{y}_{m}), v \big)_{L^2(\Omega)} \dif t
-		\notag
-		\\
-		\label{eq:linear-parabolic}
-		&=
-		-
-		\int\limits_0^T 
-		\int\limits_\Omega (a^\ell \nabla y_m^\ell + y_m^\ell b^\ell ) \cdot \nabla v \dif x \dif t
-		+
-		\int\limits_0^T 
-		\int\limits_\Gamma h^\ell (y_{m}^\ell,x,t) v \dif \sigma\dif t 
-		\\ &\qquad\qquad\qquad	\notag
-		+
-		\int\limits_0^T \int\limits_\Omega 
-		-y_m^\ell F^\ell(y^\ell_{m-1}) v + G^\ell(s_m^\ell, y_{m-1}) v \dif x \dif t
-	\end{align}
-	for all \( v \in L^2 (0,T;H^1(\Omega) ) \), and with the initial condition \( y_m^\ell \to y_0^\ell \) in \(L^2(\Omega)\) as \( t\to 0\), for all \(\ell \in \llb 1,n\rrb\). 
+\begin{equation}
+\label{eq:linear-parabolic}
+\begin{aligned}
+	\int\limits_0^T %\int\limits_\Omega \pd{ y_m^\ell}{t} v  \dif x 
+	    \big\langle \pd{ y_m^\ell}{t}, v \big\rangle
+	\dif t
+	&=
+	-
+	\int\limits_0^T 
+	\int\limits_\Omega (a^\ell \nabla y_m^\ell + y_m^\ell b^\ell ) \cdot \nabla v \dif x \dif t
+	+
+	\int\limits_0^T 
+	\int\limits_\Gamma h^\ell (y_{m}^\ell,x,t) v \dif \sigma\dif t 
+	\\ &\qquad\qquad\qquad
+	+
+	\int\limits_0^T \int\limits_\Omega 
+	-y_m^\ell F^\ell(y^\ell_{m-1}) v + G^\ell(s_m^\ell, y_{m-1}) v \dif x \dif t
+\end{aligned}
+\end{equation}
+for all \( v \in L^2 (0,T;H^1(\Omega) ) \), and with the initial condition \( y_m^\ell \to y_0^\ell \) in \(L^2(\Omega)\) as \( t\to 0\), for all \(\ell \in \llb 1,n\rrb\). 
+Here we have used the duality pairing \(\langle \cdot, \cdot \rangle\) of \( (H^1(\Omega))^*\) and \( H^1(\Omega)\).
 	
 Problem \eqref{eq:linear-parabolic} has been extensively studied in the literature, see for example \cite{Ladyzenskaja-1968} or \cite{Pao-1993}. Using Galerkin's method, we can prove that there is a unique solution given component-wise as the element \(y_m^\ell \in L^2(0,T;\)  \( H^1(\Omega)) \cap L^\infty(0,T; L^2(\Omega))\) with \( \pd{y_m^\ell}{t} \in L^2(0,T; (H^1(\Omega))^*) \).
 
@@ -2159,7 +2144,7 @@ Problem \eqref{eq:linear-parabolic} has been extensively studied in the literatu
 	
 	Consider a fundamental system of functions \((w_k)_{k\in \N^*}\) in \(H^1(\Omega)\); i.e., they form an orthogonal basis in \(H^1(\Omega)\), and for simplicity let us assume further that they are orthonormalised in \(L^2(\Omega)\). Moreover, let us define\footnote{Notice that \(a^\ell\) is linear in \( y_m\), not only in \(y_m^\ell\).}
 	\[
-		a^\ell [\by_m,v;t] := 
+		a^\ell [ y_m,v;t] := 
 		\int\limits_\Omega (a^\ell \nabla y_m^\ell + y_m^\ell b^\ell ) \cdot \nabla v \dif x + \int\limits_\Omega d^\ell (y_m) v \dif x
 		- \int\limits_\Gamma \alpha^\ell (x,t) y_m^\ell v \dif \sigma
 	\]
@@ -2184,19 +2169,19 @@ Problem \eqref{eq:linear-parabolic} has been extensively studied in the literatu
 	\label{eq:ansatz}
 		\mathbf{y}_m^{\ell,N} (t)(x) = \sum_{k=1}^N c_k^{\ell,N} (t) w_k(x)
 	\end{equation}
-	so that the coefficients \( c_k^{\ell,N} \) are determined by the conditions 
+	so that the coefficients \( c_k^{\ell,N} \) are determined by
 	\begin{equation}
 	\label{sys-pde-pre-galerkin}
-		\big(\pd{ }{t} \by_m^{\ell,N}, w_k\big)_\Omega + 
-		a^\ell [\mathbf y_m^{N}, w_k; t] 
+		\big(\pd{ }{t}  y_m^{\ell,N}, w_k\big)_\Omega + 
+		a^\ell [y_m^{N}, w_k; t] 
 		=
 		\big( \mathbf{f}^\ell (t), w_k \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  w_k \big)_{\Gamma}
 	\end{equation}
-	for almost every \(t\in (0,T)\) with the initial condition \( c_k^N (0) =  (\by^\ell (0), w_k)_\Omega = (y_0^\ell, w_k)_\Omega\)  for all \(k \in \llb 1,N\rrb\). 
-	
-	Substituting the \emph{ansatz}  \eqref{eq:ansatz} in \eqref{sys-pde-pre-galerkin} and making use of the orthonormality, we see that
+	for almost every \(t\in (0,T)\) with the initial condition \( c_k^N (0) =  ( y^\ell (0), w_k)_\Omega = (y_0^\ell, w_k)_\Omega\)  for all \(k \in \llb 1,N\rrb\); where
+	%
+	%Substituting the \emph{ansatz}  \eqref{eq:ansatz} in \eqref{sys-pde-pre-galerkin} and making use of the orthonormality, we see that
 	\begin{align*}
-		a^\ell [\mathbf y_m^{N}, w_k; t] 
+		a^\ell [y_m^{N}, w_k; t] 
 		&= 
 		\sum_{i=1}^N  \bigg[ c_i^{\ell,N}  \int\limits_\Omega  ( a^\ell \nabla w_i + w_i b^\ell) \cdot \nabla w_k \dif x -  c_i^{\ell, N} \int\limits_\Gamma \alpha^\ell w_i w_k \dif \sigma
 		\\
@@ -2206,96 +2191,96 @@ Problem \eqref{eq:linear-parabolic} has been extensively studied in the literatu
 		 \dif x
 		\bigg] =: A^\ell (c^{N})
 	\end{align*}
-	As a result, we get the system
+	Using orthogonality and orthonormality of \((w_k)_{k\in \N^*}\), we obtain the system
 	\begin{subequations}
 	\label{sys-pde-galerkin}
 	\begin{align}
-		\pd{ }{t} c_k^{\ell,N} + A^\ell (c^{N}) &= l_k^\ell (t)		\\
+		\od{ }{t} c_k^{\ell,N} + A^\ell (c^{N}) &= l_k^\ell (t)		\\
 		c_k^{\ell,N} (0) &= (y_0^\ell, w_k)
 	\end{align}
 	\end{subequations}
 	for almost every \(t\in (0,T)\), all \( k\in \llb1,N\rrb\), and \(n\in \llb 1,n\rrb\); with the functions \( l^\ell_k(t) = \big( \mathbf{f}^\ell (t), w_k \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  w_k \big)_{\Gamma}\).
 	
-	The system \eqref{sys-pde-galerkin} is a linear system of ordinary differential equations in terms of \(c_k^{\ell,N}\) with initial value conditions. Owing to Carathèodory's theorem, there exists a unique absolutely continuous solution \( c^N \in \big(H^1(0,T)\big)^{nN}\). Now, if we put \(c^{\ell,N}\) as a test function in \eqref{sys-pde-pre-galerkin} and sum over \(k\), we get that
+	The system \eqref{sys-pde-galerkin} is a system of linear ordinary differential equations in terms of \(c_k^{\ell,N}\) with initial value conditions. Owing to Carathèodory's theorem, there exists a unique solution \( c^N \in \big(H^1(0,T)\big)^{nN}\). Now, if we put \(c^{\ell,N}\) as a test function in \eqref{sys-pde-pre-galerkin} and sum over \(k\), we get that
 	\begin{equation}
 	\label{eq:result-galerkin}
-		\big(\pd{ }{t} \by_m^{\ell,N}, \by_m^{\ell,N}\big)_\Omega + 
-		a^\ell [\mathbf y_m^{N}, \by_m^{\ell,N}; t] 
+		\big(\pd{ }{t}  y_m^{\ell,N},  y_m^{\ell,N}\big)_\Omega + 
+		a^\ell [ y_m^{N},  y_m^{\ell,N}; t] 
 		=
-		\big( \mathbf{f}^\ell (t), \by_m^{\ell,N} \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  \by_m^{\ell,N} \big)_{\Gamma}
+		\big( \mathbf{f}^\ell (t),  y_m^{\ell,N} \big)_{\Omega} + \big(\mathbf{g}^\ell (t),   y_m^{\ell,N} \big)_{\Gamma}
 	\end{equation}
 	for almost every \(t\in (0,T)\) and all \(\ell \in \llb 1,n\rrb\). 
 	
 	 Now, for an arbitrary but fixed \(\tau \in (0,T]\) and any \(\ell \in \llb 1,n\rrb\), we have the identity 
 	 \[
-	 	\int\limits_0^\tau \big(\pd{ }{t} \by_m^{\ell,N}(t), \by_m^{\ell,N} (t) \big)_\Omega \dif t
+	 	\int\limits_0^\tau \big(\pd{ }{t}  y_m^{\ell,N}(t),  y_m^{\ell,N} (t) \big)_\Omega \dif t
 		=
-		\frac{1}{2} \int\limits_0^\tau  \pd{ }{t} \| \by_m^{\ell,N}(t) \|_\Omega^2 \dif t
+		\frac{1}{2} \int\limits_0^\tau  \pd{ }{t} \|  y_m^{\ell,N}(t) \|_\Omega^2 \dif t
 		=
-		\frac{1}{2} \| \by_m^{\ell,N}(\tau) \|_\Omega^2 - \frac{1}{2} \| \by_m^{\ell,N}(0) \|_\Omega^2.
+		\frac{1}{2} \|  y_m^{\ell,N}(\tau) \|_\Omega^2 - \frac{1}{2} \|  y_m^{\ell,N}(0) \|_\Omega^2.
 	 \]
 	 If we integrate \eqref{eq:result-galerkin} over \([0,\tau]\) and incorporate this last identity, we get that for any \(\ell \in \llb 1,n\rrb\) it holds
 	 \begin{align}
 	 \label{eq:estimate-integrationbyparts}
-	 	\frac{1}{2} \| \by_m^{\ell,N}(\tau) \|_\Omega^2
+	 	\frac{1}{2} \|  y_m^{\ell,N}(\tau) \|_\Omega^2
 		+ 
-		\int\limits_0^\tau a^\ell [\mathbf y_m^{N}, \by_m^{\ell,N}; t] \dif t
+		\int\limits_0^\tau a^\ell [ y_m^{N},  y_m^{\ell,N}; t] \dif t
 		=
-		\frac{1}{2} \| \by_m^{\ell,N}(0) \|_\Omega^2 + 
-		\int\limits_0^\tau \big( \mathbf{f}(t), \by_m^{\ell,N} (t) \big)_{\Omega} + \big(\mathbf{g}(t),  \by_m^{\ell,N} (t) \big)_\Gamma \dif t.
+		\frac{1}{2} \|  y_m^{\ell,N}(0) \|_\Omega^2 + 
+		\int\limits_0^\tau \big( \mathbf{f}(t),  y_m^{\ell,N} (t) \big)_{\Omega} + \big(\mathbf{g}(t),   y_m^{\ell,N} (t) \big)_\Gamma \dif t.
 	 \end{align}
 	Additionally, by Bessel's inequality, we have that
 	\begin{equation}
 	\label{eq:estimate-i}
-		\| \by_m^{\ell,N}(0) \|_\Omega^2 = \sum_{k=1}^N |c_k^{\ell,N}(0)|^2 = \sum_{k=1}^N | (y_0^\ell, w_k) |^2 \leq \|y_0^\ell\|_\Omega^2.
+		\|  y_m^{\ell,N}(0) \|_\Omega^2 = \sum_{k=1}^N |c_k^{\ell,N}(0)|^2 = \sum_{k=1}^N | (y_0^\ell, w_k) |^2 \leq \|y_0^\ell\|_\Omega^2.
 	\end{equation}
 	
 	
 	
 	Moreover, it is not hard to show, using Cauchy's inequality, that for any element \(v\in (H^1(\Omega))^n\) the inequality
 	\[
-		\frac{1}{2} \theta \|\nabla v^\ell \|^2_{\Omega}
-		\leq a^\ell [v,v^\ell;t]  + \frac{1}{2} c_{s,b,\alpha,F}^\ell \sum_{k=1}^n \|v^k\|^2_{\Omega} 
+		\frac{1}{2} {\Theta} \|\nabla v^\ell \|^2_{\Omega}
+		\leq a^\ell [v,v^\ell;t]  + \frac{1}{2} C_{s,b,\alpha,F}^\ell \sum_{k=1}^n \|v^k\|^2_{\Omega} 
 	\]
-	is satisfied, where \(c_{s,b,\alpha,F}^\ell\) is a constant depending linearly on the supremum norms of \(s_m^\ell, b^\ell, \alpha^\ell\), and \(F^\ell(y_{m-1}^\ell)\). Furthermore, applying Cauchy's inequality again we get
+	is satisfied, where \(C_{s,b,\alpha,F}^\ell\) is a constant depending linearly on the supremum norms of \(s_m^\ell, b^\ell, \alpha^\ell\), and \(F^\ell(y_{m-1}^\ell)\). Furthermore, applying Cauchy's inequality again we get
 	\[
-		\big| \big( \mathbf{f}^\ell , \by_m^{\ell,N} \big)_{\Omega} \big| \leq \frac{1}{2} \|\mathbf{f}^\ell \|^2_{\Omega} + \frac{1}{2} \|\by_m^{\ell,N}\|_{\Omega}^2
+		\big| \big( \mathbf{f}^\ell ,  y_m^{\ell,N} \big)_{\Omega} \big| \leq \frac{1}{2} \|\mathbf{f}^\ell \|^2_{\Omega} + \frac{1}{2} \| y_m^{\ell,N}\|_{\Omega}^2
 		\qquad\text{and}\qquad
-		\big(\mathbf{g}^\ell ,  \by_m^{\ell,N} \big)_\Gamma
-		\leq \varepsilon \|\mathbf{g}^\ell \|^2_{\Gamma} + \frac{1}{4\varepsilon} \|\by_m^{\ell,N}\|_{\Gamma}^2.
+		\big(\mathbf{g}^\ell ,   y_m^{\ell,N} \big)_\Gamma
+		\leq \varepsilon \|\mathbf{g}^\ell \|^2_{\Gamma} + \frac{1}{4\varepsilon} \| y_m^{\ell,N}\|_{\Gamma}^2.
 	\]
-	This way we can use a proper selection of \(\varepsilon\) alongside the trace inequality to obtain, for some \(C_1\) and \(C_2\), that
+	This way we can use a proper selection of \(\varepsilon\) alongside the trace inequality \cite{Evans-2010} to obtain, for some \(C_1\) and \(C_2\), that
 	\[
-		\pd{ }{t} \| \by_m^{\ell,N} \|^2_\Omega + \theta \|\nabla \by_m^{\ell,N}\|^2_{\Omega}
-		\leq C_1 \sum_{k=1}^n \|\by_m^{k,N}\|^2_{\Omega} + C_2\big(\|\mathbf{f}^\ell \|^2_{\Omega} + \|\mathbf{g}^\ell \|^2_{\Gamma} \big).
+		\od{ }{t} \|  y_m^{\ell,N} \|^2_\Omega + {\Theta} \|\nabla  y_m^{\ell,N}\|^2_{\Omega}
+		\leq C_1 \sum_{k=1}^n \| y_m^{k,N}\|^2_{\Omega} + C_2\big(\|\mathbf{f}^\ell \|^2_{\Omega} + \|\mathbf{g}^\ell \|^2_{\Gamma} \big).
 	\]
 	\begin{comment}
-	Adding the norm of \(\by_m^{\ell,N}\) at both sides of the inequality, we get
+	Adding the norm of \( y_m^{\ell,N}\) at both sides of the inequality, we get
 	\[
-		\pd{ }{t} \| \by_m^{\ell,N} \|^2_\Omega + \theta \| \by_m^{\ell,N}\|^2_{H^1(\Omega)}
-		\leq C_1 \sum_{k=1}^n \|\by_m^{k,N}\|^2_{H^1(\Omega)} + C_2\big(\|\mathbf{f}^\ell\|^2_{\Omega} + \|\mathbf{g}^\ell\|^2_{\Gamma} \big),
+		\od{ }{t} \|  y_m^{\ell,N} \|^2_\Omega + {\Theta} \|  y_m^{\ell,N}\|^2_{H^1(\Omega)}
+		\leq C_1 \sum_{k=1}^n \| y_m^{k,N}\|^2_{H^1(\Omega)} + C_2\big(\|\mathbf{f}^\ell\|^2_{\Omega} + \|\mathbf{g}^\ell\|^2_{\Gamma} \big),
 	\]
 	with an updated \(C_1\). 
 	\end{comment}
 	We can sum the inequalities with respect to \(\ell\) to obtain
 	\begin{equation}
 	\label{eq:estimate-differential}
-		\pd{ }{t} \sum_{\ell=1}^n \| \by_m^{\ell,N} \|^2_\Omega + \theta \sum_{\ell=1}^n \| \nabla \by_m^{\ell,N}\|^2_{\Omega}
-		\leq C_1 \sum_{\ell=1}^n \|\by_m^{\ell,N}\|^2_{\Omega} + C_2 \sum_{\ell=1}^n \big(\|\mathbf{f}^\ell\|^2_{\Omega} + \|\mathbf{g}^\ell\|^2_{\Gamma} \big),
+		\od{ }{t} \sum_{\ell=1}^n \|  y_m^{\ell,N} \|^2_\Omega + {\Theta} \sum_{\ell=1}^n \| \nabla  y_m^{\ell,N}\|^2_{\Omega}
+		\leq C_1 \sum_{\ell=1}^n \| y_m^{\ell,N}\|^2_{\Omega} + C_2 \sum_{\ell=1}^n \big(\|\mathbf{f}^\ell\|^2_{\Omega} + \|\mathbf{g}^\ell\|^2_{\Gamma} \big),
 	\end{equation}
 	with updated \(C_1\) and \(C_2\).
 	%
-	Notice that this is a differential inequality, so we can use Grönwall's inequality to get the estimate
+	Notice that this is a differential inequality, so we can use Grönwall's inequality \cite{Evans-2010} to get the estimate
 	\begin{equation}
 	\label{eq:Grownwall}
-		\sum_{\ell=1}^n \| \by_m^{\ell,N} (t) \|^2_\Omega \leq \sum_{\ell=1}^n  e^{C_1 t} \bigg(  \| \by_m^{\ell,N} (0) \|^2_\Omega
+		\sum_{\ell=1}^n \|  y_m^{\ell,N} (t) \|^2_\Omega \leq \sum_{\ell=1}^n  e^{C_1 t} \bigg(  \|  y_m^{\ell,N} (0) \|^2_\Omega
 			+ C_2 \int\limits_0^t \|\mathbf{f}^\ell (r)\|^2_{\Omega} + \|\mathbf{g}^\ell (r)\|^2_{\Gamma} \dif r
 		\bigg).
 	\end{equation}
 	Now, by \eqref{eq:estimate-i} and the fact that \eqref{eq:Grownwall} is a sum of positive terms, we get the particular estimate
 	\begin{equation}
 	\label{eq:estimate-maxnorm}
-		\max_{0\leq t \leq T} \| \by_m^{\ell,N} (t) \|^2_\Omega \leq C \sum_{k=1}^n  \bigg(  \| \by_0^k \|^2_\Omega
+		\max_{0\leq t \leq T} \|  y_m^{\ell,N} (t) \|^2_\Omega \leq C \sum_{k=1}^n  \bigg(  \|  y_0^k \|^2_\Omega
 			+ \|\mathbf{f}^k\|^2_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T;L^2(\Gamma))}
 		\bigg)
 	\end{equation}
@@ -2303,20 +2288,20 @@ Problem \eqref{eq:linear-parabolic} has been extensively studied in the literatu
 	
 	Now we can use \eqref{eq:estimate-integrationbyparts} replacing \(\tau\) with \(T\), estimate \eqref{eq:estimate-differential} completing the \(H^1\)--norm of each \(y_m^{\ell,N}\), and estimate \eqref{eq:estimate-maxnorm} to get
 	\[
-		\|\by_m^{\ell,N} \|^2_{L^2(0,T, H^1(\Omega))}
+		\| y_m^{\ell,N} \|^2_{L^2(0,T, H^1(\Omega))}
 		\leq 
-		C \sum_{k=1}^n \bigg(  \| \by_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T, L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T, L^2(\Gamma))} \bigg),
+		C \sum_{k=1}^n \bigg(  \|  y_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T, L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T, L^2(\Gamma))} \bigg),
 	\]
 	where \(C\) is a generic positive constant. With these estimates we have got that
 	\[
-		\| \by_m^{\ell,N} \|^2_{L^\infty (0,T;L^2(\Omega) )} 
-		+ \|\by_m^{\ell,N} \|^2_{L^2(0,T;H^1(\Omega))}
+		\|  y_m^{\ell,N} \|^2_{L^\infty (0,T;L^2(\Omega) )} 
+		+ \| y_m^{\ell,N} \|^2_{L^2(0,T;H^1(\Omega))}
 		\leq 
-		C \sum_{k=1}^n \bigg(  \| \by_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T;L^2(\Gamma))} \bigg);
+		C \sum_{k=1}^n \bigg(  \|  y_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T;L^2(\Gamma))} \bigg);
 	\]
-	%or alternatively, that the \(V_2(Q)\) norm of \(\by_m^{\ell,N}\) is bounded by a constant independent of \(N\) and \(\ell\), let us call it \(K_{m}\). 
-	where the term on the right is a constant independent of \(N\), let us call it \(K_{m}\). 
-	Observe that in particular \eqref{eq:estimate-maxnorm} yields \( \|\by_m^{\ell,N}(t)\|_{\Omega}^2 \leq K_{m} \) and in view of the orthonormality
+	%or alternatively, that the \(V_2(Q)\) norm of \( y_m^{\ell,N}\) is bounded by a constant independent of \(N\) and \(\ell\), let us call it \(K_{m}\). 
+	where the term on the right-hand side is a constant independent of \(N\), let us call it \(K_{m}\). 
+	Observe that in particular \eqref{eq:estimate-maxnorm} yields \( \| y_m^{\ell,N}(t)\|_{\Omega}^2 \leq K_{m} \)  for all \(t\in [0,T]\), and in view of the orthonormality
 	\begin{equation}
 	\label{eq:boundness-of-coeffs}
 		\sum_{k=1}^N |c_k^N(t)|^2 \leq K_{m}
@@ -2325,65 +2310,63 @@ Problem \eqref{eq:linear-parabolic} has been extensively studied in the literatu
 	
 	We can even go a step further. Fix any \(v\in H^1(\Omega)\) with \(\|v\|_{H^1(\Omega)} \leq 1\) and write it as \( v = v^1 + v^2\), where \(v^1\) is generated by the span of \( \{w_k\}_{k=1}^N\) and \( (v^2,w_k) = 0\) for all \( k \in \{1,\ldots,N\}\). Since the functions \( (w_k)_{k\in \N^*}\) are orthogonal in \(H^1(\Omega)\), we get \( \|v^1\|_{H^1(\Omega)} \leq \|v\|_{H^1(\Omega)} \leq 1 \). Utilising \eqref{sys-pde-pre-galerkin}, we get that for almost every \(t\in (0,T)\)
 	\[
-		\big(\pd{ }{t} \by_m^{\ell,N}, v^1\big)_\Omega + 
-		a^\ell [\mathbf y_m^{N}, v^1; t] 
+		\big(\pd{ }{t}  y_m^{\ell,N}, v^1\big)_\Omega + 
+		a^\ell [ y_m^{N}, v^1; t] 
 		=
 		\big( \mathbf{f}^\ell (t), v^1 \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  v^1 \big)_{\Gamma}.
 	\]
 	Then \eqref{eq:ansatz} implies
 	\[
-		\big\langle \pd{ }{t} \by_m^{\ell,N}, v \big\rangle =
-		\big(\pd{ }{t} \by_m^{\ell,N}, v\big)_\Omega =
-		\big(\pd{ }{t} \by_m^{\ell,N}, v^1\big)_\Omega 
+		\big\langle \pd{ }{t}  y_m^{\ell,N}, v \big\rangle =
+		\big(\pd{ }{t}  y_m^{\ell,N}, v\big)_\Omega =
+		\big(\pd{ }{t}  y_m^{\ell,N}, v^1\big)_\Omega 
 		=
 		\big( \mathbf{f}^\ell (t), v^1 \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  v^1 \big)_{\Gamma}
-		- a^\ell [\mathbf y_m^{N}, v^1; t] .
+		- a^\ell [y_m^{N}, v^1; t] .
 	\]
 	Continuity of \(a^\ell\) and the norm of \(v\) with by Cauchy--Bunyakovsky--Schwarz inequality give
 	\[
-		\Big| \big\langle \pd{ }{t} \by_m^{\ell,N}, v \big\rangle \Big|
+		\Big| \big\langle \pd{ }{t}  y_m^{\ell,N}, v \big\rangle \Big|
 		\leq C \sum_{k=1}^n
-		\big( \|\mathbf{f}^k\|_{\Omega} + \|\mathbf{g}^k\|_{\Gamma} + \|\by_m^{k,N}\|_{H^1(\Omega)} \big);
+		\big( \|\mathbf{f}^k\|_{\Omega} + \|\mathbf{g}^k\|_{\Gamma} + \| y_m^{k,N}\|_{H^1(\Omega)} \big);
 	\]
-	thus the operator norm of \(\pd{ }{t} \by_m^{\ell,N}\) is bounded for almost everywhere \(t\in (0,T)\). Additionally, we can square the last inequality, use again Cauchy's inequality and get
+	thus the operator norm of \(\pd{ }{t}  y_m^{\ell,N}\) is bounded for almost everywhere \(t\in (0,T)\). Additionally, we can square the last inequality, use again Cauchy's inequality and get
 	\[
-		\big\| \pd{ }{t} \by_m^{\ell,N} \big\|_{H^1(\Omega)^*} 
-		\leq C \sum_{k=1}^n \big( \|\mathbf{f}^k\|_{\Omega} + \|\mathbf{g}^k\|_{\Gamma} + \|\by_m^{k,N}\|_{H^1(\Omega)} \big) ;
+		\big\| \pd{ }{t}  y_m^{\ell,N} \big\|_{(H^1(\Omega))^*} 
+		\leq C \sum_{k=1}^n \big( \|\mathbf{f}^k\|_{\Omega} + \|\mathbf{g}^k\|_{\Gamma} + \| y_m^{k,N}\|_{H^1(\Omega)} \big) ;
 	\]
 	and therefore
 	\begin{align*}
-		\int\limits_0^T \big\| \pd{ }{t} \by_m^{\ell,N} \big\|^2_{H^1(\Omega)^*} \dif t 
-		\leq C\sum_{k=1}^n \bigg(  \| \by_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T, L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T, L^2(\Gamma))} \bigg).
+		\int\limits_0^T \big\| \pd{ }{t}  y_m^{\ell,N} \big\|^2_{(H^1(\Omega))^*} \dif t 
+		\leq C\sum_{k=1}^n \bigg(  \|  y_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T, L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T, L^2(\Gamma))} \bigg).
 	\end{align*}
 	As a result, we have got
 	\begin{equation}
 	\label{eq:energy-estimates}
 	\begin{aligned}
-		\| \by_m^{\ell,N} \|^2_{C([0,T];L^2(\Omega) )} 
-		&+ \|\by_m^{\ell,N} \|^2_{L^2(0,T; H^1(\Omega))}
-		+  \| \partial_t \by_m^{\ell,N} \|^2_{L^2(0,T;H^1(\Omega)^*)}
+		\|  y_m^{\ell,N} \|^2_{C([0,T];L^2(\Omega) )} 
+		&+ \| y_m^{\ell,N} \|^2_{L^2(0,T; H^1(\Omega))}
+		+  \| \partial_t  y_m^{\ell,N} \|^2_{L^2(0,T;H^1(\Omega)^*)}
 		\\
 		&\qquad\qquad\leq 
-		C \sum_{k=1}^n \bigg(  \| \by_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T;L^2(\Gamma))} \bigg).
+		C \sum_{k=1}^n \bigg(  \|  y_0^k \|^2_\Omega + \|\mathbf{f}^k\|^2_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|^2_{L^2(0,T;L^2(\Gamma))} \bigg).
 	\end{aligned}
 	\end{equation}
 	
 	%
 	% Made it!
 	%
-	According to the energy estimates \eqref{eq:energy-estimates} and \eqref{eq:boundness-of-coeffs}, we see that \((\by_m^{\ell,N})_{N\in \N^*}\) is bounded in \(L^2(0,T;H^1(\Omega))\), \((\partial_t \by_m^{\ell,N})_{N\in \N^*}\) is bounded in \(L^2(0,T;H^1(\Omega)^*)\), and all \( c_k^{\ell,N} (t)\) are essentially bounded for all \(\ell\), \(k\), \(N\), and \(t\). 
-	
-	
-	According to the energy estimates \eqref{eq:energy-estimates}, we see that the sequence \((\by_m^{\ell,N_q})_{N_q\in \N}\)  is bounded in \(L^2(0,T;H^1(\Omega))\) and \((\pd{ }{t}\by_m^{\ell,N_q})_{N_q\in \N}\)  is bounded in \(L^2(0,T;(H^1(\Omega))^*)\). Consequently, there exists a subsequence \((\by_m^{\ell,N_q})_{N_q\in \N}\) and functions \(\by_m^{\ell} \in L^2(0,T;H^1(\Omega))\),  with \(\pd{ }{t}\by_m^{\ell} \in L^2(0,T;(H^1(\Omega))^*)\) for each \(\ell \in \llb1,n\rrb\), such that
+	According to the energy estimates \eqref{eq:energy-estimates} and \eqref{eq:boundness-of-coeffs}, we see that \(( y_m^{\ell,N})_{N\in \N^*}\) is bounded in \(L^2(0,T;H^1(\Omega))\), \((\partial_t  y_m^{\ell,N})_{N\in \N^*}\) is bounded in \(L^2(0,T;H^1(\Omega)^*)\), and all \( c_k^{\ell,N} (t)\) are essentially bounded for all \(\ell\), \(k\), \(N\), and \(t\). 
+	Consequently, there exists a subsequence \(( y_m^{\ell,N_q})_{N_q\in \N}\) and functions \( y_m^{\ell} \in L^2(0,T;H^1(\Omega))\),  with \(\pd{ }{t} y_m^{\ell} \in L^2(0,T;(H^1(\Omega))^*)\) for each \(\ell \in \llb1,n\rrb\), such that
 	\begin{equation}
 	\label{weak-conv}
 		\begin{cases}
-			\by_m^{\ell,N_q} \rightharpoonup \by_m^{\ell} & \text{weakly in } L^2(0,T;H^1(\Omega)),
+			 y_m^{\ell,N_q} \rightharpoonup  y_m^{\ell} & \text{weakly in } L^2(0,T;H^1(\Omega)),
 			\\
-			\pd{ }{t}\by_m^{\ell,N_q} \rightharpoonup \pd{ }{t} \by_m^{\ell} & \text{weakly in } L^2(0,T;H^1(\Omega)^*).
+			\pd{ }{t} y_m^{\ell,N_q} \rightharpoonup \pd{ }{t}  y_m^{\ell} & \text{weakly in } L^2(0,T;H^1(\Omega)^*).
 		\end{cases}
 	\end{equation}
-	Moreover, owing to the weak lower sequential semicontinuity of the norm, we also get that \(\|\by_m^\ell(t)\|_\Omega\) is also bounded by \(K_{m}\), thus \(\by_m^\ell \in L^\infty (0,T; L^2 (\Omega))\).
+	Moreover, owing to the weak lower sequential semicontinuity of the norm, we also get that \(\| y_m^\ell(t)\|_\Omega\) is also bounded by \(K_{m}\) for all \(t\in [0,T]\), thus \( y_m^\ell \in L^\infty (0,T; L^2 (\Omega))\).
 
 
 
@@ -2396,19 +2379,19 @@ Now, for a fixed integer \(\tilde n\), let us pick a function \( \bv \in C^1([0,
 	Let us pick \(N \geq \tilde n\), multiply \eqref{sys-pde-pre-galerkin} by \(c_k\), sum over \(k\) and then integrate with respect to \(t\) to find
 	\[
 		\int\limits_0^T
-		\big\langle \pd{ }{t} \by_m^{\ell,N}, \bv \big\rangle + 
-		a^\ell [\mathbf y_m^{N}, \bv; t] \dif t
+		\big\langle \pd{ }{t}  y_m^{\ell,N}, \bv \big\rangle + 
+		a^\ell [y_m^{N}, \bv; t] \dif t
 		=
 		\int\limits_0^T
 		\big( \mathbf{f}^\ell (t), \bv \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  \bv \big)_{\Gamma}
 		\dif t.
 	\]
-	Using the subsequence and recalling \eqref{weak-conv}, we get
+	Using the subsequence and recalling \eqref{weak-conv} and taking limit \(N\to \infty\), we get
 	\begin{equation}
 	\label{eq:variational}
 		\int\limits_0^T
-		\big\langle \pd{ }{t} \by_m^{\ell}, \bv \big\rangle + 
-		a^\ell [\mathbf y_m^{\ell}, \bv; t] \dif t
+		\big\langle \pd{ }{t}  y_m^{\ell}, \bv \big\rangle + 
+		a^\ell [y_m^{\ell}, \bv; t] \dif t
 		=
 		\int\limits_0^T
 		\big( \mathbf{f}^\ell (t), \bv \big)_{\Omega} + \big(\mathbf{g}^\ell (t),  \bv \big)_{\Gamma}
@@ -2416,17 +2399,17 @@ Now, for a fixed integer \(\tilde n\), let us pick a function \( \bv \in C^1([0,
 	\end{equation}
 	This equality then holds for all functions \( \bv \in L^2(0,T;H^1(\Omega))\), as functions of the form \eqref{eq:test-fun-bochner} are dense in this space. %In particular, it holds for any \( v \in H^1(\Omega)\) as well. 
 	
-	To prove that \( \by_m^\ell (0) = y_0^\ell\) it suffices to see that \eqref{eq:variational} can be integrated by parts for all \( \bv \in C^1(0,T;H^1(\Omega))\) with \(\bv(T) = 0\). Again passing through a subsequence, noticing that \( \by_m^{\ell, N_k} (0) \to y_0^\ell\) in \(L^2(\Omega)\), and that \(\bv(0)\) is arbitrary, then we obtain the desired property.
+	To prove that \(  y_m^\ell (0) = y_0^\ell\) it suffices to see that \eqref{eq:result-galerkin} can be integrated by parts in time for all \( \bv \in C^1(0,T;H^1(\Omega))\) with \(\bv(T) = 0\) \cite{Evans-2010}. Again passing through a subsequence, noticing that \(  y_m^{\ell, N_k} (0) \to y_0^\ell\) in \(L^2(\Omega)\), and that \(\bv(0)\) is arbitrary, then we obtain the desired property.
 	
-	As discussed in \cite{Evans-2010}, uniqueness follows from showing that if \( \by_m^\ell\) and \( \mathbf{u}\) are two solutions of the parabolic problem, then their difference \(\bv^\ell\) satisfies
+	As discussed in \cite{Evans-2010}, uniqueness follows from showing that if \(  y_m^\ell\) and \( u\) are two solutions of the parabolic problem, then their difference \(v^\ell\) satisfies
 	\[
 		\frac{1}{2}
-		\pd{ }{t} \| \bv^\ell \|^2_{\Omega} + 
-		a^\ell [\bv, \bv^\ell; t]
+		\pd{ }{t} \| v^\ell \|^2_{\Omega} + 
+		a^\ell [v, v^\ell; t]
 		=
 		0.
 	\]
-	The lower bounds of \(a^\ell\) and Gronwall's inequality later imply that \( \bv \equiv 0\).
+	The lower bounds of \(a^\ell\) and Gronwall's inequality later imply that \( v \equiv 0\).
 
 
 
@@ -2455,19 +2438,19 @@ It is shown in \cite{Evans-2010}, that as \(y_m^\ell \in L^2(0,T; H^1(\Omega)) \
 	%
 	\begin{equation}
 	\begin{aligned}
-		\| \by_m^{\ell} \|_{C([0,T];L^2(\Omega) )} 
-		&+ \|\by_m^{\ell} \|_{L^2(0,T; H^1(\Omega))}
-		+  \| \partial_t \by_m^{\ell} \|_{L^2(0,T;H^1(\Omega)^*)}
+		\|  y_m^{\ell} \|_{C([0,T];L^2(\Omega) )} 
+		&+ \| y_m^{\ell} \|_{L^2(0,T; H^1(\Omega))}
+		+  \| \partial_t  y_m^{\ell} \|_{L^2(0,T;H^1(\Omega)^*)}
 		\\
 		&\qquad\qquad\leq 
-		C\sum_{k=1}^n \bigg(  \| \by_0^k \|_\Omega + \|\mathbf{f}^k\|_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|_{L^2(0,T; L^2(\Gamma))} \bigg),
+		C\sum_{k=1}^n \bigg(  \|  y_0^k \|_\Omega + \|\mathbf{f}^k\|_{L^2(0,T;L^2(\Omega))} + \|\mathbf{g}^k\|_{L^2(0,T; L^2(\Gamma))} \bigg),
 	\end{aligned}
 	\end{equation}
 	for every \( \ell \in \llb 1, n\rrb\).
 
 
 
-Now we will proceed to show that the solutions \(y_m\) are uniformly bounded independently.  To do this, we will be using the framework of invariant rectangles \cite{Redlinger-1989,Weinberger-1975}. As pointed out in \cite{Ptashnyk-2016}, the theory of bounded invariant rectangles can be applied to problems of the type \eqref{sys:de-coupled} using a regularisation argument. 
+Now we will proceed to show that the solutions \(y_m\) are uniformly bounded.  To do this, we will be using the framework of invariant rectangles \cite{Redlinger-1989,Weinberger-1975}. As pointed out in \cite{Ptashnyk-2016}, the theory of bounded invariant rectangles can be applied to problems of the type \eqref{sys:de-coupled} using a regularisation argument. 
 
 Let us recall here the linear system of partial differential equations given by \eqref{sys:de-coupled-pde}, \eqref{sys:de-coupled-pde-b}, and \eqref{sys:de-coupled-pde-i}, which we include here for clarity:
 \begin{subequations}
@@ -2488,7 +2471,7 @@ Now let us introduce the set
 \[
 	\Sigma  = \big\{ y \in \R^n :\, 0 \leq y \leq \vartheta  \big\}.
 \]
-We claim that \(\Sigma\) is an invariant set. 
+We claim that \(\Sigma\) is an invariant set for \eqref{sys:de-coupled.recalled}. 
 Let us define \(H(y,t)\) as the reaction term of system \eqref{sys:de-coupled.recalled}; i.e., \( H^\ell (y) := - y^\ell F^\ell(y_{m-1}^\ell) + G^\ell(s_m^\ell, y^1,\ldots y^n) \). Using the explicit formulae for \(G\), we get
 \[
 	H^\ell (y) = -y^\ell F^\ell(y_{m-1}^\ell) + \beta_0^\ell s_m^\ell - \gamma^\ell y^\ell + s_m^\ell \sum_{\substack{1\le i\le n\\ i\neq \ell}} \beta_i^\ell y^i.
@@ -2512,9 +2495,9 @@ Applying the theorem on positive invariant regions, we conclude that \( y\geq 0\
 Now, at \(\vartheta\), we get
 \begin{align*}
 	H^\ell( y^1, \ldots, y^{\ell-1}, \vartheta, y^{\ell+1}, \ldots, y^n ) 
-	= -\vartheta ( F^\ell(y_{m-1}^\ell) + \gamma^\ell) + \beta_0^\ell s_m^\ell + \sum_{\substack{1\le i\le n\\ i\neq \ell}}  s_m^\ell \beta_i^\ell  y^i 
+	= -\vartheta ( F^\ell(y_{m-1}^\ell) + \gamma^\ell) + \beta_0^\ell s_m^\ell + \sum_{\substack{1\le i\le n\\ i\neq \ell}}  s_m^\ell \beta_i^\ell  y^i .
 \end{align*}
-for some constant \(m\) as \(F\) is positive and bounded. Then if we consider \(K^\ell(y) = y^\ell - \vartheta \), we are looking again to have \(\nabla K^\ell(y)[H] \big|_{y^\ell = \vartheta} \leq 0\), for then we can conclude \( y \leq \vartheta\). 
+Then if we consider \(K^\ell(y) = y^\ell - \vartheta \), we are looking again to have \(\nabla K^\ell(y)[H] \big|_{y^\ell = \vartheta} \leq 0\), for then we can conclude \( y \leq \vartheta\). 
 %
 Notice that in such case we need to satisfy the property
 \begin{equation}
@@ -2522,7 +2505,7 @@ Notice that in such case we need to satisfy the property
 	\beta_0^\ell s_m^\ell + s_m^\ell \sum_{\substack{1\le i\le n\\ i\neq \ell}}  \beta_i^\ell  y^i \leq \vartheta ( F^\ell(y_{m-1}^\ell) + \gamma^\ell).
 \end{equation}
 In the cases \(s_m^\ell \equiv 0\) or \(\beta \equiv 0\), this is trivial. Let us now assume that \(s_m^\ell \neq 0 \) and recall that it is bounded from above. For the first term on the left of \eqref{eq:to_balance}, we can ask \( \beta_0^\ell s_m^\ell  \leq \vartheta  \gamma^\ell\) and then require \( \vartheta \geq \nicefrac{\beta_0^\ell s_m^\ell}{\gamma^\ell}\). Similarly, we can limit \(y^i\) to balance \eqref{eq:to_balance}.
-This will not generate a contradiction, for we can analyse the reaction terms for \(s_{m+1}^\ell\) as well, where non negativity follows from the same arguments as for \(y^\ell\), and boundedness for a constant \(\eta\) requires
+This will not generate a contradiction, for we can analyse the reaction terms for \(s_{m}^\ell\) as well, where non negativity follows from the same arguments as for \(y^\ell\), and boundedness for a constant \(\eta\) requires
 \(
 	\gamma^\ell y^\ell 
 	\leq \eta \big( \beta_0^\ell + \sum_{\substack{1\le i\le n\\ i\neq \ell}} \beta_i^\ell y^i\big)
@@ -2539,9 +2522,10 @@ This will not generate a contradiction, for we can analyse the reaction terms fo
 \vspace{0.5\baselineskip}
 
 As a result, we have that \(y_m \in Y\) and moreover that the mapping \(K\) such that \( y_m = K(y_{m-1})\) is defined from \(Y \) into itself. Moreover, 
-\(y_m^\ell \in L^2(0,T; H^1(\Omega))\) with \(\pd{ }{t} y_m^\ell \in L^2(0,T; (H^1(\Omega))^*)\), and the space 
-\(V= L^2(0,T; H^1(\Omega)) \cap L^2(0,T; (H^1(\Omega))^*)\)  by Lions-Aubin lemma is compactly embedded in \(L^2(Q)\) \cite{Aubin-1963}. Also we have that \(Y\) is a convex subset of \((L^2(Q))^n\). 
-Hence, by Schauder fixed-point theorem, there exists a fixed point of \(K:Y\to Y\), and this fixed point if a weak solution of the original nonlinear coupled problem \eqref{eq:pde-ode-sys-a}. Moreover, this  solution is unique which follows from the fact that \(F\) is Lipschitz continuous and all \(y_m\) are bounded.
+\(y_m^\ell \in L^2(0,T; H^1(\Omega))\) with \(\pd{ }{t} y_m^\ell \in L^2(0,T; (H^1(\Omega))^*)\), and 
+%\(V= L^2(0,T; H^1(\Omega)) \cap L^2(0,T; (H^1(\Omega))^*)\)  
+by Lions-Aubin lemma these spaces are compactly embedded in \(L^2(Q)\) \cite{Aubin-1963}. Also we have that \(Y\) is a convex subset of \((L^2(Q))^n\). 
+Hence, by Schauder fixed-point theorem \cite{Zeidler-1998}, there exists a fixed point of \(K:Y\to Y\), and this fixed point is a weak solution of the original nonlinear coupled problem \eqref{eq:pde-ode-sys-a}. Moreover, this  solution is unique which follows from the fact that \(F\) is Lipschitz continuous and all \(y_m\) are bounded, which ensures that all nonlinear functionals are Lipschitz.
 
 
 

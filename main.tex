@@ -250,12 +250,11 @@ Within the absorption zone, roots absorb many different elements from the soil. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Interaction of exudates with soil}
-
-% Now that we have discussed the sections of the root and how they act we can consider the ways in which they interact with our soil solution. 
-% Lets consider the mechanisms at work between the root and the soil solution with interaction between our exudates and the nutrients we are considering. 
-In the case of \ce{Zn}  gathering, the plant exudes a phytosiderophore, deoxymugineic acid (\ce{DMA}), which acts to increase the uptake of \ce{Zn} from soils in the form of \ce{Zn^{2+}} and \ce{Zn-DMA} at the root surface, see Figure \ref{fig:Zinc} for a sketch of this process. In the case of phosphorus, the interaction is a little more complex. First, studies have shown that in soil with limited \ce{P} availability, exudation of citrate by plant roots has improved \ce{P} solubilisation in soils \textcolor{red}{explain why this works} allowing the inorganic \ce{P} to move from solid soil into soil solution. The presence of nutrients in soil solution is critical for plants as the nutrients get to the root surface by processes of diffusion and mass transport (transport of ions in the soil solution) \cite{Reichardt2020}.
-% , where it moves by diffusion and convection which enables the root to absorb it.
-Then we have the exudation of phytase enzymes which are responsible for the process of mineralising \ce{P}, i.e., converting organic \ce{P} into inorganic \ce{P} which can then be more easily processed by the plant. Most importantly, research has shown that working in tandem, citrate, and phytase have a much larger effect on \ce{P} absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george} \textcolor{red}{figure showing this effect?}.
+In the case of \ce{Zn}  gathering, the plant exudes a phytosiderophore, deoxymugineic acid (\ce{DMA}), which acts to increase the uptake of \ce{Zn} from soils in the form of \ce{Zn^{2+}} and \ce{Zn-DMA} at the root surface, see Figure \ref{fig:Zinc} for a sketch of this process. In the case of phosphorus, the interaction is a little more complex. First, studies have shown that in soil with limited \ce{P} availability, exudation of citrate by plant roots has improved \ce{P} solubilisation in soils
+% \textcolor{red}{explain why this works} 
+allowing the inorganic \ce{P} to move from solid soil into soil solution. 
+The presence of nutrients in soil solution is critical for plants as the nutrients get to the root surface by processes of diffusion and mass transport (i.e. transport of ions in the soil solution which take) \cite{Reichardt2020}.
+Then we have the exudation of phytase enzymes which are responsible for the process of mineralising \ce{P}, i.e., converting organic \ce{P} into inorganic \ce{P}, which allows the plant to utilise it. Most importantly, research has shown that working in tandem, citrate, and phytase have a much larger effect on \ce{P} absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george}. The role of citrate and phytase in \ce{P} absorption by the root is further explained in Fig. \ref{fig:CitPhys}.
 
 \begin{figure}[h]
 \centering
@@ -286,7 +285,6 @@ Then we have the exudation of phytase enzymes which are responsible for the proc
 \label{sec:bio_basemodel}
 
 We now present the model of \cite{Ptashnyk-2011} which considers the way rice plants access \ce{Zn} in \ce{Zn}-deficient soils. The paper models the mechanism of \ce{DMA} exudation which allows rice roots to access \ce{Zn} and form \ce{Zn-DMA} which is solubilised as explained in the previous sections. Let $X$ be the amount of the micronutrient metal \ce{Zn} and $Y$ the amount of exuded phytosiderophore \ce{DMA}. All parameters following in this section are described in Table \ref{t:First-model-params}. 
-%The soil is modelled as a mixture of soil liquid and solid soil particles,
 The equations model the movement of $X$ and $Y$ by diffusion and convection through the soil pore solution, allowing for adsorption and desorption to occur on soil surfaces and diffusion only within the soil solution. 
 The concentrations of $X$ and $Y$ in the soil solution are marked by $X_L$ and $Y_L$, while their concentrations in the soil solid are $X_S$ and $Y_S$.
 %We can split $X$ and $Y$ into the amount of each in he different states, let $X_L$, $Y_L$ be the concentrations of \ce{Zn} and \ce{DMA} in solution and $X_S$, $Y_S$ are the concentrations in soil solids. 
@@ -994,8 +992,13 @@ Using parameters from table 1 in \cite{Ptashnyk-2011} we can consider what this 
      \end{subfigure}
      \caption{Basic model with parameters from \cite{Ptashnyk-2011} applied to both roots.}
  \end{figure}
- 
- As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The DMA exuded from the left has run into that on the right which is causing more \ce{Zn} to be made available to both roots. As the domain is symmetric and the roots close enough that their rhizospheres meet this is as expected. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/testpics/ZnCumulative/IncreasedDistanceZnCumu.png}
+    \caption{Cumulative \ce{Zn} uptate by roots after 24 hours at $0.15$ dm distance apart, contrasted with the original model.}
+    \label{fig:CZinDist}
+\end{figure}
+ As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The DMA exuded from the left has run into that on the right which is causing more \ce{Zn} to be made available to both roots. As the domain is symmetric and the roots close enough that their rhizospheres meet this is as expected adn we see inthe  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Increased distance between roots}
  \begin{figure}
@@ -1228,9 +1231,9 @@ Again, we consider zero-flux conditions for the rest of the boundary.
 %     $D_X$ & Diffusion of micronutrient $X$ in the soil, $D_X = D_{L,X} \theta f$  \\  
 % 	$D_{Y,1}$ &  Diffusion of the PS $Y_1$ in the soil, $D_{Y,1} = D_{L,Y,1} \theta f$  \\   
 % 	$D_{Y,2}$ & Diffusion of the PS $Y_2$ in the soil, $D_{Y,2} = D_{L,Y,2} \theta f$\\
-    $D_{LX}$ & Diffusion of micronutrient $X$ in free solution \\  
-	$D_{LY,1}$ &  Diffusion of exudate $Y_1$ in free solution \\   
-	$D_{LY,2}$ & Diffusion of the exudate $Y_2$ in free solution \\
+    $D_{L,X}$ & Diffusion of micronutrient $X$ in free solution \\  
+	$D_{L,Y,1}$ &  Diffusion of exudate $Y_1$ in free solution \\   
+	$D_{L,Y,2}$ & Diffusion of the exudate $Y_2$ in free solution \\
 % 	$\nu$ & Water flux\\
 	$g_X$ & Function for immobilisation of $X$ \\
 	$g_{Y,1}$ & Function for decomposition of $Y_1$ \\
@@ -1238,10 +1241,10 @@ Again, we consider zero-flux conditions for the rest of the boundary.
 	$b_X$ & Buffer power of $X$ \\
 	$b_{Y,1}$ & Buffer power of $Y_1$ \\
 	$b_{Y,2}$ & Buffer power of $Y_2$ \\
-	$\kappa_{X,1}$ & $X$ - $Y_1$ interaction coefficient \\
-	$\kappa_{X,2}$ & $X$ - $Y_2$ interaction coefficient\\
-	$\kappa_{Y,1}$ & $Y_1$ - $X$ interaction coefficient\\
-	$\kappa_{Y,2}$ & $Y_2$ - $X$ interaction coefficient\\ 
+	$\kappa_{X,1}$ & $X$ -- $Y_1$ interaction coefficient \\
+	$\kappa_{X,2}$ & $X$ -- $Y_2$ interaction coefficient\\
+	$\kappa_{Y,1}$ & $Y_1$ -- $X$ interaction coefficient\\
+	$\kappa_{Y,2}$ & $Y_2$ -- $X$ interaction coefficient\\ 
 	$\alpha_1 $ & $X$-absorbing power of root of plant 1 \\
 	$\alpha_2 $ & $X$-absorbing power of root of plant 1 \\
 	$F_{Y,1} $ & Rate of $Y_1$ exudation from plant 1 \\
@@ -1475,39 +1478,39 @@ In this section, we discuss the selection of parameters in Table \ref{t:Second-m
     \bf Symbol & \multicolumn{1}{l}{\bf Meaning} & \bf Value
     %
     \\ \midrule
-    $\theta$ & Solution volume fraction & 0.2 -- 0.3 dm$^3$ $dm^{-3}$ \\
+    $\theta$ & Solution volume fraction & 0.2 -- 0.3 \si{dm^3.dm^{-3}} \\
     $f$ & Diffusion impedance factor & 0.5 \\ 
-    $\rho$ & Soil bulk density & 1.2 kg dm$^{-3}$ \\
-    $D_{LX} $ & Diffusion coefficient of phosphate in free solution & $7-9 \times 10^{-8}$ dm$^2$ s$^{-1}$ \\  
-	$D_{LY,1}$ &  Diffusion of phytase in free solution & $3.5 - 4.5 \times 10^{-8}$ dm$^2$ s$^{-1}$ \\   
-	$D_{LY,2}$ & Diffusion of citrate in free solution & $2.1 \times 10^{-8}$ dm$^2$ s$^{-1}$ \\
-	$\nu$ & Water flux & $1 \times 10^{-6}$ dm s$^{-1}$\\
+    $\rho$ & Soil bulk density & 1.2 \si{kg.dm^{-3}} \\
+    $D_{L,X} $ & Diffusion coefficient of phosphate in free solution & $7-9 \times 10^{-8}$ \si{dm^2 . s^{-1}} \\  
+	$D_{L,Y,1}$ &  Diffusion of phytase in free solution & $3.5 - 4.5 \times 10^{-8}$ dm$^2$ s$^{-1}$ \\   
+	$D_{L,Y,2}$ & Diffusion of citrate in free solution & $2.1 \times 10^{-8}$ \si{dm^2 . s^{-1}} \\
+	$\nu$ & Water flux & $1 \times 10^{-6}$ \si{dm .s^{-1}}\\
 	$g_X$ & Function for phosphate immobilisation & 0 \\
 	$g_{Y,1}$ & Function for phytase decomposition & 0 \\
-	$g_{Y,2}$ & Function for citrate decomposition & $\frac{\rho V_{max} Y_{L,2} }{K_M + Y_{L,2} }$ where $V_{max} = 0$ or $V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$, \\
-	 & & $K_M=10^{-8}$ M \\
+	$g_{Y,2}$ & Function for citrate decomposition & $\frac{\rho V_{max} Y_{L,2} }{K_M + Y_{L,2} }$ where $V_{max} = 0$ or $V_{max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1} .s^{-1}}, \\
+	 & & $K_M=10^{-8}$ \si{M} \\
 	$b_X$ & Phosphate buffer power & 300 -- 2200 \\
 	$b_{Y,1}$ & Phytase buffer power & 1 \\
 	$b_{Y,2}$ & Citrate buffer power & 1 \\
-	$\kappa_{X,1}$ & Phosphate - phytase interaction coefficient & 18.43 dm$^3$ mol$^{-1}$ \\
-	$\kappa_{X,2}$ & Phosphate - citrate interaction coefficient & $92.16$ dm$^3$ mol$^{-1}$ \\
+	$\kappa_{X,1}$ & Phosphate - phytase interaction coefficient & 18.43 \si{dm^3 . mol^{-1}} \\
+	$\kappa_{X,2}$ & Phosphate - citrate interaction coefficient & $92.16$ \si{dm^3 .mol^{-1}} \\
 	$\kappa_{Y,1}$ & Phytase - phosphate interaction coefficient & 0 \\
 	$\kappa_{Y,2}$ & Citrate - phosphate interaction coefficient & 0 \\ 
-	$\alpha_1 $ & Phosphate absorbing power of root of barley & $5.6 \times 10^{-3}$ dm s$^{-1}$\\
-	$\alpha_2 $ & Phosphate absorbing power of root of tobacco & $5.6 \times 10^{-3}$ dm s$^{-1}$\\
-	$F_{Y,1,1} $ & Rate of phytase exudation in barley & $2.466 \times 10^{-11} - 2.503 \times 10^{-10}$  mol dm$^{-2}$ s$^{-1}$ \\
-	$F_{Y,2,1} $ & Rate of citrate exudation in barley & $1.097 \times 10^{-12} - 1.006 \times 10^{-9}$ mol dm$^{-2}$ s$^{-1}$ \\
-	$F_{Y,1,2} $ & Rate of phytase exudation in tobacco &  $1.316 \times 10^{-6}$ mol dm$^{-2}$ s$^{-1}$ \\
-	$F_{Y,2,2} $ & Rate of citrate exudation in tobacco &  $2.722 \times 10^{-6}$ mol dm$^{-2}$ s$^{-1}$ \\
-	$L_1$ & Barley root length & increases at rate $G_1 = 0.1728$ dm day$^{-1}$ \\
-	$L_2$ & Tobacco root length & increases at rate $G_2 = 0.2$ dm day$^{-1}$\\
+	$\alpha_1 $ & Phosphate absorbing power of root of barley & $5.6 \times 10^{-3}$ \si{dm.s^{-1}} \\
+	$\alpha_2 $ & Phosphate absorbing power of root of tobacco & $5.6 \times 10^{-3}$ \si{dm.s^{-1}} \\
+	$F_{Y,1,1} $ & Rate of phytase exudation in barley & $2.466 \times 10^{-11} - 2.503 \times 10^{-10}$  \si{mol.dm^{-2}. s^{-1}} \\
+	$F_{Y,2,1} $ & Rate of citrate exudation in barley & $1.097 \times 10^{-12} - 1.006 \times 10^{-9}$ \si{mol.dm^{-2}. s^{-1}} \\
+	$F_{Y,1,2} $ & Rate of phytase exudation in tobacco &  $1.316 \times 10^{-6}$ \si{mol.dm^{-2} .s^{-1}} \\
+	$F_{Y,2,2} $ & Rate of citrate exudation in tobacco &  $2.722 \times 10^{-6}$ \si{mol.dm^{-2}.s^{-1}} \\
+	$L_1$ & Barley root length & increases at rate $G_1 = 0.1728$ \si{dm.day^{-1}} \\
+	$L_2$ & Tobacco root length & increases at rate $G_2 = 0.2$ \si{dm.day^{-1}} \\
 	$\delta L_{X,1}$ & Length of phosphate uptake zone at barley & $L_1$\\
-	$\delta L_{Y,1,1}$ & Length of phytase secretion zone at barley & 0.2 dm \\
-	$\delta L_{Y,1,2}$ & Length of citrate secretion zone at barley & 0.2 dm\\
+	$\delta L_{Y,1,1}$ & Length of phytase secretion zone at barley & 0.2 \si{dm} \\
+	$\delta L_{Y,1,2}$ & Length of citrate secretion zone at barley & 0.2 \si{dm}\\
 	$\delta L_{X,2}$ & Length of phosphate uptake zone at tobacco & $L_2$ \\
-	$\delta L_{Y,1,2}$ &  Length of phytase secretion zone at tobacco & 0.2 dm \\
-	$\delta L_{Y,2,2}$ &  Length of citrate secretion zone at tobacco & 0.2 dm \\
-	$a$ & Root radius of barley & 0.005 dm \\
+	$\delta L_{Y,1,2}$ &  Length of phytase secretion zone at tobacco & 0.2 \si{dm} \\
+	$\delta L_{Y,2,2}$ &  Length of citrate secretion zone at tobacco & 0.2 \si{dm} \\
+	$a$ & Root radius of barley & 0.005 \si{dm} \\
 	$w$ & Distance between the roots & varied \\
 \bottomrule
 
@@ -1520,13 +1523,13 @@ In this section, we discuss the selection of parameters in Table \ref{t:Second-m
 \end{table}
 
 \subsubsection{Soil parameters}
-We choose the water content in soil $\theta$ to be in the range $0.2$ to $0.3$ which should be in accordance with real-life conditions in which tobacco and barley are cultivated, along with estimated soil bulk density $\rho=1.2$ kg/dm$^{-3}$. We keep the impedance factor the same as in \cite{Ptashnyk-2011}, i.e. $f=0.5$.
+We choose the water content in soil $\theta$ to be in the range $0.2$ to $0.3$ which should be in accordance with real-life conditions in which tobacco and barley are cultivated, along with estimated soil bulk density $\rho=1.2$ \si{kg\per dm^{-3}}. We keep the impedance factor the same as in \cite{Ptashnyk-2011}, i.e. $f=0.5$.
 
 \subsubsection{Diffusion coefficients}
-We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{LX} = 9 \times 10^{-8}$ dm$^2$s$^{-1}$ and from \cite{McKayFletcher-2019} where $D_{LX} = 7 \times 10^{-8}$ dm$^2$s$^{-1}$. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{LY,2} = 2.1 \times 10^{-8}$ dm$^2$s$^{-1}$. We estimate phytase diffusion to be half of phosphate diffusion, i.e. $D_{LY,1}$ in the range $3.5-4.5 \times 10^{-8}$dm$^2$s$^{-1}$, as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{LX}f\theta$, $D_{Y,1} = D_{LY,1}f\theta$, and $D_{Y,2} = D_{LY,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, following the findings in \cite{Ptashnyk-2011} we consider $\nu=0$. 
+We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{LX} = 9 \times 10^{-8}$ \si{dm^2 .s^{-1}} and from \cite{McKayFletcher-2019} where $D_{LX} = 7 \times 10^{-8}$ \si{dm^2.s^{-1}}. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{LY,2} = 2.1 \times 10^{-8}$ \si{dm^2.s^{-1}}. We estimate phytase diffusion to be half of phosphate diffusion, i.e. $D_{LY,1}$ in the range $3.5-4.5 \times 10^{-8}$ \si{dm^2.s^{-1}}, as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{LX} f \theta$, $D_{Y,1} = D_{LY,1} f \theta$, and $D_{Y,2} = D_{LY,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, following the findings in \cite{Ptashnyk-2011} we consider $\nu=0$. 
 
 \subsubsection{Parameters for sorption, mutual interaction, and decomposition}
-From the derivation of the extended model we recall that the phosphate buffer power is $b_X = \beta_1 / \beta_2$, where $\beta_1$, $\beta_2$ are parameters for adsorption and desorption to and from soil particles, respectively. The typical range for $b_X$ is taken from \cite{Ptashnyk-2010}. For further derivation we take $\beta_1$, $\beta_2$ from \cite{Ptashnyk-2010} where $\beta_1 = 3.7 \times 10^{-6}$ s$^{-1}$, $\beta_2 = 4.68 \times 10^{-9}$ s$^{-1}$. For simplicity we assume $b_{Y,1}=b_{Y,2} = 1$. The parameter for $X-Y_2$ interaction is $\kappa_{X,2} = \beta_4 / \beta_1$ where $\beta_4$ is phosphate enhanced desorption from soil solid due to absorbed citrate. The value $\beta_4 = 3.41 \times 10^{-4}$ is from \cite{McKayFletcher-2019} and it gives us $\kappa_{X,2} = 92.16$ dm$^3$ mol$^{-1}$. We estimate the coefficient for $X-Y_1$ interaction, $\kappa_{X,1}$, to be 5-fold smaller than $\kappa_{X,2}$. Furthermore, we consider the parameters for interaction of the exudates with phosphate ($\kappa_{Y,1}$ and $\kappa_{Y,2}$) to be zero. 
+From the derivation of the extended model we recall that the phosphate buffer power is $b_X = \beta_1 / \beta_2$, where $\beta_1$, $\beta_2$ are parameters for adsorption and desorption to and from soil particles, respectively. The typical range for $b_X$ is taken from \cite{Ptashnyk-2010}. For further derivation we take $\beta_1$, $\beta_2$ from \cite{Ptashnyk-2010} where $\beta_1 = 3.7 \times 10^{-6}$ \si{s^{-1}}, $\beta_2 = 4.68 \times 10^{-9}$ \si{s^{-1}}. For simplicity we assume $b_{Y,1}=b_{Y,2} = 1$. The parameter for $X-Y_2$ interaction is $\kappa_{X,2} = \beta_4 / \beta_1$ where $\beta_4$ is phosphate enhanced desorption from soil solid due to absorbed citrate. The value $\beta_4 = 3.41 \times 10^{-4}$ is from \cite{McKayFletcher-2019}, and it gives us $\kappa_{X,2} = 92.16$ \si{dm^3. mol^{-1}}. We estimate the coefficient for $X-Y_1$ interaction, $\kappa_{X,1}$, to be 5-fold smaller than $\kappa_{X,2}$. Furthermore, we consider the parameters for interaction of the exudates with phosphate ($\kappa_{Y,1}$ and $\kappa_{Y,2}$) to be zero. 
 %as the amount the exudates reacting with the soil is much larger than the amount of phosphate taken by the roots. 
 
 Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the soil that involve decomposition of phosphate, i.e. $g_X = 0$. For the decomposition of citrate we might consider a Michaelis-Menten-type term $g_{Y,2} = V_{max} Y_{L,2} / (K_M + Y_{L,2})$, however, sorption of citrate to soil particles causes up to 99\% reduction in biodegradation rate \cite{McKayFletcher-2019}. We therefore choose $V_{max} = 0$ and experiment with non-zero values similar to those in \cite{Ptashnyk-2011}. For phytase we also set $g_{Y,2} = 0$ since we assume no microbial consumption of this nutrient.
@@ -1535,7 +1538,7 @@ Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the 
 The coefficients for exudation rates in barley are taken from \cite{Ruiz-2020} \textcolor{red}{Add conversion details (from nkat)?} Tobacco exudation rates were obtained from \cite{giles_george} where we tried to estimate the root surface by using root radius being half of barley root radius (i.e. $a_2 = 2.5 \times 10^{-3}$) and the length of the root 100 dm, approximating the root(s) as a cylinder. However, this way both $F_{Y,1,2}$ and $F_{Y,2,2}$ were of order $10^{-6}$ which is much larger than the order of magnitude of $F_{Y,1,1}$ and $F_{Y,2,1}$ being $10^{-10}$. The relatively large exudation rates caused issues in the numerical simulations (the values of phosphate were blowing up). We therefore considered all of the exudation rates in the system to be of order $10^{-10}$, i.e. we multiplied the calculated values for $F_{Y,1,2}$ and $F_{Y,2,2}$ by $10^{-4}$.
 
 \subsubsection{Geometry of the domain}
-The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Figure \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ dm. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2cm long exudation zone to be 2cm behind the root tip (i.e. before the root cap).
+The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Figure \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ \si{dm}. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2cm long exudation zone to be 2 \si{cm} behind the root tip (i.e. before the root cap).
 
 % \begin{table}[!htb]
 % \begin{center}
@@ -1625,7 +1628,7 @@ In this section, we will numerically solve the non-dimensionalised version of mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Citrate consumption by microbes}
 \label{sec:numexp_vmax}
-The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$ in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Figure \ref{fig:numexp_vmax1} with Figure \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Figure \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
+The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1}.s^{-1}} in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Figure \ref{fig:numexp_vmax1} with Figure \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Figure \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
 
 \begin{figure}[!htb]
 \centering
@@ -1806,22 +1809,23 @@ We can experiment with the effect of an increase of diffusion coefficient on the
 \def\arraystretch{2.0}
 \begin{tabular}{lrcccc}
 \toprule
- & \multicolumn{2}{c}{\textbf{Total phosphate taken by root after 24h [mol dm$^{-1}$]}} & \multicolumn{2}{c}{\textbf{Change}} \\
+ & & \multicolumn{2}{c}{\textbf{Absorbed phosphate [\si{mol .dm^{-1}}]}} & \multicolumn{2}{c}{\textbf{Change}} \\
  \hline
-  \textbf{Section} & \textbf{Parameter change} & \textbf{Left root} & \textbf{Right root} & \textbf{Left root}  & \textbf{Right root}\\
+  \textbf{Num. experiment} & \textbf{Parameter change} & \textbf{Left root} & \textbf{Right root} & \textbf{Left root}  & \textbf{Right root}\\
  \hline 
-Sec. \ref{sec:baseparams} & Base parameters & 9.689e$^{-9}$ &  1.103e$^{-8}$& - &- \\
-Sec. \ref{sec:numexp_vmax}& Citrate $V_{max}=2.5 \times 10^{-9}$ & 9.409e$^{-9}$ & 1.047e$^{-8}$ & -2.9\% & -5.08\%\\
-Sec. \ref{sec:numexp_bx} & Buffer power $b_x \times 2$ & 1.521e$^{-8}$ & 1.806e$^{-8}$ & 57.0\% & 63.74\% \\
-Sec. \ref{sec:numexp_bx} & Buffer power $b_x / 2$  & 6.495e$^{-9}$ & 7.095e$^{-9}$ & -33.0\% & -35.68\%\\
-Sec. \ref{sec:numexp_a1} & Uptake power $\alpha_1 \times 10$ & 1.188e$^{-8}$ & 1.103e$^{-8}$ & 22.6\% & 0.00\% \\
-Sec. \ref{sec:numexp_a1} & Uptake power $\alpha_1 / 10$  & 9.087e$^{-9}$ & 1.103e$^{-8}$ & -6.2\% & 0.00\% \\
-Sec. & $D_{LX}\times 1.2$ & 1.653e$^{-8}$ & 1.961e$^{-8}$ & 70.6\% & 77.79\% \\
-Sec. & $D_{LY,1}\times 1.2$ & 1.516e$^{-8}$ & 1.805e$^{-8}$ & 56.5\% & 63.64\% \\
-Sec. & $\{D_{LY,1}, D_{LY,2} \}\times 1.2$ & & \\
-Sec. & $\{D_{LX}, D_{LY,1}, D_{LY,2} \}\times 1.2$ & & \\
-Sec. & $F_{Y,1,1}\times 10$ & 1.187e$^{-8}$ & 1.114e$^{-8}$ & 22.5\% & 1.00\% \\
-Sec. & $F_{Y,1,1}\times 10\text{ and } D_{Y1}\times 1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% & 1.27\%   \\
+Benchmark solution & Base parameters & 9.689e$^{-9}$ &  1.103e$^{-8}$& - &- \\
+Consumption of $Y_2$ by microbes & $V_{max}=2.5 \times 10^{-9}$ & 9.409e$^{-9}$ & 1.047e$^{-8}$ & -2.9\% & -5.08\%\\
+Buffer power & $b_x \times 2$ & 1.521e$^{-8}$ & 1.806e$^{-8}$ & 57.0\% & 63.74\% \\
+Buffer power & $b_x / 2$  & 6.495e$^{-9}$ & 7.095e$^{-9}$ & -33.0\% & -35.68\%\\
+Uptake power& $\alpha_1 \times 10$ & 1.188e$^{-8}$ & 1.103e$^{-8}$ & 22.6\% & 0.00\% \\
+Uptake power & $\alpha_1 / 10$  & 9.087e$^{-9}$ & 1.103e$^{-8}$ & -6.2\% & 0.00\% \\
+Diffusion coefficients & $D_{L,X}\times 1.2$ &  e$^{-8}$ & e$^{-8}$ & \% & \% \\
+Diffusion coefficients & $D_{L,Y,1}\times 1.2$ & 9.669e$^{-9}$ & 1.102e$^{-8}$ & -0.2\% & -0.09\% \\
+Diffusion coefficients & $\{D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & 9.619e$^{-9}$& 1.091e$^{-8}$ & -0.7\% & -1.09\% \\
+Diffusion coefficients & $\{D_{L,X}, D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & 1.047e$^{-8}$ & 1.186e$^{-8}$ & 8.1\% & 7.52\% \\
+Exudation rate & $F_{Y,1,1}\times 10$ & 1.187e$^{-8}$ & 1.114e$^{-8}$ & 22.5\% & 1.00\% \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } D_{Y,1}\times 1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% & 1.27\%   \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } \{D_{L,X}, D_{Y,1}\}\times 1.2$ & \\
 \bottomrule
 \end{tabular}
 \caption{Total phosphate absorbed in each of the roots after 24 hours and change of resulting values with respect to results obtained by using the original (base) parameters defined in Table \ref{t:Second-model-params}. \label{t:numexp_results}}
@@ -2509,21 +2513,21 @@ All the files and this document are available as in the following repository:
 \toprule
   \textbf{Parameter} & \textbf{Value} & \textbf{Parameter} & \textbf{Value}  \\
  \hline 
-$\theta$ & 0.25 dm$^3$ $dm^{-3}$ & $f$ & 0.5 \\
-$\rho$ & 1.2 kg dm$^{-3}$ & $D_{LX}$ & $9 \times 10^{-8}$ dm$^2$ s$^{-1}$\\
-$D_{LY,1}$  & $4.5 \times 10^{-8}$ dm$^2$ s$^{-1}$ & $D_{LY,2}$ & $2.1 \times 10^{-8}$ dm$^2$ s$^{-1}$ \\
+$\theta$ & 0.25 \si{dm^3} \si{dm^{-3}} & $f$ & 0.5 \\
+$\rho$ & 1.2 kg dm$^{-3}$ & $D_{L,X}$ & $9 \times 10^{-8}$ \si{dm^2.s^{-1}} \\
+$D_{L,Y,1}$  & $4.5 \times 10^{-8}$ \si{dm^2 . s^{-1}} & $D_{L,Y,2}$ & $2.1 \times 10^{-8}$ \si{dm^2 .s^{-1}} \\
 $\nu$ & 0 & $g_X$ & 0 \\
 $g_{Y,1}$ & 0 & $g_{Y,2}$ & 0 \\
 $b_X$ & $\beta_1 / \beta_2 = 790.6$ & $b_{Y,1}$ & 1 \\
-$b_{Y,2}$ & 1 & $\kappa_{X,1}$ & $\kappa_{X,2}$/5 = 18.43 dm$^3$ mol$^{-1}$ \\
-$\kappa_{X,2}$ & $\beta_4 / \beta_1 = 92.16$ dm$^3$ mol$^{-1}$ & $\kappa_{Y,1}$ & 0 \\
-$\kappa_{Y,2}$ & 0 & $\alpha_1$, $\alpha_2$ & $5.6 \times 10^{-3}$ dm s$^{-1}$\\
-$F_{Y,1,1}$ & $2.503 \times 10^{-10}$ mol dm$^{-2}$ s$^{-1}$ & $F_{Y,2,1}$ & $1.006 \times 10^{-10}$  mol dm$^{-2}$ s$^{-1}$ \\
-$F_{Y,1,2}$ & $1.316 \times 10^{-10}$ mol dm$^{-2}$ s$^{-1}$ & $F_{Y,2,2}$ & $2.722 \times 10^{-10}$  mol dm$^{-2}$ s$^{-1}$\\
-$G_1$ & 0.1728 dm day$^{-1}$ & $G_2$ & 0.2 dm day$^{-1}$ \\
-$\delta L_{X,1}$, $\delta L_{X,2}$ & 0.2 dm & $\delta L_{Y,1,1}$, $\delta L_{Y,2,1}$ & 0.2 dm \\
-$\delta L_{Y,1,1}$, $\delta L_{Y,2,1}$ & 0.2 dm & $a$ & 0.005 dm \\
-$w$ & 0.04 dm & & \\
+$b_{Y,2}$ & 1 & $\kappa_{X,1}$ & $\kappa_{X,2}$/5 = 18.43 \si{dm^3 . mol^{-1}} \\
+$\kappa_{X,2}$ & $\beta_4 / \beta_1 = 92.16$ \si{dm^3 .mol^{-1}} & $\kappa_{Y,1}$ & 0 \\
+$\kappa_{Y,2}$ & 0 & $\alpha_1$, $\alpha_2$ & $5.6 \times 10^{-3}$ \si{dm.s^{-1}}\\
+$F_{Y,1,1}$ & $2.503 \times 10^{-10}$ \si{mol.dm^{-2}.s^{-1}} & $F_{Y,2,1}$ & $1.006 \times 10^{-10}$ \si{mol.dm^{-2}.s^{-1}} \\
+$F_{Y,1,2}$ & $1.316 \times 10^{-10}$ \si{mol.dm^{-2}.s^{-1}} & $F_{Y,2,2}$ & $2.722 \times 10^{-10}$ \si{mol.dm^{-2}.s^{-1}}\\
+$G_1$ & 0.1728 \si{dm.day^{-1}} & $G_2$ & 0.2 \si{dm.day^{-1}} \\
+$\delta L_{X,1}$, $\delta L_{X,2}$ & 0.2 \si{dm} & $\delta L_{Y,1,1}$, $\delta L_{Y,2,1}$ & 0.2 \si{dm} \\
+$\delta L_{Y,1,1}$, $\delta L_{Y,2,1}$ & 0.2 \si{dm} & $a$ & 0.005 \si{dm} \\
+$w$ & 0.04 \si{dm} & & \\
 \bottomrule
 \end{tabular}
 \caption{Original parameter values to compute benchmark result in section \ref{sec:baseparams}. \label{t:baseparams}}

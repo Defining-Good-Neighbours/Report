@@ -540,28 +540,6 @@ such that \(D_{X} = \nicefrac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r}\) an
     \right)
     \notag
     \\
-    &= \varepsilon_x
-    \begin{pmatrix}
-        \nicefrac{1}{\varepsilon_r} & 0 \\
-        0 & \nicefrac{1}{\varepsilon_z}
-    \end{pmatrix}
-    \hat{\nabla}
-    \cdot
-    \left( 
-        \begin{pmatrix}
-         \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{D}_{X,r} & 0 
-         \\
-        0 &  \nicefrac{\varepsilon_z}{\varepsilon_t} \hat{D}_{X,z}
-    \end{pmatrix}
-    \hat{\nabla} \hat{x} - \hat{x}
-    \begin{pmatrix}
-         \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_{r} 
-         \\
-        \nicefrac{\varepsilon_z}{\varepsilon_t} \hat{\nu}_{z}
-    \end{pmatrix}
-    \right)
-    \notag
-    \\
     &= \frac{\varepsilon_x}{\varepsilon_t}
     \hat{\nabla}
     \cdot
@@ -654,7 +632,7 @@ Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_0) = (\vareps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Numerical Approximation}
+\subsection{Numerical Approximation Scheme}
 \label{sec:Numerics-base}
 
 In order to get numerical solutions of the coupled system of partial differential equations \eqref{eq:sys-Zn-X-Omega}--\eqref{eq:sys-Zn-Y-Omega} with boundary conditions \eqref{eq:sys-Zn-X-Gamma-a}--\eqref{eq:sys-Zn-Y-Gamma-a} or \eqref{sys:extension-two-roots}, we will use a splitting scheme.
@@ -709,6 +687,7 @@ Additionally, we will approximate the time derivatives using simple backward dif
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Non-dimensionalised variational expressions}
+\label{sus:non-dim-base}
 
 
 The existence of a solution to the model \eqref{eq:system-Zinc} and its extension with boundary conditions \eqref{sys:extension-two-roots} is presented in Section \ref{sec:Existence}. 
@@ -913,7 +892,7 @@ for every \(v\in H^1(\Omega)\). (B) Proceed on finding \( x^{n+1}\) such that it
 \end{aligned}
 \end{equation}
 \end{subequations}
-for every \(v\in H^1(\Omega)\). (C) Until the iterations have finished, go back to step (A).
+for every \(v\in H^1(\Omega)\). %(C) Until the iterations have finished, go back to step (A).
 
 
 Correspondingly, the extension for two roots with boundary conditions \eqref{sys:extension-two-roots} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( y^{n+1}\) such that
@@ -954,7 +933,7 @@ for every \(v\in H^1(\Omega)\). (B) Proceed on finding \( x^{n+1}\) such that it
 \end{aligned}
 \end{equation}
 \end{subequations}
-for every \(v\in H^1(\Omega)\). (C) Until the iterations have finished, go back to step (A).
+for every \(v\in H^1(\Omega)\). %(C) Until the iterations have finished, go back to step (A).
 
 \vspace{1\baselineskip}
 In both approximation schemes, each contributing subset of \(\Gamma\) is updated for the current time step. For instance, segment \(\Gamma_{1,y}^{n+1}\) is the segment \(\Gamma_{1,y}\) at time \( \hat{t}_{n+1} = (n+1)\Delta \hat t\).
@@ -1097,34 +1076,45 @@ If instead we increase the rate of \ce{Zn} absorption by the rice plant we see t
 We will consider a model where two plants secrete two different exudates that act on a nutrient in the soil which is then absorbed through their roots. We will follow the derivation for a model of one plant described in \cite{Ptashnyk-2011}. The main change is in modelling dynamics of an extra nutrient which results in additional term in the equation for dynamics of $X$ and a new equation for the dynamics of the second exudate.
 	
 Our domain will be a rectangle with a root of plant that secretes exudate $Y_1$ on the left-hand side, and a root of plant secreting exudate $Y_2$ on the right-hand side. The concentrations of $X$, $Y_1$, and $Y_2$ in the soil solution will be marked by $X_L$, $Y_{L,1}$, and $Y_{L,2}$, while their concentrations in the soil solid in rapid equilibrium with the solution will be $X_S$, $Y_{S,1}$, and $Y_{S,2}$. The conservation equations for $X$, $Y_1$, and $Y_2$ in unit volume of soil are
+\begin{subequations}
+\label{x_1}
 \begin{align}
-	\partial_t(\theta X_L + X_S) &= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X, \label{x_1}\\
-	\partial_t(\theta Y_{L,1} + Y_{S,1}) &= \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_1} \\
-	\partial_t(\theta Y_{L,2} + Y_{S,2}) &= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}, \label{y2_1}		
+	\partial_t(\theta X_L + X_S) &= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X, \\
+	\partial_t(\theta Y_{L,1} + Y_{S,1}) &= \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \\
+	\partial_t(\theta Y_{L,2} + Y_{S,2}) &= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2},
 \end{align}
+\end{subequations}
 with the involved parameters presented in Table \ref{t:Second-model-params}. Next, we specify the equations for interaction between the nutrients in the solid and in the solution assuming $Y_1$ and $Y_2$ do not interact with each other. This is represented with the following system of ordinary differential equations
+\begin{subequations}
+\label{sys:eq-mod-2}
 \begin{align}
 	\partial X_S &= \beta_1 X_L - \beta_2 X_S - \beta_3 X_S Y_{L,1} - \beta_4 X_S Y_{L,2},  \\
 	\partial Y_{S,1} &= \gamma_1 Y_{L,1} - \gamma_2 Y_{S,2} - \gamma_3 Y_{S,1} X_L, \\
 	\partial Y_{S,2} &= \xi_1 Y_{L,2} - \xi_2 Y_{S,2} - \xi_3 Y_{S,2} X_L,
 \end{align}	
-where $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\gamma_3$, $\xi_1$, $\xi_2$, and $\xi_3$ are reaction rate coefficients. At equilibrium we have $\partial_t X_S = \partial_t Y_{S,1} = \partial_t Y_{S,2} = 0$, therefore
+\end{subequations}
+where $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\gamma_3$, $\xi_1$, $\xi_2$, and $\xi_3$ are reaction rate coefficients. At equilibrium, equations \eqref{sys:eq-mod-2} satisfy $\partial_t X_S = \partial_t Y_{S,1} = \partial_t Y_{S,2} = 0$, therefore
 \begin{align}
-	X_S &= \frac{\beta_1 X_L}{\beta_2 + \beta_3Y_{L,1} + \beta_4 Y_{L,2}}, \label{x_2} \\
-	Y_{S,1} &= \frac{\gamma_1 Y_{L,1}}{\gamma_2 + \gamma_3X_L}, \label{y1_2} \\
-	Y_{S,2} &= \frac{\xi_1 Y_{L,2}}{\xi_2 + \xi_3X_L}. \label{y2_2}
+\label{x_2} 
+	X_S = \frac{\beta_1 X_L}{\beta_2 + \beta_3Y_{L,1} + \beta_4 Y_{L,2}}, 
+	\qquad
+	Y_{S,1} = \frac{\gamma_1 Y_{L,1}}{\gamma_2 + \gamma_3X_L},
+	\qquad
+	Y_{S,2} = \frac{\xi_1 Y_{L,2}}{\xi_2 + \xi_3X_L}.
 \end{align}
-We differentiate the equations \eqref{x_2}, \eqref{y1_2}, and \eqref{y2_2}, which gives us 
+We differentiate the terms in \eqref{x_2} with respect to time, which gives us 
+\begin{subequations}
+\label{x_3}
 \begin{align}
 	\partial_t X_S &= \frac{\beta_1}{\beta_2 + \beta_3 Y_{L,1} + \beta_4 Y_{L,2}} \partial_t X_L - \frac{\beta_1 X_L \beta_3}{(\beta_2 + \beta_3 Y_{L,1} + \beta_4 Y_{L,2})^2} \partial_t Y_{L,1}
 	- \frac{\beta_1 X_L \beta_4}{(\beta_2 + \beta_3 Y_{L,1} + \beta_4 Y_{L,2})^2} \partial_t Y_{L,2}, 
-	\label{x_3}
 	\\
-	\partial_t Y_{S,1} &= \frac{\gamma_1}{\gamma_2 + \gamma_3 X_L} \partial_t Y_{L,1} - \frac{\gamma_1 Y_{L,1} \gamma_3}{(\gamma_2 + \gamma_3 X_L)^2} \partial_t X_L, \label{y1_3}
+	\partial_t Y_{S,1} &= \frac{\gamma_1}{\gamma_2 + \gamma_3 X_L} \partial_t Y_{L,1} - \frac{\gamma_1 Y_{L,1} \gamma_3}{(\gamma_2 + \gamma_3 X_L)^2} \partial_t X_L,
 	\\
-	\partial_t Y_{S,2} &= \frac{\xi_1}{\xi_2 + \xi_3 X_L} \partial_t Y_{L,2} - \frac{\xi_1 Y_{L,2} \xi_3}{(\xi_2 + \xi_3 X_L)^2} \partial_t X_L. \label{y2_3}
+	\partial_t Y_{S,2} &= \frac{\xi_1}{\xi_2 + \xi_3 X_L} \partial_t Y_{L,2} - \frac{\xi_1 Y_{L,2} \xi_3}{(\xi_2 + \xi_3 X_L)^2} \partial_t X_L. 
 \end{align} 
-Combining equations \eqref{x_1} and \eqref{x_3}, \eqref{y1_1} and \eqref{y1_3}, and \eqref{y2_1} and \eqref{y2_3} gives us
+\end{subequations}
+Combining equations \eqref{x_1} and \eqref{x_3} yields
 \begin{align}
 	\begin{split} 
 		\left(\theta + \frac{\beta_1}{\beta_2 + \beta_3 Y_{L,1} + \beta_4 Y_{L,2}}\right) \partial_t X_L - \frac{\beta_1 X_L \beta_3}{(\beta_2 + \beta_3 Y_{L,1} + \beta_4 Y_{L,2})^2} \partial_t Y_{L,1} \\
@@ -1133,11 +1123,11 @@ Combining equations \eqref{x_1} and \eqref{x_3}, \eqref{y1_1} and \eqref{y1_3}, 
 		 &= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X, 
 	\end{split} \label{x_4} 
 	\\
-	(\theta + \frac{\gamma_1}{\gamma_2 + \gamma_3 X_L}) \partial_t Y_{L,1} - \frac{\gamma_1 Y_{L,1} \gamma_3}{(\gamma_2 + \gamma_3 X_L)^2} \partial_t X_L)  &= \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_4} 
+	\left(\theta + \frac{\gamma_1}{\gamma_2 + \gamma_3 X_L}\right) \partial_t Y_{L,1} - \frac{\gamma_1 Y_{L,1} \gamma_3}{(\gamma_2 + \gamma_3 X_L)^2} \partial_t X_L)  &= \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_4} 
 	\\
-	(\theta + \frac{\xi_1}{\xi_2 + \xi_3 X_L}) \partial_t Y_{L,2} - \frac{\xi_1 Y_{L,2} \xi_3}{(\xi_2 + \xi_3 X_L)^2} \partial_t X_L &= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}. \label{y2_4}	
+	\left(\theta + \frac{\xi_1}{\xi_2 + \xi_3 X_L}\right) \partial_t Y_{L,2} - \frac{\xi_1 Y_{L,2} \xi_3}{(\xi_2 + \xi_3 X_L)^2} \partial_t X_L &= \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}. \label{y2_4}	
 \end{align}
-The set of equations above can be modified by dividing the numerator and denominator of each fraction by an adequate parameter. This way we get the final set of conservation equations in terms of $X_L$, $Y_{L,1}$ and $Y_{L,2}$
+The set of equations above can be modified by dividing the numerator and denominator of each fraction by an adequate parameter. This way we get the final set of conservation equations in terms of $X_L$, $Y_{L,1}$, and $Y_{L,2}$:
 \begin{subequations}
 \label{eq:extendedsys}
 \begin{align}
@@ -1162,9 +1152,30 @@ The set of equations above can be modified by dividing the numerator and denomin
 \end{subequations}
 where $b_X = \beta_1 / \beta_2$, $b_{Y,1} = \gamma_1 / \gamma_2$, $b_{Y,2} = \xi_1 / \xi_2$, $\kappa_{X,1} = \beta_3 / \beta_1$, $\kappa_{X,2} = \beta_4 / \beta_1$, $\kappa_{Y,1} = \gamma_3 / \gamma_1$, $\kappa_{Y,1} = \xi_3 / \xi_1$ are parameters presented in Table \ref{t:Second-model-params}.
 	
+Finally, in what follows, we will consider a simplification of the system of equations \eqref{eq:extendedsys} in a regime where $\kappa_{Y,1} = \kappa_{Y,2} = 0$, i.e., the exudates do not interact with the metal. In this scenario we get the reduced system 
+\begin{subequations}
+\label{sys-first-extension}
+\begin{align}
+	\begin{split} 
+		&\left( \theta + \frac{b_X}{1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2}} \right)
+			\partial_t X_L - 
+			\frac{\kappa_{X,1} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,1}
+			\\
+			&\hspace{3cm} -
+			\frac{\kappa_{X,2} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,2}
+			= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X, 
+	\end{split} \label{x_fin2} \\
+	&(\theta + b_{Y,1}) \partial_t Y_{L,1}   = \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_fin2} \\
+	&(\theta + b_{Y,2}) \partial_t Y_{L,2}  = \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}. \label{y2_fin2}	
+\end{align}
+\end{subequations}
+
+
+
+
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Boundary conditions}
+\subsection{One exudate per root}
 The following boundary conditions are expanded upon the right-hand side boundary using the conditions from the base model and symmetry of the domain. On the left-hand side of the domain (plant 1) we have
 \begin{subequations}
 \label{eq:extendedsys_BCs}
@@ -1180,26 +1191,7 @@ and on the right-hand side of the domain (plant 2) we have
 \end{subequations}
 Again, we consider zero-flux conditions for the rest of the boundary.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simplified system with no exudate-metal interaction}
-We consider a simplification of the system of equations \eqref{eq:generalised-x_t} - \eqref{eq:generalised-y_2_t} in a regime where $\kappa_{Y,1} = \kappa_{Y,2} = 0$, i.e., the exudates do not interact with the metal. In this scenario we get the reduced system 
-\begin{subequations}
-\label{sys-first-extension}
-\begin{align}
-	\begin{split} 
-		&\left( \theta + \frac{b_X}{1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2}} \right)
-			\partial_t X_L - 
-			\frac{\kappa_{X,1} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,1}
-			\\
-			&\hspace{2.5cm} -
-			\frac{\kappa_{X,2} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,2}
-			= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X, 
-	\end{split} \label{x_fin2} \\
-	&(\theta + b_{Y,1}) \partial_t Y_{L,1}   = \nabla \cdot(D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) - g_{Y,1}, \label{y1_fin2} \\
-	&(\theta + b_{Y,2}) \partial_t Y_{L,2}  = \nabla \cdot(D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) - g_{Y,2}. \label{y2_fin2}	
-\end{align}
-\end{subequations}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1271,124 +1263,6 @@ We consider a simplification of the system of equations \eqref{eq:generalised-x_
 \end{table}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Variational formulation}
-
-The existence of a solution of system \eqref{sys-first-extension} is presented in Section \ref{sec:Existence}.
-To find the variational formulation of the system, we will use a sufficiently smooth test function and then use a density argument for a more general function space. Let's begin supposing that there is a $\mathcal{C}^2 (\bar \Omega)$ solution pair $(X_L,Y_L)$ and multiply the first equation by a $v \in \mathcal{C}^1 (\bar\Omega)$ function and introduce the functions 
-\[
-    A(Y_{L,1}, Y_{L,2}) := \theta + \frac{b_X}{1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2}},
-    \qquad
-    B(X_L, Y_{L,1}, Y_{L,2}) := \frac{\kappa_{X,1} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2},
-\]
-and
-\[
-    C(X_L, Y_{L,1}, Y_{L,2}) := \frac{\kappa_{X,2} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2}.
-\]
-This way \eqref{x_fin2} can be written compactly as
-\[
-	A(Y_{L,1}, Y_{L,2})      \partial_t X_L - 
-	B(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,1} -
-	C(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,2}
-	= \nabla \cdot(D_X \nabla X_L - \nu X_L) - g_X.
-\]
-
-Now, let us multiply all three differential equations by the test function \(v\), integrate over \(\Omega\), and use Divergence Theorem. This way we get
-\begin{subequations}
-\begin{align}
-    \int\limits_\Omega
-    A(Y_{L,1}, Y_{L,2}) \partial_t X_L v &- B(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,1} v - C(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,2} v \dif \mu 
-    \notag
-    \\
-    &=
-    \int\limits_\Gamma
-    (D_X \nabla X_L - \nu X_L) \cdot \vec{n} v
-    \dif \sigma
-    -\int\limits_\Omega
-    (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
-    -\int\limits_\Omega g_X v \dif \mu,
-    \\
-    \int\limits_\Omega (\theta + b_{Y,1}) \partial_t Y_{L,1} v \dif \mu  &=
-    \int\limits_\Gamma (D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) \cdot \vec{n} v \dif\sigma
-    -\int\limits_\Omega (D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,1} v \dif\mu,
-    \\
-    \int\limits_\Omega (\theta + b_{Y,2}) \partial_t Y_{L,2} v \dif\mu  &= \int\limits_\Gamma (D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) \cdot \vec{n} v \dif\sigma - 
-    \int\limits_\Omega (D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,2} v \dif\mu;
-\end{align}
-\end{subequations}
-where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector, and $\sigma$ the surface measure on $\Gamma$. 
-
-Observe that due to the zero-flux constraint, we only need to analyse four segments of $\Gamma$. First, for \( r = a\), we have that \(\vec{n} = (-1,0)\), and we define the sets \( \Gamma_{1, X} = \{a\} \times [L_1 - \delta L_{X,1}]\) and 
-\( \Gamma_{1, Y} = \{a\} \times [L_1 - \delta L_{Y,1,1}]\). Second, for \(r = w+a\), we have that \(\vec{n} = (1,0)\), and likewise we define \( \Gamma_{2, X} = \{w+a\} \times [L_2 - \delta L_{X,2}]\) and \( \Gamma_{2, Y} = \{w+a\} \times [L_2 - \delta L_{Y,2,2}]\). This way we can split \(\Gamma\) as 
-\[ 
-    \Gamma = \Gamma_0 \cup \Gamma_{1, X} \cup \Gamma_{1, Y} \cup \Gamma_{2, X} \cup \Gamma_{2,Y},
-\]
-where \( \Gamma_0 = \Gamma \setminus (\bar{\Gamma}_{1, X} \cup \bar{\Gamma}_{1, Y} \cup \bar{\Gamma}_{2, X} \cup \bar{\Gamma}_{2,Y}) \) is the set with zero flux conditions.
-Thence
-\begin{subequations}
-\label{sys:two-plants-1-weak}
-\begin{align}
-    \int\limits_\Omega
-    A(Y_{L,1}, Y_{L,2}) \partial_t X_L v &- B(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,1} v - C(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,2} v \dif \mu 
-    \notag
-    \\
-    &=
-    -\int\limits_{\Gamma_{2,X}}  \alpha_2 X_L v \dif \sigma
-    - \int\limits_{\Gamma_{1,X}} \alpha_1 X_L v \dif \sigma
-    -\int\limits_\Omega
-    (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
-    -\int\limits_\Omega g_X v \dif \mu,
-    \\
-    \int\limits_\Omega (\theta + b_{Y,1}) \partial_t Y_{L,1} v \dif \mu  &=
-    \int\limits_{\Gamma_{1,Y}} F_{Y,1} v \dif\sigma
-    -\int\limits_\Omega (D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,1} v \dif\mu,
-    \\
-    \int\limits_\Omega (\theta + b_{Y,2}) \partial_t Y_{L,2} v \dif\mu  &= \int\limits_{\Gamma_{2,Y}} F_{Y,2} v \dif\sigma - 
-    \int\limits_\Omega (D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,2} v \dif\mu.
-\end{align}
-\end{subequations}
-Notice that by density, each equation in \eqref{sys:two-plants-1-weak} has to be satisfied for all \(v\in H^1(\Omega)\).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Numerical approximation}
-
-Again we include a simple backward difference scheme for finding solutions of \eqref{sys:two-plants-1-weak}. As before, we will discretise the time domain; then, let the superscript $n$ denote a quantity at time $t_n$, where $n$ is an integer counting time levels; e.g. $X_L^n$ is $X_L$ evaluated at time level $n$. This way we get the following system of discretised equations in time:
-\begin{subequations}
-\label{sys:two-plants-1-weak-euler}
-\begin{align}
-    \int\limits_\Omega
-    A(Y_{L,1}^{n+1}, Y_{L,2}^{n+1}) (X_L^{n+1} - X_L^n) v &- B(X_L^{n+1}, Y_{L,1}^{n+1}, Y_{L,2}^{n+1}) (Y_{L,1}^{n+1} - Y_{L,1}^n) v 
-    \notag
-    \\
-    &\qquad\quad - C(X_L^{n+1}, Y_{L,1}^{n+1}, Y_{L,2}^{n+1}) (Y_{L,2}^{n+1} - Y_{L,2}^n) v \dif \mu 
-    \notag
-    \\
-    &= -\Delta t
-    \int\limits_{\Gamma_{2,X}}  \alpha_2 X_L^{n+1} v \dif \sigma
-    - \Delta t \int\limits_{\Gamma_{1,X}} \alpha_1 X_L^{n+1} v \dif \sigma
-    \\
-    &\qquad\qquad - \Delta t \int\limits_\Omega
-    (D_X \nabla X_L^{n+1} - \nu X_L^{n+1}) \cdot \nabla v  \dif \mu
-    - \Delta t \int\limits_\Omega g_X^{n+1} v \dif \mu,
-    \notag
-    \\
-    %
-    \int\limits_\Omega (\theta + b_{Y,1}) (Y_{L,1}^{n+1} - Y_{L,1}^n) v \dif \mu  &=
-    \Delta t \int\limits_{\Gamma_{1,Y}} F_{Y,1} v \dif\sigma
-    \notag \\ & \qquad
-    - \Delta t \int\limits_\Omega (D_{Y,1} \nabla Y_{L,1}^{n+1} - \nu Y_{L,1}^{n+1}) \cdot \nabla v \dif\mu -  \Delta t \int\limits_\Omega g_{Y,1}^{n+1} v \dif\mu,
-    \\
-    %
-    \int\limits_\Omega (\theta + b_{Y,2}) (Y_{L,2}^{n+1} - Y_{L,2}^n) v \dif\mu  &= \Delta t \int\limits_{\Gamma_{2,Y}} F_{Y,2} v \dif\sigma 
-    \notag \\ & \qquad
-    - \Delta t 
-    \int\limits_\Omega (D_{Y,2} \nabla Y_{L,2}^{n+1} - \nu Y_{L,2}^{n+1}) \cdot \nabla v \dif\mu - \Delta t \int\limits_\Omega g_{Y,2}^{n+1} v \dif\mu.
-\end{align}
-\end{subequations}
-System \eqref{sys:two-plants-1-weak-euler} is to be solved at each level in time \( n\) with initial conditions \( (X_L^0,Y_{L,1}^0, Y_{L,2}^0)\). Notice that the scheme is further applicable for any suitable scaling.
 
 
 
@@ -1450,38 +1324,116 @@ For our simulations we assume that both exudates at both plants are secreted 2cm
     \label{fig:2roots-b}
 \end{figure}
 
-The existence of a solution is also contemplated in Section \ref{sec:Existence}.
-The resulting variational formulation is 
-\begin{subequations}
-\label{sys:two-plants-2-weak}
-\begin{align}
-    \int\limits_\Omega
-    A(Y_{L,1}, Y_{L,2}) \partial_t X_L v &- B(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,1} v - C(X_L, Y_{L,1}, Y_{L,2}) \partial_t Y_{L,2} v \dif \mu 
-    \notag
-    \\
-    &=
-    - \int\limits_{\Gamma_{2,X}}  \alpha_2 X_L v \dif \sigma
-    - \int\limits_{\Gamma_{1,X}} \alpha_1 X_L v \dif \sigma
-    -\int\limits_\Omega
-    (D_X \nabla X_L - \nu X_L) \cdot \nabla v  \dif \mu
-    -\int\limits_\Omega g_X v \dif \mu,
-    \\
-    %
-    \int\limits_\Omega (\theta + b_{Y,1}) \partial_t Y_{L,1} v \dif \mu  &=
-    \int\limits_{\Gamma_{1,1,Y}} F_{Y,1,1} v \dif\sigma
-    + \int\limits_{\Gamma_{1,2,Y}} F_{Y,1,2} v \dif\sigma
-    -\int\limits_\Omega (D_{Y,1} \nabla Y_{L,1} - \nu Y_{L,1}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,1} v \dif\mu,
-    %
-    \\
-    \int\limits_\Omega (\theta + b_{Y,2}) \partial_t Y_{L,2} v \dif\mu  &=
-    \int\limits_{\Gamma_{2,1,Y}} F_{Y,2,1} v \dif\sigma
-    +\int\limits_{\Gamma_{2,2,Y}} F_{Y,2,2} v \dif\sigma - 
-    \int\limits_\Omega (D_{Y,2} \nabla Y_{L,2} - \nu Y_{L,2}) \cdot \nabla v \dif\mu - \int\limits_\Omega g_{Y,2} v \dif\mu.
-\end{align}
-\end{subequations}
-Here the sub subsets of \(\Gamma\) are defined implicitly by conditions \eqref{bounday-two-two}.
 
-The discretisation of \eqref{sys:two-plants-2-weak} is similar to the one of \eqref{sys:two-plants-1-weak}. Again, its non-dimensionalisation follows a similar scheme.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Numerical Approximation Scheme}
+\label{sec:Numerics-extension}
+
+In this section we will outline the approximation scheme used to obtain numerical solutions of the extended model. The methods used follow the same lines of Section \ref{sec:Numerics-base}. 
+
+An scaling procedure similar to the one carried out in Section \ref{sus:non-dim-base} is presented in Appendix \ref{app:non-dim}. There we identify the variables \( \hat x\), \(\hat y_1\), and \(\hat y_2\) as the non-dimensionalised versions of \(X_L\), \(Y_{L,1}\), and \(Y_{L,2}\), respectively. In what follows, we will use the non-dimensionalised quantities but will drop the \emph{hat} decorator for brevity of presentation.
+
+In this context, define the squared domain \( \Omega = [0,1] \times [0,-1]\) and its boundary \( \Gamma = \partial \Omega\). For each moment of time \(t\in [0,1]\), we define the functions 
+\[
+    A(y_1, y_2) := \theta + \frac{b_x}{1 + \kappa_{x,1} b_{x} y_1 + \kappa_{x,2} b_{x} y_2},
+    \qquad
+    B(x, y_1, y_2) := \frac{\kappa_{x,1} b_x^2 x}{(1 + \kappa_{x,1} b_{x} y_1 + \kappa_{x,2} b_{x} y_2 )^2},
+\]
+and
+\[
+    C(x, y_1, y_2) := \frac{\kappa_{x,2} b_x^2 x}{(1 + \kappa_{x,1} b_{x} y_1 + \kappa_{x,2} b_{x} y_2 )^2}.
+\]
+
+%Inserting this in the variational system, and applying the splitting technique discussed for \eqref{ec:splitting}, we get that the base model of \cite{Ptashnyk-2011} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( y^{n+1}\) such that
+
+
+%The existence of a solution of system \eqref{sys-first-extension} is presented in Section \ref{sec:Existence}.
+
+Again we include a simple backward difference scheme with decoupling for finding solutions of \eqref{sys-first-extension} with boundary conditions \eqref{eq:extendedsys_BCs} or \eqref{bounday-two-two}. As before, we will discretise the time domain by \(N+1\) uniform steps of length \(\Delta t\). The superscript $n$ denotes a quantity at time $t_n$, where $n$ is an integer counting time levels; e.g. $x^n$ is $x$ evaluated at time level $n$. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+For the model on one exudate per root \eqref{eq:extendedsys_BCs}, we proceed to decouple the parabolic system of differential equations by linearising its nonlinear terms using previous updates. Here we observe that the parabolic systems on \(y_1\) and \(y_2\) are simpler to solve, as they do not depend explicitly on \(x\). The resulting scheme is as follows.
+%
+Initialising \(\hat{x}^{0} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( y_1^{n+1}\) such that
+\begin{subequations}
+\label{sys:two-plants-1-weak-euler}
+\begin{align}
+\label{ec:alg-y_1}
+    \int\limits_\Omega (\theta + b_{y,1}) (y_{1}^{n+1} - y_{1}^n) v \dif \mu  &=
+    \Delta t \int\limits_{\Gamma_{1,y}^{n+1}} F_{y,1}^{n} v \dif\sigma
+    %\notag \\ & \qquad
+    - \Delta t \int\limits_\Omega (D_{y,1} \nabla y_{1}^{n+1} - \nu y_{1}^{n+1}) \cdot \nabla v \dif\mu -  \Delta t \int\limits_\Omega g_{y,1}^{n} v \dif\mu,
+\end{align}
+for every \(v\in H^1(\Omega)\). (B) Also find \(y_2^{n+1}\) that solves
+\begin{align}
+\label{ec:alg-y_2}
+    \int\limits_\Omega (\theta + b_{y,2}) (y_{2}^{n+1} - y_{2}^n) v \dif\mu  &= \Delta t \int\limits_{\Gamma_{2,y}^{n+1}} F_{y,2}^n v \dif\sigma 
+    %\notag \\ & \qquad
+    - \Delta t 
+    \int\limits_\Omega (D_{y,2} \nabla y_{2}^{n+1} - \nu y_{2}^{n+1}) \cdot \nabla v \dif\mu - \Delta t \int\limits_\Omega g_{y,2}^{n} v \dif\mu,
+\end{align}
+for every \(v\in H^1(\Omega)\). (C) Proceed on finding \(x^{n+1}\) such that it satisfies
+%
+\begin{equation}
+\begin{aligned}
+    \int\limits_\Omega
+    &A(y_1^{n}, y_2^{n}) (x^{n+1} - x^n) v - B(x^{n}, y_{1}^{n}, y_{2}^{n}) (y_{1}^{n+1} - y_{1}^n) v 
+    %
+    - C(x^{n}, y_{1}^{n}, y_{2}^{n}) (y_{2}^{n+1} - y_{2}^n) v \dif \mu 
+    %\notag
+    \\
+    &= -\Delta t
+    \int\limits_{\Gamma_{2,x}^{n+1}}  \alpha_2 x^{n+1} v \dif \sigma
+    - \Delta t \int\limits_{\Gamma_{1,x}^{n+1}} \alpha_1 x^{n+1} v \dif \sigma
+    %\\&\qquad\qquad 
+    - \Delta t \int\limits_\Omega
+    (D_x \nabla x^{n+1} - \nu x^{n+1}) \cdot \nabla v  \dif \mu
+    - \Delta t \int\limits_\Omega g_x^{n} v \dif \mu,
+\end{aligned}
+\end{equation}
+\end{subequations}
+for every \(v\in H^1(\Omega)\). %(D) Until the iterations have finished, go back to step (A).
+
+The segments \( \Gamma_{1,y}^{n+1}\), \(\Gamma_{2,y}^{n+1}\), \( \Gamma_{1,x}^{n+1}\), and \(\Gamma_{2,x}^{n+1}\) are updated at each time level \(t_{n+1}\). They are implicitly defined by the boundary conditions \eqref{eq:extendedsys_BCs}.
+
+
+\vspace{1\baselineskip}
+In the case of two exudates the numerical approach is similar. The only differences are that the surface integral in \eqref{ec:alg-y_1} is replaced by
+\[
+    \Delta t \int\limits_{\Gamma_{1,1,y}^{n+1}} F_{y,1,1}^n v \dif\sigma
+    + \Delta t \int\limits_{\Gamma_{1,2,y}^{n+1}} F_{y,1,2}^n v \dif\sigma;
+\]
+and likewise the surface term in \eqref{ec:alg-y_2} is replaced by
+\[
+    \Delta t \int\limits_{\Gamma_{2,1,y}^{n+1}} F_{y,2,1}^n v \dif\sigma
+    +\Delta t \int\limits_{\Gamma_{2,2,y}^{n+1}} F_{y,2,2}^n v \dif\sigma.
+\]
+Here the sub subsets of \(\Gamma\) are defined implicitly by conditions \eqref{bounday-two-two}.
 
 
 
@@ -1491,263 +1443,7 @@ The discretisation of \eqref{sys:two-plants-2-weak} is similar to the one of \eq
 
 
 %\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Non-dimensionalisation}
 
-Similarly as we did in Section \ref{2-Base-Scaling}, 
-we will scale the variables of the model appropriately. Again, we introduce the following relations
-\[
-    r = \varepsilon_r \hat{r} + a,
-    \qquad
-    z = \varepsilon_z \hat{z},
-    \qquad
-    t = \varepsilon_t \hat{t},
-    \qquad
-    X_L = \varepsilon_x \hat{x},
-    \qquad
-    Y_{L,1} = \varepsilon_{1,y} \hat{y}_1,
-    \qquad
-    Y_{L,2} = \varepsilon_{2,y} \hat{y}_2;
-\]
-where \( \varepsilon_r, \varepsilon_z, \varepsilon_t, \varepsilon_x, \varepsilon_{1,y}\), and \(\varepsilon_{2,y}\) are scaling constants to be determined, and \(\hat{r}, \hat z, \hat t, \hat x, \hat y_1\), and \(\hat y_2\) are non-dimensional variables.
-Again we get the relations \(X_L(r,z) = \varepsilon_x \hat{x} (\varepsilon_r \hat r + a, \varepsilon_z \hat z) = \varepsilon_x \hat{x} \big( \varepsilon_r^{-1} (r-a) , \varepsilon_z^{-1} z\big) \), \(Y_{L,1} (r,z) = \varepsilon_{1,y} \hat{y}_1 \big( \varepsilon_r^{-1} (r-a), \varepsilon_z^{-1} z \big)\), and \(Y_{L,2} (r,z) = \varepsilon_{2,y} \hat{y}_2 \big( \varepsilon_r^{-1} (r-a), \varepsilon_z^{-1} z \big)\). Again the gradient operator is also scaled as
-\[
-    \nabla X_L =
-    \begin{pmatrix}
-        \nicefrac{1}{\varepsilon_r} & 0 \\
-        0 & \nicefrac{1}{\varepsilon_z}
-    \end{pmatrix}
-    \hat{\nabla} \varepsilon_x \hat{x},
-    \qquad \text{with} \qquad
-    \hat{\nabla} = 
-    \begin{pmatrix}
-        \pd{ }{\hat r}
-        &
-        \pd{ }{\hat z}
-    \end{pmatrix}^\top .
-\]
-For ease of presentation, we will separate the derivation into two parts. First, we will find the non-dimensionalised version of the differential equations. Here the choice of the scaling will not be explicit. This changes in the second part, where we present a scaled version of the boundary and initial conditions.
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Scaled differential equations}
-
-The scaled equations can be found following the same steps as before. First consider the quantities
-\begin{subequations}
-\label{eq:generalised-x_t-parts}
-\begin{align}
-    \left( \theta + \frac{b_X}{1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2}} \right) \partial_t X_L &= \frac{\varepsilon_x}{\varepsilon_t} \left( \theta + \frac{b_X}{1 + \varepsilon_{1,y} \kappa_{X,1} b_{X} \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_{X} \hat{y}_2 } \right)  \pd{\hat{x}}{\hat{t}}
-    \\
-    \frac{\kappa_{X,1} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,1} 
-    &=
-    \frac{\varepsilon_x}{\varepsilon_t} \frac{\varepsilon_{1,y} \kappa_{X,1} b_X^2 \hat{x}}{\big(1+ \varepsilon_{1,y} \kappa_{X,1} b_X \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_1}{\hat t}
-    \\
-    \frac{ \kappa_{X,2} b_X^2 X_L }{\big(1 + \kappa_{X,1} b_X Y_{L,1} + \kappa_{X,2} b_X Y_{L,2}\big)^2} \partial_t Y_{L,2}
-    &=
-    \frac{\varepsilon_x}{\varepsilon_t} \frac{\varepsilon_{2,y} \kappa_{X,2} b_X^2 \hat{x}}{\big(1+ \varepsilon_{1,y} \kappa_{X,1} b_X \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_2}{\hat t}
-\end{align}
-\end{subequations}
-
-We know that a linear combination of these forms \eqref{eq:generalised-x_t}, from where the term \(\nabla \cdot (D_X \nabla X_L - \nu X_L)\) follows \eqref{eq:divergence-non-dimen-x}.
-Proceed to define the scaled constants and vector
-\[
-    \hat{\kappa}_{X,1} = \varepsilon_{1,y} \kappa_{X,1},
-    \qquad
-    \hat{\kappa}_{X,2} = \varepsilon_{2,y} \kappa_{X,2},
-    \qquad
-    \hat{\nu} = 
-    \begin{pmatrix}   \hat{\nu}_r    &    \hat{\nu}_z    \end{pmatrix}^\top
-    =
-    \nu \varepsilon_t
-    \begin{pmatrix}    {\varepsilon_r}^{-1}    &    {\varepsilon_z}^{-1}
-    \end{pmatrix}^\top ,
-\]
-define the matrix
-\[
-    \hat{D}_x = 
-    \begin{pmatrix}
-         \hat{D}_{X,r} & 0 
-         \\
-        0 &  \hat{D}_{X,z}
-    \end{pmatrix}
-    =
-    D_X \varepsilon_t
-    \begin{pmatrix}
-         \varepsilon_r^{-2} & 0 
-         \\
-        0 &  \varepsilon_z^{-2}
-    \end{pmatrix}
-    ,
-\]
-and then define the non-dimensionalised quantity \( \hat{g}_X = \nicefrac{\varepsilon_t}{\varepsilon_x} g_X\). This way we get from \eqref{eq:generalised-x_t-parts} that
-\begin{equation}
-\begin{aligned}
-    \left( \theta + \frac{b_X}{1 + \hat{\kappa}_{X,1} b_{X} \hat{y}_1 + \hat{\kappa}_{X,2} b_{X} \hat{y}_2 } \right)  \pd{\hat{x}}{\hat{t}}
-    &
-    -\frac{\hat{\kappa}_{X,1} b_X^2 \hat{x}}{\big(1+ \hat{\kappa}_{X,1} b_X \hat{y}_1 + \hat{\kappa}_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_1}{\hat t}
-    \\
-    &\,\,
-    -\frac{\hat{\kappa}_{X,2} b_X^2 \hat{x}}{\big(1+ \hat{\kappa}_{X,1} b_X \hat{y}_1 + \hat{\kappa}_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_2}{\hat t}
-    =
-    \hat{\nabla}
-    \cdot
-    \left( 
-        \hat{D}_x \hat{\nabla} \hat{x} - \hat{x} \hat{\nu}
-    \right)
-    - \hat{g}_X.
-\end{aligned}
-\end{equation}
-
-Similarly, for \eqref{eq:generalised-y_1_t}, we first get the relations
-\begin{subequations}
-\label{eq:generalised-y_1_t-parts}
-\begin{align}
-    \left(\theta + \frac{b_{Y,1}}{1 + \kappa_{Y,1} b_{Y,1} X_L}\right) \partial_t Y_{L,1} 
-    &= 
-    \frac{\varepsilon_{1,y}}{\varepsilon_t} \left( \theta + \frac{b_{Y,1}}{1 + \varepsilon_{x} \kappa_{Y,1} b_{Y,1} \hat{x} } \right)  \pd{\hat{y}_1}{\hat{t}}
-    \\
-    \frac{ \kappa_{Y,1} b_{Y,1}^2 Y_{L,1}}{\big(1 + \kappa_{Y,1} b_{Y,1} X_L\big)^2} \partial_t X_L
-    &=
-    \frac{\varepsilon_{1,y}}{\varepsilon_t}
-    \frac{ \varepsilon_x  \kappa_{Y,1} b_{Y,1}^2 \hat{y}_{1}}{\big(1 + \varepsilon_x \kappa_{Y,1} b_{Y,1} \hat{x} \big)^2}
-    \pd{\hat{x}}{\hat{t}}.
-\end{align}
-\end{subequations}
-Now define
-\[
-    \hat{\kappa}_{Y,1} = \varepsilon_{x} \kappa_{Y,1},
-    \qquad
-    \hat{D}_{y,1} = 
-    \begin{pmatrix}
-         \hat{D}_{Y,1,r} & 0 
-         \\
-        0 &  \hat{D}_{Y,1,z}
-    \end{pmatrix}
-    =
-    D_{Y,1} \varepsilon_t
-    \begin{pmatrix}
-         \varepsilon_r^{-2} & 0 
-         \\
-        0 &  \varepsilon_z^{-2}
-    \end{pmatrix},
-    \qquad\text{and}\qquad
-    \hat{g}_{y,1} = \frac{\varepsilon_t}{\varepsilon_{1,y}} g_{Y,1}
-\]
-to get from \eqref{eq:generalised-y_1_t-parts} that
-\begin{equation}
-    \left( \theta + \frac{b_{Y,1}}{1 + \hat{\kappa}_{Y,1} b_{Y,1} \hat{x} } \right)  \pd{\hat{y}_1}{\hat{t}}
-    -
-    \frac{ \hat{\kappa}_{Y,1} b_{Y,1}^2 \hat{y}_{1}}{\big(1 + \hat{\kappa}_{Y,1} b_{Y,1} \hat{x} \big)^2}
-    \pd{\hat{x}}{\hat{t}}
-    = \hat{\nabla} \cdot (\hat{D}_{y,1} \hat{y}_1 - \hat{y}_1 \hat{\nu}) - \hat{g}_{y,1}.
-\end{equation}
-
-
-
-
-Finally, for \eqref{eq:generalised-y_2_t} define
-\[
-    \hat{\kappa}_{Y,2} = \varepsilon_{x} \kappa_{Y,2},
-    \qquad
-    \hat{D}_{y,2} = 
-    \begin{pmatrix}
-         \hat{D}_{Y,2,r} & 0 
-         \\
-        0 &  \hat{D}_{Y,2,z}
-    \end{pmatrix}
-    =
-    D_{Y,2} \varepsilon_t
-    \begin{pmatrix}
-         \varepsilon_r^{-2} & 0 
-         \\
-        0 &  \varepsilon_z^{-2}
-    \end{pmatrix},
-    \qquad\text{and}\qquad
-    \hat{g}_{y,2} = \frac{\varepsilon_t}{\varepsilon_{2,y}} g_{Y,2},
-\]
-from which we get
-\begin{equation}
-    \left(\theta + \frac{b_{Y,2}}{1 + \hat{\kappa}_{Y,2} b_{Y,2} \hat{x}}\right) \pd{\hat{y}_2}{\hat{t}}
-    - 
-    \frac{ b_{Y,2}^2 \hat{\kappa}_{Y,2} \hat{y}_2 }{\big(1 + \hat{\kappa}_{Y,2} b_{Y,2} \hat{x} \big)^2} \pd{\hat{x}}{\hat{t}} 
-    = 
-    \hat{\nabla} \cdot(\hat{D}_{y,2} \hat{\nabla} \hat{y}_{2} - \hat{y}_2 \hat{\nu}  ) - \hat{g}_{y,2}.
-\end{equation}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Scaled boundary and initial conditions}
-
-The choice of the scaling parameters come from the boundary conditions. 
-
-
-
-Here we will present the choice and development for the secretion of two exudates. The treatment is similar for the secretion of one. 
-
-Again, the derivation is straightforward from the base model. First, we note that for \(X_L\) we get, for one side of the boundary, that
-\[
-    D_X \partial_r X_L - \nu X_L = 
-    \frac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r} \frac{\varepsilon_x}{\varepsilon_r} \pd{\hat{x}}{\hat{r}} - \frac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_r \varepsilon_x \hat{x} = \frac{\varepsilon_r \varepsilon_x}{\varepsilon_t} \hat{\alpha}_1 \hat{x}
-    \qquad \text{at } r = a = a + \varepsilon_r \hat{r}, \quad \varepsilon_z \hat{z} \in [L_1 - \delta L_{X,1}, L_1],
-\]
-or equivalently
-\begin{subequations}
-\begin{equation}
-    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = \hat{\alpha}_1 \hat{x}
-    \qquad \text{at } \hat{r} = 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{x,1}, \hat{L}_1];
-\end{equation}
-where we require \( \alpha_1 = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\alpha}_1\), \( \hat{L}_1 = \varepsilon_z^{-1} L_1\), and \( \delta\hat{L}_{x,1} = \varepsilon_z^{-1} \delta L_{X,1}\). Similarly, the other side of the boundary follows
-\begin{equation}
-    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = -\hat{\alpha}_2 \hat{x}
-    \qquad \text{at } \hat{r} = 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{x,2}, \hat{L}_2];
-\end{equation}
-where we have selected \( \varepsilon_r = w\), and a proper selection of constants as in the previous line.
-
-The relationships for \(Y_{L,1}\) and \(Y_{L,2}\) are similar:
-\begin{align}
-    \hat{D}_{Y,1,r} \pd{\hat{y}_1}{\hat{r}} - \hat{\nu}_r \hat{y}_1 &= -\hat{F}_{1,1}(t)
-    &
-    \text{at } \hat{r} &= 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{y,1,1}, \hat{L}_1],
-    \\
-    \hat{D}_{Y,2,r} \pd{\hat{y}_2}{\hat{r}} - \hat{\nu}_r \hat{y}_2 &= -\hat{F}_{2,1}(t)
-    &
-    \text{at } \hat{r} &= 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{y,2,1}, \hat{L}_1],
-    \\
-    \hat{D}_{Y,1,r} \pd{\hat{y}_1}{\hat{r}} - \hat{\nu}_r \hat{y}_1 &= \hat{F}_{1,2}(t)
-    &\text{at } \hat{r} &= 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{y,1,2}, \hat{L}_2],
-    \\
-    \hat{D}_{Y,2,r} \pd{\hat{y}_2}{\hat{r}} - \hat{\nu}_r \hat{y}_2 &= \hat{F}_{2,2}(t)
-    &\text{at } \hat{r} &= 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{y,2,2}, \hat{L}_2];
-\end{align}
-\end{subequations}
-where appropriate quantities are selected. For instance \( \hat{F}_{1,1} = \frac{\varepsilon_t}{\varepsilon_r \varepsilon_{1,y}} F_{Y,1,1} \).
-
-For the other scaling parameters, notice that if we again pick \( \varepsilon_z = L_{t_{\max}}\), again \(\hat z \) will be in the range \( [0,1]\) (or \([0,-1]\) when growth is modelled downwards). 
-This choice implies that \( \max_t\{|\hat{L}_1|,|\hat{L}_2|\}\) should be \(1\), where we have
-\begin{align}
-    \hat{L}_1 &= \hat{L}_1(\hat t) = \frac{1}{\varepsilon_z} ( L_{1,0} + G_1 \varepsilon_t \hat t )
-    = \hat{L}_{1,0} + \hat{G}_1 \hat t,
-    \qquad 
-    \hat{L}_{1,0} = \varepsilon^{-1}_z L_{1,0},
-    \qquad
-    \hat{G}_1 = \varepsilon_t \varepsilon_z^{-1} G_1,
-    \\
-    \hat{L}_2 &= \hat{L}_2(\hat t) = \frac{1}{\varepsilon_z} ( L_{2,0} + G_2 \varepsilon_t \hat t )
-    = \hat{L}_{2,0} + \hat{G}_2 \hat t,
-    \qquad 
-    \hat{L}_{2,0} = \varepsilon^{-1}_z L_{2,0},
-    \qquad
-    \hat{G}_2 = \varepsilon_t \varepsilon_z^{-1} G_2;
-\end{align}
-and we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat t\) in the range \( [0,1]\). As a result, we have selected scaling parameters such that the system of partial differential equations is defined in either \( [0,1]^3\) or \([0,1]\times [0,-1] \times [0,1]\).
-%
-Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_{1,0},\hat{y}_{2,0} ) = (\varepsilon_x^{-1} X^0_L, \varepsilon_{1,y}^{-1} Y^0_{L,1}, \varepsilon_{2,y}^{-1} Y^0_{L,2}) \). 
-
-
-Observe that again we can use parameters \(\varepsilon_x\), \(\varepsilon_{1,y}\), and \(\varepsilon_{2,y}\) to calibrate the effects of \( \hat{x}\) and \(\hat{y}\) in all of the nonlinear terms in the above equations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1903,7 +1599,7 @@ In this section, we will numerically solve the non-dimensionalised version of mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Benchmark result}
 \label{sec:baseparams}
- For the first simulation we choose the set of parameters presented in Table \ref{t:baseparams} and plot the concentrations of phosphate, phytase, and citrate in soil solution after 24 hours, see Fig. \ref{fig:baseparams}. We can clearly see that the root on the LHS has stronger exudation of phytase, while the root on the RHS has more prominent secretion of citrate, which is in accordance with the exudation rates we used. When comparing the two exudates we can also see that the effect of diffusion is more visible in phytase as the exudate gets transported into the middle of the domain, further away from the roots. The importance of diffusion coefficient will be therefore further investigated in the next subsections, along with the effect of exudation rate and uptake power of the roots. Another important feature is the buffer power of phosphate, i.e. the ratio of absorption and desorption to and from soil particles. We can hypothesise that with increased buffer power (which can be interpreted as increased absorption or decreased desorption rate), the nutrients will get absorbed to soil particles more quickly which will have a negative impact on phosphate uptake. Also, as mentioned previously, we will experiment with the effect of microbial consumption of citrate, predicting that it will have only a minor effect on the uptake of phosphate.
+ For the first simulation we choose the set of parameters presented in Table \ref{t:baseparams} and plot the concentrations of phosphate, phytase, and citrate in soil solution after 24 hours, see Figure \ref{fig:baseparams}. We can clearly see that the root on the LHS has stronger exudation of phytase, while the root on the RHS has more prominent secretion of citrate, which is in accordance with the exudation rates we used. When comparing the two exudates we can also see that the effect of diffusion is more visible in phytase as the exudate gets transported into the middle of the domain, further away from the roots. The importance of diffusion coefficient will be therefore further investigated in the next subsections, along with the effect of exudation rate and uptake power of the roots. Another important feature is the buffer power of phosphate, i.e. the ratio of absorption and desorption to and from soil particles. We can hypothesise that with increased buffer power (which can be interpreted as increased absorption or decreased desorption rate), the nutrients will get absorbed to soil particles more quickly which will have a negative impact on phosphate uptake. Also, as mentioned previously, we will experiment with the effect of microbial consumption of citrate, predicting that it will have only a minor effect on the uptake of phosphate.
 
 \begin{figure}[!htb]
 \centering
@@ -1929,7 +1625,7 @@ In this section, we will numerically solve the non-dimensionalised version of mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Citrate consumption by microbes}
 \label{sec:numexp_vmax}
-The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$ in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Fig. \ref{fig:numexp_vmax1} with Fig. \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Fig. \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
+The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$ in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Figure \ref{fig:numexp_vmax1} with Figure \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Figure \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
 
 \begin{figure}[!htb]
 \centering
@@ -1953,14 +1649,20 @@ The first parameter change we experiment with is the assumption that citrate get
 \caption{$V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$, i.e. citrate gets consumed by microbes. In (a) concentration of phosphate and (b) citrate in soil solution between the two roots after 24 hours; (c) comparison of phosphate absorbed by each of the roots with original (dashed line) and changed parameters (solid line).}
 \end{figure}
 
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Phosphate buffer power}
 \label{sec:numexp_bx}
-Next, we look at the buffer power $b_X$, which is defined as the ratio of absorption and desorption of phosphate to and from soil particles. First, we consider a twofold increase in $b_X$ which can be thought of as $b_X * 2 = \beta_1 / (0.5 \beta_2)$, i.e. we reduce the desorption rate by a half. The implications of this change can be observed in Fig. \ref{fig:numexp_bxup}. The results are somewhat counter-intuitive at first glance as we would expect that the decreased desorption rate (or equivalently, an increased absorption rate) would cause less phosphate to be absorbed by the root as it would stick to the soil particles instead of into the soil solution. We can also explain this algebraically by taking \eqref{x_2} and expressing the ratio between phosphate concentration in soil solution and soil solid,
+Next, we look at the buffer power $b_X$, which is defined as the ratio of absorption and desorption of phosphate to and from soil particles. First, we consider a twofold increase in $b_X$ which can be thought of as $b_X \times 2 = \beta_1 / (  \nicefrac{\beta_2}{2} )$, i.e. we reduce the desorption rate by a half. The implications of this change can be observed in Figure \ref{fig:numexp_bxup}. The results are somewhat counter-intuitive at first glance as we would expect that the decreased desorption rate (or equivalently, an increased absorption rate) would cause less phosphate to be absorbed by the root as it would stick to the soil particles instead of into the soil solution. We can also explain this algebraically by taking \eqref{x_2} and expressing the ratio between phosphate concentration in soil solution and soil solid,
 \begin{equation}
     \frac{X_L}{X_S} = \frac{1}{b_X} + \kappa_{X,1} Y_{L,1} + \kappa_{X,2} Y_{L,2},
 \end{equation}
-we see that with increased $b_X$, the concentration of $X$ in soil solid increases at the expense of $X_L$. However, we can try to justify the results by supposing that the exudates operate on $P$ at soil particles, i.e. they solubilise $P$ they find at soil particles, and the more $P$ is found there (the higher the buffer power), the more of it gets solubilised into the solution and transported to the root surface. Citrate, in particular, pushes organic phosphate from the soil particles into the soil solution where phytase acts on it. This observation is very interesting as we didn't model the process into such details, and can be explored further in future work.
+we see that with increased $b_X$, the concentration of $X$ in soil solid increases at the expense of $X_L$. However, we can try to justify the results by supposing that the exudates operate on \ce{P} at soil particles, i.e. they solubilise \ce{P} they find at soil particles, and the more \ce{P} is found there (the higher the buffer power), the more of it gets solubilised into the solution and transported to the root surface. Citrate, in particular, pushes organic phosphate from the soil particles into the soil solution where phytase acts on it. This observation is very interesting as we didn't model the process into such details, and can be explored further in future work.
 
 \begin{figure}[!htb]
 \centering
@@ -1970,7 +1672,7 @@ we see that with increased $b_X$, the concentration of $X$ in soil solid increas
     \label{fig:numexp_bxup1}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/bxtimes2.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_bxup2}
@@ -1979,7 +1681,7 @@ we see that with increased $b_X$, the concentration of $X$ in soil solid increas
 \label{fig:numexp_bxup}
 \end{figure}
 
-We may consider the opposite of the previous scenario and divide $b_X$ by two, i.e. $b_X / 2 = \beta_1 / (2 \beta_2)$, so we increase the desorption rate from soil particles. We now know that this will have the opposite effect to what we have observed in Fig. \ref{fig:numexp_bxup}. In Fig. \ref{fig:numexp_bxdown2} we can see a decrease in phosphate uptake by both roots. Besides the huge difference between the range of values in Fig. \ref{fig:numexp_bxup1} and \ref{fig:numexp_bxdown1}, we notice in Table \ref{t:numexp_results} that decreased buffer power results in a greater absolute change in absorbed phosphate.
+We may consider the opposite of the previous scenario and divide $b_X$ by two, i.e. $b_X / 2 = \beta_1 / (2 \beta_2)$, so we increase the desorption rate from soil particles. We now know that this will have the opposite effect to what we have observed in Figure \ref{fig:numexp_bxup}. In Figure \ref{fig:numexp_bxdown2} we can see a decrease in phosphate uptake by both roots. Besides the huge difference between the range of values in Figure \ref{fig:numexp_bxup1} and \ref{fig:numexp_bxdown1}, we notice in Table \ref{t:numexp_results} that decreased buffer power results in a greater absolute change in absorbed phosphate.
 
 \begin{figure}[!htb]
 \centering
@@ -1989,7 +1691,7 @@ We may consider the opposite of the previous scenario and divide $b_X$ by two, i
     \label{fig:numexp_bxdown1}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/bxdivby2.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_bxdown2}
@@ -2001,7 +1703,7 @@ We may consider the opposite of the previous scenario and divide $b_X$ by two, i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Uptake power at left root}
 \label{sec:numexp_a1}
-We now explore what effect does tenfold increase or decrease in uptake power of the left root, $\alpha_1$, have in comparison to the benchmark results. In Fig. \ref{fig:numexp_a1_up2} and \ref{fig:numexp_a1_down2} we see the expected increase and decrease in phosphate uptake by the left root. In Table \ref{t:numexp_results} we can observe that the tenfold raise in $\alpha_1$ caused $22.6 \%$ more phosphate to be absorbed, while tenfold drop in the uptake power resulted in decline by only $6 \%$. We can therefore assume that this root is more sensitive towards the increase in the uptake power. By comparing Fig. \ref{fig:numexp_a1_up1} and \ref{fig:numexp_a1_down1} we do not notice a major difference in $X_L$ besides a longer phosphate-deprived zone at the left edge of Fig. \ref{fig:numexp_a1_up1}.
+We now explore what effect does tenfold increase or decrease in uptake power of the left root, $\alpha_1$, have in comparison to the benchmark results. In Figures \ref{fig:numexp_a1_up2} and \ref{fig:numexp_a1_down2} we see the expected increase and decrease in phosphate uptake by the left root. In Table \ref{t:numexp_results} we can observe that the tenfold raise in $\alpha_1$ caused $22.6 \%$ more phosphate to be absorbed, while tenfold drop in the uptake power resulted in decline by only $6 \%$. We can therefore assume that this root is more sensitive towards the increase in the uptake power. By comparing Figures \ref{fig:numexp_a1_up1} and \ref{fig:numexp_a1_down1} we do not notice a major difference in $X_L$ besides a longer phosphate-deprived zone at the left edge of Figure \ref{fig:numexp_a1_up1}.
 
 \begin{figure}[!htb]
 \centering
@@ -2011,7 +1713,7 @@ We now explore what effect does tenfold increase or decrease in uptake power of 
     \label{fig:numexp_a1_up1}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/alpha1times10.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_a1_up2}
@@ -2028,7 +1730,7 @@ We now explore what effect does tenfold increase or decrease in uptake power of 
     \label{fig:numexp_a1_down1}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/alpha1divby10.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_a1_down2}
@@ -2072,7 +1774,7 @@ We can experiment with the effect of an increase of diffusion coefficient on the
     \caption{Phosphate ($X$)}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/Fy11times10.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
 \end{subfigure}
@@ -2088,12 +1790,12 @@ We can experiment with the effect of an increase of diffusion coefficient on the
     \caption{Phosphate ($X$)}
 \end{subfigure}
 \hspace{1cm}
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.4\textwidth}
     \includegraphics[width=\textwidth]{Figures/Fy11times10DY1up20pc.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
 \end{subfigure}
 
-\caption{Phytase exudation rate power $F_{Y,1,1}$ multiplied by 10 combined with $20\%$ increase in diffusion of phytase $D_{LY,1}$. In (a) concentration of phosphate between the two roots after 24 hours; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
+\caption{Phytase exudation rate power $F_{Y,1,1}$ multiplied by 10 combined with $20\%$ increase in diffusion of phytase $D_{L,Y,1}$. In (a) concentration of phosphate between the two roots after 24 hours; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
 \end{figure}
 
 \begin{table}[h]
@@ -2110,16 +1812,16 @@ We can experiment with the effect of an increase of diffusion coefficient on the
  \hline 
 Sec. \ref{sec:baseparams} & Base parameters & 9.689e$^{-9}$ &  1.103e$^{-8}$& - &- \\
 Sec. \ref{sec:numexp_vmax}& Citrate $V_{max}=2.5 \times 10^{-9}$ & 9.409e$^{-9}$ & 1.047e$^{-8}$ & -2.9\% & -5.08\%\\
-Sec. \ref{sec:numexp_bx} & Buffer power $b_x * 2$ & 1.521e$^{-8}$ & 1.806e$^{-8}$ & 57.0\% & 63.74\% \\
+Sec. \ref{sec:numexp_bx} & Buffer power $b_x \times 2$ & 1.521e$^{-8}$ & 1.806e$^{-8}$ & 57.0\% & 63.74\% \\
 Sec. \ref{sec:numexp_bx} & Buffer power $b_x / 2$  & 6.495e$^{-9}$ & 7.095e$^{-9}$ & -33.0\% & -35.68\%\\
-Sec. \ref{sec:numexp_a1} & Uptake power $\alpha_1 * 10$ & 1.188e$^{-8}$ & 1.103e$^{-8}$ & 22.6\% & 0.00\% \\
+Sec. \ref{sec:numexp_a1} & Uptake power $\alpha_1 \times 10$ & 1.188e$^{-8}$ & 1.103e$^{-8}$ & 22.6\% & 0.00\% \\
 Sec. \ref{sec:numexp_a1} & Uptake power $\alpha_1 / 10$  & 9.087e$^{-9}$ & 1.103e$^{-8}$ & -6.2\% & 0.00\% \\
-Sec. & $D_{LX}*1.2$ & 1.653e$^{-8}$ & 1.961e$^{-8}$ & 70.6\% & 77.79\% \\
-Sec. & $D_{LY,1}*1.2$ & 1.516e$^{-8}$ & 1.805e$^{-8}$ & 56.5\% & 63.64\% \\
-Sec. & $\{D_{LY,1}, D_{LY,2} \}*1.2$ & & \\
-Sec. & $\{D_{LX}, D_{LY,1}, D_{LY,2} \}*1.2$ & & \\
-Sec. & $F_{Y,1,1}*10$ & 1.187e$^{-8}$ & 1.114e$^{-8}$ & 22.5\% & 1.00\% \\
-Sec. & $F_{Y,1,1}*10\text{ and } D_{Y1}*1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% & 1.27\%   \\
+Sec. & $D_{LX}\times 1.2$ & 1.653e$^{-8}$ & 1.961e$^{-8}$ & 70.6\% & 77.79\% \\
+Sec. & $D_{LY,1}\times 1.2$ & 1.516e$^{-8}$ & 1.805e$^{-8}$ & 56.5\% & 63.64\% \\
+Sec. & $\{D_{LY,1}, D_{LY,2} \}\times 1.2$ & & \\
+Sec. & $\{D_{LX}, D_{LY,1}, D_{LY,2} \}\times 1.2$ & & \\
+Sec. & $F_{Y,1,1}\times 10$ & 1.187e$^{-8}$ & 1.114e$^{-8}$ & 22.5\% & 1.00\% \\
+Sec. & $F_{Y,1,1}\times 10\text{ and } D_{Y1}\times 1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% & 1.27\%   \\
 \bottomrule
 \end{tabular}
 \caption{Total phosphate absorbed in each of the roots after 24 hours and change of resulting values with respect to results obtained by using the original (base) parameters defined in Table \ref{t:Second-model-params}. \label{t:numexp_results}}
@@ -2775,7 +2477,15 @@ Hence, by Schauder fixed-point theorem \cite{Zeidler-1998}, there exists a fixed
 \addcontentsline{toc}{section}{References}
 \printbibliography
 
+
+
+
+
+
+
+
 \newpage
+\pagenumbering{roman}
 \appendix
 \section*{Appendix}
 \addcontentsline{toc}{section}{Appendices}
@@ -2825,7 +2535,459 @@ $w$ & 0.04 dm & & \\
 \subsection{Parameter conversion}
 \label{app:two}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Non-dimensionalisation of extended model}
+\label{app:non-dim}
+
+Similarly as we did in Section \ref{2-Base-Scaling}, 
+we will scale the variables of the model appropriately. Again, we introduce the following relations
+\[
+    r = \varepsilon_r \hat{r} + a,
+    \qquad
+    z = \varepsilon_z \hat{z},
+    \qquad
+    t = \varepsilon_t \hat{t},
+    \qquad
+    X_L = \varepsilon_x \hat{x},
+    \qquad
+    Y_{L,1} = \varepsilon_{1,y} \hat{y}_1,
+    \qquad
+    Y_{L,2} = \varepsilon_{2,y} \hat{y}_2;
+\]
+where \( \varepsilon_r, \varepsilon_z, \varepsilon_t, \varepsilon_x, \varepsilon_{1,y}\), and \(\varepsilon_{2,y}\) are scaling constants to be determined, and \(\hat{r}, \hat z, \hat t, \hat x, \hat y_1\), and \(\hat y_2\) are non-dimensional variables.
+Again we get the relations \(X_L(r,z) = \varepsilon_x \hat{x} (\varepsilon_r \hat r + a, \varepsilon_z \hat z) = \varepsilon_x \hat{x} \big( \varepsilon_r^{-1} (r-a) , \varepsilon_z^{-1} z\big) \), \(Y_{L,1} (r,z) = \varepsilon_{1,y} \hat{y}_1 \big( \varepsilon_r^{-1} (r-a), \varepsilon_z^{-1} z \big)\), and \(Y_{L,2} (r,z) = \varepsilon_{2,y} \hat{y}_2 \big( \varepsilon_r^{-1} (r-a), \varepsilon_z^{-1} z \big)\). Again the gradient operator is also scaled as
+\[
+    \nabla X_L =
+    \begin{pmatrix}
+        \nicefrac{1}{\varepsilon_r} & 0 \\
+        0 & \nicefrac{1}{\varepsilon_z}
+    \end{pmatrix}
+    \hat{\nabla} \varepsilon_x \hat{x},
+    \qquad \text{with} \qquad
+    \hat{\nabla} = 
+    \begin{pmatrix}
+        \pd{ }{\hat r}
+        &
+        \pd{ }{\hat z}
+    \end{pmatrix}^\top .
+\]
+For ease of presentation, we will separate the derivation into two parts. First, we will find the non-dimensionalised version of the differential equations. Here the choice of the scaling will not be explicit. This changes in the second part, where we present a scaled version of the boundary and initial conditions.
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Scaled differential equations}
+
+The scaled equations can be found following the same steps as before. First consider the quantities
+\begin{subequations}
+\label{eq:generalised-x_t-parts}
+\begin{align}
+    \left( \theta + \frac{b_X}{1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2}} \right) \partial_t X_L &= \frac{\varepsilon_x}{\varepsilon_t} \left( \theta + \frac{b_X}{1 + \varepsilon_{1,y} \kappa_{X,1} b_{X} \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_{X} \hat{y}_2 } \right)  \pd{\hat{x}}{\hat{t}}
+    \\
+    \frac{\kappa_{X,1} b_X^2 X_L}{\big(1 + \kappa_{X,1} b_{X} Y_{L,1} + \kappa_{X,2} b_{X} Y_{L,2} \big)^2} \partial_t Y_{L,1} 
+    &=
+    \frac{\varepsilon_x}{\varepsilon_t} \frac{\varepsilon_{1,y} \kappa_{X,1} b_X^2 \hat{x}}{\big(1+ \varepsilon_{1,y} \kappa_{X,1} b_X \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_1}{\hat t}
+    \\
+    \frac{ \kappa_{X,2} b_X^2 X_L }{\big(1 + \kappa_{X,1} b_X Y_{L,1} + \kappa_{X,2} b_X Y_{L,2}\big)^2} \partial_t Y_{L,2}
+    &=
+    \frac{\varepsilon_x}{\varepsilon_t} \frac{\varepsilon_{2,y} \kappa_{X,2} b_X^2 \hat{x}}{\big(1+ \varepsilon_{1,y} \kappa_{X,1} b_X \hat{y}_1 + \varepsilon_{2,y} \kappa_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_2}{\hat t}
+\end{align}
+\end{subequations}
+
+%We know that a linear combination of these forms \eqref{eq:generalised-x_t}, from where the term \(\nabla \cdot (D_X \nabla X_L - \nu X_L)\) follows \eqref{eq:divergence-non-dimen-x}.
+
+Proceed to define the scaled constants
+\(
+    \hat{\kappa}_{X,1} = \varepsilon_{1,y} \kappa_{X,1},
+    \qquad
+    \hat{\kappa}_{X,2} = \varepsilon_{2,y} \kappa_{X,2},
+\) and reuse the scaled vector \(\hat{\nu}\) and the matrix
+\(
+    \hat{D}_x ,
+\)
+and then define the non-dimensionalised quantity \( \hat{g}_X = \nicefrac{\varepsilon_t}{\varepsilon_x} g_X\). This way we get from \eqref{eq:generalised-x_t-parts} that
+\begin{equation}
+\begin{aligned}
+    \left( \theta + \frac{b_X}{1 + \hat{\kappa}_{X,1} b_{X} \hat{y}_1 + \hat{\kappa}_{X,2} b_{X} \hat{y}_2 } \right)  \pd{\hat{x}}{\hat{t}}
+    &
+    -\frac{\hat{\kappa}_{X,1} b_X^2 \hat{x}}{\big(1+ \hat{\kappa}_{X,1} b_X \hat{y}_1 + \hat{\kappa}_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_1}{\hat t}
+    \\
+    &\,\,
+    -\frac{\hat{\kappa}_{X,2} b_X^2 \hat{x}}{\big(1+ \hat{\kappa}_{X,1} b_X \hat{y}_1 + \hat{\kappa}_{X,2} b_X \hat{y}_2 \big)^2} \pd{\hat y_2}{\hat t}
+    =
+    \hat{\nabla}
+    \cdot
+    \left( 
+        \hat{D}_x \hat{\nabla} \hat{x} - \hat{x} \hat{\nu}
+    \right)
+    - \hat{g}_X.
+\end{aligned}
+\end{equation}
+
+Similarly, for \eqref{eq:generalised-y_1_t}, we first get the relations
+\begin{subequations}
+\label{eq:generalised-y_1_t-parts}
+\begin{align}
+    \left(\theta + \frac{b_{Y,1}}{1 + \kappa_{Y,1} b_{Y,1} X_L}\right) \partial_t Y_{L,1} 
+    &= 
+    \frac{\varepsilon_{1,y}}{\varepsilon_t} \left( \theta + \frac{b_{Y,1}}{1 + \varepsilon_{x} \kappa_{Y,1} b_{Y,1} \hat{x} } \right)  \pd{\hat{y}_1}{\hat{t}}
+    \\
+    \frac{ \kappa_{Y,1} b_{Y,1}^2 Y_{L,1}}{\big(1 + \kappa_{Y,1} b_{Y,1} X_L\big)^2} \partial_t X_L
+    &=
+    \frac{\varepsilon_{1,y}}{\varepsilon_t}
+    \frac{ \varepsilon_x  \kappa_{Y,1} b_{Y,1}^2 \hat{y}_{1}}{\big(1 + \varepsilon_x \kappa_{Y,1} b_{Y,1} \hat{x} \big)^2}
+    \pd{\hat{x}}{\hat{t}}.
+\end{align}
+\end{subequations}
+Now define
+\[
+    \hat{\kappa}_{Y,1} = \varepsilon_{x} \kappa_{Y,1},
+    \qquad
+    \hat{D}_{y,1} = 
+    \begin{pmatrix}
+         \hat{D}_{Y,1,r} & 0 
+         \\
+        0 &  \hat{D}_{Y,1,z}
+    \end{pmatrix}
+    =
+    D_{Y,1} \varepsilon_t
+    \begin{pmatrix}
+         \varepsilon_r^{-2} & 0 
+         \\
+        0 &  \varepsilon_z^{-2}
+    \end{pmatrix},
+    \qquad\text{and}\qquad
+    \hat{g}_{y,1} = \frac{\varepsilon_t}{\varepsilon_{1,y}} g_{Y,1}
+\]
+to get from \eqref{eq:generalised-y_1_t-parts} that
+\begin{equation}
+    \left( \theta + \frac{b_{Y,1}}{1 + \hat{\kappa}_{Y,1} b_{Y,1} \hat{x} } \right)  \pd{\hat{y}_1}{\hat{t}}
+    -
+    \frac{ \hat{\kappa}_{Y,1} b_{Y,1}^2 \hat{y}_{1}}{\big(1 + \hat{\kappa}_{Y,1} b_{Y,1} \hat{x} \big)^2}
+    \pd{\hat{x}}{\hat{t}}
+    = \hat{\nabla} \cdot (\hat{D}_{y,1} \hat{y}_1 - \hat{y}_1 \hat{\nu}) - \hat{g}_{y,1}.
+\end{equation}
+
+
+
+
+Finally, for \eqref{eq:generalised-y_2_t} define
+\[
+    \hat{\kappa}_{Y,2} = \varepsilon_{x} \kappa_{Y,2},
+    \qquad
+    \hat{D}_{y,2} = 
+    \begin{pmatrix}
+         \hat{D}_{Y,2,r} & 0 
+         \\
+        0 &  \hat{D}_{Y,2,z}
+    \end{pmatrix}
+    =
+    D_{Y,2} \varepsilon_t
+    \begin{pmatrix}
+         \varepsilon_r^{-2} & 0 
+         \\
+        0 &  \varepsilon_z^{-2}
+    \end{pmatrix},
+    \qquad\text{and}\qquad
+    \hat{g}_{y,2} = \frac{\varepsilon_t}{\varepsilon_{2,y}} g_{Y,2},
+\]
+from which we get
+\begin{equation}
+    \left(\theta + \frac{b_{Y,2}}{1 + \hat{\kappa}_{Y,2} b_{Y,2} \hat{x}}\right) \pd{\hat{y}_2}{\hat{t}}
+    - 
+    \frac{ b_{Y,2}^2 \hat{\kappa}_{Y,2} \hat{y}_2 }{\big(1 + \hat{\kappa}_{Y,2} b_{Y,2} \hat{x} \big)^2} \pd{\hat{x}}{\hat{t}} 
+    = 
+    \hat{\nabla} \cdot(\hat{D}_{y,2} \hat{\nabla} \hat{y}_{2} - \hat{y}_2 \hat{\nu}  ) - \hat{g}_{y,2}.
+\end{equation}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Scaled boundary and initial conditions}
+
+The choice of the scaling parameters come from the boundary conditions. 
+
+
+
+Here we will present the choice and development for the secretion of two exudates. The treatment is similar for the secretion of one. 
+
+Again, the derivation is straightforward from the base model. First, we note that for \(X_L\) we get, for one side of the boundary, that
+\begin{subequations}
+\begin{equation}
+    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = \hat{\alpha}_1 \hat{x}
+    \qquad \text{at } \hat{r} = 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{x,1}, \hat{L}_1];
+\end{equation}
+where we require \( \alpha_1 = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\alpha}_1\), \( \hat{L}_1 = \varepsilon_z^{-1} L_1\), and \( \delta\hat{L}_{x,1} = \varepsilon_z^{-1} \delta L_{X,1}\). Similarly, the other side of the boundary follows
+\begin{equation}
+    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = -\hat{\alpha}_2 \hat{x}
+    \qquad \text{at } \hat{r} = 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{x,2}, \hat{L}_2];
+\end{equation}
+where we have selected \( \varepsilon_r = w\), and a proper selection of constants as in the previous line.
+
+The relationships for \(Y_{L,1}\) and \(Y_{L,2}\) are similar:
+\begin{align}
+    \hat{D}_{Y,1,r} \pd{\hat{y}_1}{\hat{r}} - \hat{\nu}_r \hat{y}_1 &= -\hat{F}_{1,1}(t)
+    &
+    \text{at } \hat{r} &= 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{y,1,1}, \hat{L}_1],
+    \\
+    \hat{D}_{Y,2,r} \pd{\hat{y}_2}{\hat{r}} - \hat{\nu}_r \hat{y}_2 &= -\hat{F}_{2,1}(t)
+    &
+    \text{at } \hat{r} &= 0, \quad \hat{z} \in [\hat{L}_1 - \delta \hat{L}_{y,2,1}, \hat{L}_1],
+    \\
+    \hat{D}_{Y,1,r} \pd{\hat{y}_1}{\hat{r}} - \hat{\nu}_r \hat{y}_1 &= \hat{F}_{1,2}(t)
+    &\text{at } \hat{r} &= 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{y,1,2}, \hat{L}_2],
+    \\
+    \hat{D}_{Y,2,r} \pd{\hat{y}_2}{\hat{r}} - \hat{\nu}_r \hat{y}_2 &= \hat{F}_{2,2}(t)
+    &\text{at } \hat{r} &= 1, \quad \hat{z} \in [\hat{L}_2 - \delta \hat{L}_{y,2,2}, \hat{L}_2];
+\end{align}
+\end{subequations}
+where appropriate quantities are selected. For instance \( \hat{F}_{1,1} = \frac{\varepsilon_t}{\varepsilon_r \varepsilon_{1,y}} F_{Y,1,1} \).
+
+For the other scaling parameters, notice that if we again pick \( \varepsilon_z = L_{t_{\max}}\), again \(\hat z \) will be in the range \( [0,-1]\). 
+This choice implies that \( \max_t\{|\hat{L}_1|,|\hat{L}_2|\}\) should be \(1\), where we have
+\begin{align}
+    \hat{L}_1 &= \hat{L}_1(\hat t) = \frac{1}{\varepsilon_z} ( L_{1,0} + G_1 \varepsilon_t \hat t )
+    = \hat{L}_{1,0} + \hat{G}_1 \hat t,
+    \qquad 
+    \hat{L}_{1,0} = \varepsilon^{-1}_z L_{1,0},
+    \qquad
+    \hat{G}_1 = \varepsilon_t \varepsilon_z^{-1} G_1,
+    \\
+    \hat{L}_2 &= \hat{L}_2(\hat t) = \frac{1}{\varepsilon_z} ( L_{2,0} + G_2 \varepsilon_t \hat t )
+    = \hat{L}_{2,0} + \hat{G}_2 \hat t,
+    \qquad 
+    \hat{L}_{2,0} = \varepsilon^{-1}_z L_{2,0},
+    \qquad
+    \hat{G}_2 = \varepsilon_t \varepsilon_z^{-1} G_2;
+\end{align}
+and we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat t\) in the range \( [0,1]\). As a result, we have selected scaling parameters such that the system of partial differential equations is defined in \([0,1]\times [0,-1] \times [0,1]\).
+%
+Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_{1,0},\hat{y}_{2,0} ) = (\varepsilon_x^{-1} X^0_L, \varepsilon_{1,y}^{-1} Y^0_{L,1}, \varepsilon_{2,y}^{-1} Y^0_{L,2}) \). 
+
+
+Observe that again we can use parameters \(\varepsilon_x\), \(\varepsilon_{1,y}\), and \(\varepsilon_{2,y}\) to calibrate the effects of \( \hat{x}\) and \(\hat{y}\) in all of the nonlinear terms in the above equations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

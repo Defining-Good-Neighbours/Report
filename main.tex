@@ -182,36 +182,31 @@ Then we move to consider a more complex system between two species of plant: Tob
 
 Nutrient deficiency is one of the most pressing problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc (\ce{Zn}) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments \cite{calicioglu_2019}. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process \cite{fact.mr_2021}. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For instance, many farmers rotate planting a four crop system of brassicas, legumes, cereals, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year \cite{xuan_2011}. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This work will explore the benefits of intercropping different genotypes and species of crop plants next to each other in order to studi the benefits this may have upon nutrient uptake within their root systems.
 
-One of the main nutrients plants rely upon is phosphorus (\ce{P}) which is used in important processes such as cell membrane construction, DNA production, and the production of ATP \cite{vysotskaya_2016}. In order to maximise plant production of new cells and leaf growth it is therefire important for the plant to have a ready supply of \ce{P} available in the soil \cite{vysotskaya_2016}. For this reason, many commercial farming programs rely on \ce{P} fertilisers produced from either acid- or heat-treated rock phosphate \cite{PhosporusRecoveryandRecycling}. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources \cite{fact.mr_2021}. Thus, if plants can be bred or inter-cropped in a certain way to more efficiently access and use the \ce{P} compounds present in soil without the need of supplying the soil with additional source of \ce{P}, this would be of great benefit to many farming and crop focused industries.
+One of the main nutrients plants rely upon is phosphorus (\ce{P}) which is used in important processes such as cell membrane construction, DNA production, and the production of ATP \cite{vysotskaya_2016}, for an overview of the roles of \ce{P} in plant growth see Fig. \ref{fig:Phos}. In order to maximise plant production of new cells and leaf growth it is therefire important for the plant to have a ready supply of \ce{P} available in the soil \cite{vysotskaya_2016}. For this reason, many commercial farming programs rely on \ce{P} fertilisers produced from either acid- or heat-treated rock phosphate \cite{PhosporusRecoveryandRecycling}. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources \cite{fact.mr_2021}. Thus, if plants can be bred or inter-cropped in a certain way to more efficiently access and use the \ce{P} compounds present in soil without the need of supplying the soil with additional source of \ce{P}, this would be of great benefit to many farming and crop focused industries.
 
-In this project, we will reproduce the model of zinc uptake by rice using metal-complexing phytosidero\-phore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e., inter-cropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access \ce{P} from the soil in the form of phosphate \cite{giles_richardson2018}. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
+In this project, we will reproduce the model of zinc uptake by rice using metal-complexing phytosidero\-phore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e.inter-cropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access \ce{P} from the soil in the form of phosphate \cite{giles_richardson2018}. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
 
-The document is structured as follows. In Section \ref{sec:Bio-background}, the mechanisms of Zinc uptake are described and the model of \cite{Ptashnyk-2011} is introduced. 
-In Section \ref{sec:Base}, an initial extension for two roots is discussed. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a scaling procedure. In Section \ref{sec:Extension}, two extensions of the model are proposed for inter-cropping. Their variational formulation is presented along a scaling procedure for numerical computation. Then numerical experimentation of the extensions is included in Section \ref{sec:Results_Extension}. Existence results for the coupled ODE-PDE systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
-
-
-%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Biological background and introduction to the base model}
-\label{sec:Bio-background}
+The document is structured as follows. In Section \ref{sec:Bio-background}, the mechanisms of zinc uptake are described and the model of \cite{Ptashnyk-2011} is introduced. 
+In Section \ref{sec:Base}, an initial extension to two roots is discussed. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a non-dimensionalising procedure. In Section \ref{sec:Extension}, two extensions of the model are proposed for inter-cropping. Their variational formulation is presented in the Appendix along a non-dimensionalising procedure for numerical computation. Parameter choice for the barley-tobacco combination and subsequent numerical experimentation of the extended model can be found in Section \ref{sec:Results_Extension}. Existence results for the coupled ODE-PDE systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
 
 \begin{figure}[!htb]
-  \vspace{-1cm}
+%   \vspace{-1cm}
      \centering
      \includegraphics[width=0.7\textwidth]{Figures/PhosphorusPlantRoles.pdf}
      \caption{Phosphorus is an essential nutrient for proper growth of plants with  different functions shown in the figure. Reproduced from \cite{fertilizers}.}
      \label{fig:Phos}
  \end{figure}
- 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Biological background and introduction to the base model}
+\label{sec:Bio-background}
+
+Once the motivation to this project has been established, let us introduce the plant system we are going to be working with. We introduce the reader to the biological background of the models considered in this project, along with a derivation of the base model from \cite{Ptashnyk-2011}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dynamics at the root}
-
-Once the motivation to this project has been established, let us introduce the plant system we are going to be working with. First, we will briefly explain how plant roots interact with the soil around them in order to gather nutrients, and then we will consider the work in \cite{Ptashnyk-2011} to produce a mathematical model of this process.
- 
+Here we will briefly explain how plant roots interact with the soil around them in order to gather nutrients.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -244,7 +239,7 @@ Behind the root cap, there is a zone of exudation within which the plant may sec
 \end{figure}
 
 % There is then another zone, that of absorption. 
-Another zone of the root important for our model is the absorption zone. In some plants, the whole root may absorb nutrients, while in others, absorption is limited to a smaller portion of the root surface. This is similar to the zone of exudation which in some plants may be very large and in others is limited to a very small region \SI{2}{cm} behind the root cap. This is portrayed in Figure \ref{fig:zones} along other key zones of a sample root.
+Another zone of the root important for our model is the absorption zone. In some plants, the whole root may absorb nutrients, while in others, absorption is limited to a smaller portion of the root surface. This is similar to the zone of exudation which in some plants may be very large and in others is limited to a very small region behind the root cap. This is portrayed in Figure \ref{fig:zones} along other key zones of a sample root.
 
 Within the absorption zone, roots absorb many different elements from the soil. While the model in \cite{Ptashnyk-2011} focuses on zinc uptake, our primary interest is the uptake of phosphorus. Both of these nutrients can be highly deficient in many soil types and interact similarly with different exudates.
 
@@ -254,7 +249,7 @@ Within the absorption zone, roots absorb many different elements from the soil. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Interaction of exudates with soil}
 In the case of \ce{Zn}  gathering, the plant exudes a phytosiderophore, deoxymugineic acid (\ce{DMA}), which acts to increase the uptake of \ce{Zn} from soils in the form of \ce{Zn^{2+}} bound to soil particles, see Figure \ref{fig:Zinc} for a sketch of this process. In the case of phosphorus, the interaction is a little more complex. Studies have shown that in soil with limited \ce{P} availability, exudation of citrate by plant roots has improved \ce{P} solubilisation in soils
-allowing the inorganic \ce{P} to move from soil solid into solution \cite{McKayFletcher-2019}. In particular citrate, as an organic acid anion, lowers the pH of our previously neutral soil. This promotes competition in the ions that bind with metals in the soil, meaning they bind more with iron and aluminium. \ce{P} strongly adsorbs to soil particle surfaces (i.e. iron and aluminium), thus with more of those bound up into other compounds, more \ce{P} is free to move into solution \cite{McKayFletcher-2019}.
+allowing the inorganic \ce{P} to move from soil solid into solution \cite{McKayFletcher-2019}. In particular citrate, as an organic acid anion, lowers the pH of the previously neutral soil. This promotes competition in the ions that bind with metals in the soil, meaning they bind more with iron and aluminium. \ce{P} strongly adsorbs to soil particle surfaces (i.e. iron and aluminium), thus with more of those bound up into other compounds, more \ce{P} is free to move into solution \cite{McKayFletcher-2019}.
 Then we have the exudation of phytase enzymes which are responsible for the process of mineralising \ce{P}, i.e., converting organic \ce{P} into inorganic \ce{P}, which allows the plant to utilise it. Most importantly, research has shown that working in tandem, citrate, and phytase have a much larger effect on \ce{P} absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george}. The role of citrate and phytase in \ce{P} absorption by the root is further explained in Fig. \ref{fig:CitPhys}.
 
 \begin{figure}[h]
@@ -288,7 +283,6 @@ Then we have the exudation of phytase enzymes which are responsible for the proc
 We now present the model of \cite{Ptashnyk-2011} which considers the way rice plants access \ce{Zn} in \ce{Zn}-deficient soils. The paper models the mechanism of \ce{DMA} exudation which allows rice roots to access \ce{Zn} and form \ce{Zn-DMA} which is solubilised as explained in the previous sections. Let $X$ be the amount of the micronutrient metal \ce{Zn} and $Y$ the amount of exuded phytosiderophore \ce{DMA}. All parameters following in this section are described in Table \ref{t:First-model-params}. 
 The equations model the movement of $X$ and $Y$ by diffusion and convection through the soil pore solution, allowing for adsorption and desorption to occur on soil particle surfaces and diffusion only within the soil solution. 
 The concentrations of $X$ and $Y$ in the soil solution are marked by $X_L$ and $Y_L$, while their concentrations in the soil solid are $X_S$ and $Y_S$.
-%We can split $X$ and $Y$ into the amount of each in he different states, let $X_L$, $Y_L$ be the concentrations of \ce{Zn} and \ce{DMA} in solution and $X_S$, $Y_S$ are the concentrations in soil solids. 
 Thus the following conservation equations for $X$ and $Y$ are proposed:
 \begin{equation}
 \begin{aligned}
@@ -297,7 +291,6 @@ Thus the following conservation equations for $X$ and $Y$ are proposed:
     \label{eq:1}
 \end{aligned}
 \end{equation}
-%with parameters as summarised in Table \ref{t:First-model-params}. 
 We can then derive equilibrium conditions between the soil particles and solution. %Simultaneously, we know that at this equilibrium there will be no change in the amount of \ce{DMA} or \ce{Zn} in solution, thus
 At equilibrium describing fast absorption we have
 \begin{equation}
@@ -994,8 +987,9 @@ Using parameters from table 1 in \cite{Ptashnyk-2011} we can consider what this 
     \centering
     \includegraphics[width=0.5\textwidth]{Figures/testpics/ZnCumulative/BasicModelCumuZn.eps}
     \caption{Cumulative \ce{Zn} uptate by roots after 24 hours at $0.08$ \si{dm} distance apart.}
+    \label{fig:OneCn}
 \end{figure}
- As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The \ce{DMA} exuded from the left has run into that on the right which is causing more \ce{Zn} to be made available to both roots. As the domain is symmetric and the roots close enough that their rhizospheres meet this is as expected and we see in the  
+For this base model we choose parameters as in \cite{Ptashnyk-2011} and run the model with both roots the same. Our domain is symmetrical with one root on either side with equal parameters. This is evident as shown in figure \ref{fig:OneCn} which plots the cumulative \ce{Zn} uptake  in mols per decimeter over 24 hours. Above these plots are concentration plats which track the concentration of \ce{DMA} and \ce{Zn} in the soil respectively in mols per decimeter cubed. We show the final frames after 24 hours to give a snapshot of the results after a significant period of time. As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The \ce{DMA} exuded from the left has run into that on the right which is causing more \ce{Zn} to be made available to both roots. As the domain is symmetric and the roots close enough that their rhizospheres meet this is as expected. Thus it is intuative to consider what happens when the roots are moved further apart and whether this band of increasd \ce{Zn} concentration is maintained ove 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Increased distance between roots}
  \begin{figure}

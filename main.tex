@@ -125,14 +125,14 @@
             
         \vspace{1cm}
         
-        \Large Karolína Benková, Liz Howell, Andrés Miniguano Trujillo\footnote{\normalsize Maxwell Institute for Mathematical Sciences,   \texttt{\{K.Benkova,Liz.Howell,Andres.Miniguano-Trujillo\}@ed.ac.uk}}
+        \Large Karolína Benková, Liz Howell, Andrés Miniguano Trujillo\footnote{\small Maxwell Institute for Mathematical Sciences,   \texttt{\{K.Benkova,Liz.Howell,Andres.Miniguano-Trujillo\}@ed.ac.uk}}
         
             
         \vspace{1.5cm}
             
         \Large
-        Supervised by Dr Mariya Ptashnyk\footnote{\normalsize Heriot-Watt University, \texttt{M.Ptashnyk@hw.ac.uk}} \\ 
-        In collaboration with Dr Tim George\footnote{\normalsize The James Hutton Institute, \texttt{\{Tim.George,Ali.Karley\}@hutton.ac.uk}} and Dr Alison Karley\textsuperscript{\small\ddag}
+        Supervised by Dr Mariya Ptashnyk\footnote{\small Heriot-Watt University, \texttt{M.Ptashnyk@hw.ac.uk}} \\ 
+        In collaboration with Dr Tim George\footnote{\small The James Hutton Institute, \texttt{\{Tim.George,Ali.Karley\}@hutton.ac.uk}} and Dr Alison Karley\textsuperscript{\small\ddag}
 
         \vfill
             
@@ -155,17 +155,21 @@ The issue of nutrient deficiency is one that plagues the modern world, and it wi
 Improving the way that plants make use of the nutrients in the soil may allow them to flourish even in soils of lesser quality. In addition, if plants can gather additional nutrients, they can pass them on to those that consume them, as it happens with zinc. Thus, finding ways to improve the efficiency of roots absorbing nutrients could be of huge benefit as the need for dietary supplements or fertilisers would decrease.
 % to the farming industry in order to improve crops for selling and to get better crops for feeding both livestock and population, which would decrease the need for dietary supplements or fertilisers.
 
-This report presents research considering two mathematical models of partial differential equations which describe interaction of one or two root exudates with a micronutrient that is absorbed by the root. We study two intercropping combinations, first rice-rice, and then barley-tobacco crops. This work thus reports on biological background of the plants and chemicals concerned, the corresponding mathematical models for intercropping, their computational results obtained by solving the systems numerically, and on the existence of solutions. The results we describe can be used as a guidance for choosing suitable plant combinations and soils for beneficial intercropping with enhanced nutrient uptake, giving leads for further study of the problem in future work. 
+This report presents research considering two mathematical models of nonlinear partial differential equations which describe interaction of one or two root exudates with a micronutrient that is absorbed by the root. We study two intercropping combinations, first rice-rice, and then barley-tobacco crops. This work thus reports on biological background of the plants and chemicals concerned, the corresponding mathematical models for intercropping, their computational results obtained by solving the systems numerically, and on the existence and non-negativity of solutions. The results we describe can be used as a guidance for choosing suitable plant combinations and soils for beneficial intercropping with enhanced nutrient uptake, giving leads for further study of the problem in future work. 
 % We consider how to accurately encapsulate the crops in a simulation, the existence of true solutions to the problem, and results of numerical simulations which give new leads for investigation through experimentation. 
 
-The main objective of the numerical experiments is to find the relationship between the parameters and the nutrient absorbed by the root. Thus, we create plots for cumulative uptake of nutrients by the root, and additionally we examine concentrations of the chemicals in between the two roots. The simulations are done using the computating platform FEniCS with Python interface, while the visualisations are done using Paraview and Python's Matplotlib library.
+The main objective of the numerical experiments is to find the relationship between the parameters and the nutrient absorbed by the root. Thus, we create plots for cumulative uptake of nutrients by the root, and additionally we examine concentrations of the chemicals in between the two roots. The simulations are done using the computing platform FEniCS with its Python interface, while the visualisations are done using Paraview and Python's Matplotlib library.
 
 First, we modify an existing model by adding another identical root, and examine the effects of changing the proximity of the roots and the exudation rate. We use parameters modelling zinc uptake from zinc-deficient soils by rice plants, using the phytosiderophore \ce{DMA}. We find that positive effects of intercropping are largely lost once plants are too far from each other, i.e. when their zones of root influence don't intersect anymore.
 However, if the expression of genes related to \ce{DMA} expression is increased, this may lead to a small increase in the maximum distance between plants where intercropping is effective. Increasing the expression of genes relating to zinc uptake rate however is not as effective at making a difference in cumulative zinc absorption, as nutrient uptake depends on how much nutrients are available in the soil, which depends primarily on the exudation rate.
 
 Next, we derive a model for two exudates as this is both more interesting and complex scenario dy\-na\-mics-wise. We choose the parameters to model roots of tobacco and barley and carry numerical experiments on a wide range of parameters to model interactions of the exudates citrate and phytase with the nutrient phosphate. In addition to the results in the previous paragraph we find that that for higher nutrient uptake, increased exudation rate of the roots and increased diffusion and buffer power of the nutrient are important, along with decreased buffer power and diffusion of the exudates. We acknowledge the limitations of the model and the results being an approximation of the real dynamics in the rhizosphere because of the number of assumptions we have made.
 
+
+
 % Add some description of the analysis part or something else?
+
+Finally, the existence of solutions for the nonlinear systems is studied at the end of the document. Using a general framework, it is proved that all the coupled differential systems studied in this work have a unique solution. Additional analyses were carried out, showing that solutions are bounded and non-negative for bounded non-negative initial data. 
 
 
 % You can (obviously) find some information and guidance on the web. Some
@@ -205,12 +209,14 @@ Finally, an analysis of the system provides us with a proof of existence of a so
 
 Nutrient deficiency is one of the most pressing problems affecting crops in the modern age. In particular, humans rely upon grasses and grains to introduce zinc (\ce{Zn}) and other key nutrients to our diets. Thus, as our population grows, we would like to plant more crops to feed ourselves and, as we take up more space on the Earth, we would look to grow those plants in increasingly hostile environments \cite{calicioglu_2019}. Indeed,  many of the elements that make up the fertilisers we use the most to improve soil conditions are difficult to obtain or process \cite{fact.mr_2021}. One of the mechanisms we can use to address this is intercropping, the practice of mixing the species or genotypes of species as we plant. This can occur in time, through crop rotation which is the practice of planting different crops each season to improve soil condition. For instance, many farmers rotate planting a four crop system of brassicas, legumes, cereals, and potato plants to increase soil nutrients and ensure that certain plant-focused soil pests will die out year by year \cite{xuan_2011}. Intercropping can also occur in space, through the practice of planting different species of plants in proximity to one another to encourage a mutually beneficial relationship between them. This work will explore the benefits of intercropping in space, planting different genotypes and species of crop plants next to each other in order to study the benefits this may have upon nutrient uptake within their root systems.
 
-One of the main nutrients plants rely upon is phosphorus (\ce{P}) which is used in important processes such as cell membrane construction, DNA production, and the production of ATP \cite{vysotskaya_2016}, for an overview of the roles of \ce{P} in plant growth see Fig. \ref{fig:Phos}. In order to maximise plant production of new cells and leaf growth it is therefire important for the plant to have a ready supply of \ce{P} available in the soil \cite{vysotskaya_2016}. For this reason, many commercial farming programs rely on \ce{P} fertilisers produced from either acid- or heat-treated rock phosphate \cite{PhosporusRecoveryandRecycling}. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources \cite{fact.mr_2021}. Thus, if plants can be bred or intercropped in a certain way to more efficiently access and use the \ce{P} compounds present in soil without the need of supplying the soil with additional source of \ce{P}, this would be of great benefit to many farming and crop focused industries.
+One of the main nutrients plants rely upon is phosphorus (\ce{P}) which is used in important processes such as cell membrane construction, DNA production, and the production of ATP \cite{vysotskaya_2016}, for an overview of the roles of \ce{P} in plant growth see Figure \ref{fig:Phos}. In order to maximise plant production of new cells and leaf growth it is therefire important for the plant to have a ready supply of \ce{P} available in the soil \cite{vysotskaya_2016}. For this reason, many commercial farming programs rely on \ce{P} fertilisers produced from either acid- or heat-treated rock phosphate \cite{PhosporusRecoveryandRecycling}. This rock phosphate is mined primarily in countries such as Morocco, China and Russia, each of which has their own political difficulties when it comes to obtaining a steady supply of resources \cite{fact.mr_2021}. Thus, if plants can be bred or intercropped in a certain way to more efficiently access and use the \ce{P} compounds present in soil without the need of supplying the soil with additional source of \ce{P}, this would be of great benefit to many farming and crop focused industries.
 
 In this project, we will reproduce the model of zinc uptake by rice using metal-complexing phytosidero\-phore as an exudate \cite{Ptashnyk-2011} and extend it to model interaction of roots of two different plants growing next to each other (i.e. intercropped) with two different exudates and one common nutrient being taken from the soil. The parameters we choose to use in the model correspond to barley and tobacco plants which secrete citrate and phytase so that the plant can access \ce{P} from the soil in the form of phosphate \cite{giles_richardson2018}. We will also experiment with different parameter set-ups and report on findings regarding the combinations of parameter values or plant traits that enhance phosphate uptake. The findings about what traits are beneficial for nutrient uptake in intercropping might be especially useful for farming focused industries as the results are not limited only to hypothetical barley and tobacco system but to any combination of plants which might satisfy the characteristics we propose. 
 
 The document is structured as follows. In Section \ref{sec:Bio-background}, the mechanisms of zinc uptake are described and the model of \cite{Ptashnyk-2011} is introduced. 
-In Section \ref{sec:Base}, an initial extension to two roots is discussed. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a non-dimensionalising procedure. In Section \ref{sec:Extension}, two extensions of the model are proposed for intercropping. Their variational formulation is presented in the Appendix along a non-dimensionalising procedure for numerical computation. Parameter choice for the barley-tobacco combination and subsequent numerical experimentation of the extended model can be found in Section \ref{sec:Results_Extension}. Existence results for the coupled ODE-PDE systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
+In Section \ref{sec:Base}, an initial extension to two roots is discussed. A numerical scheme is also presented to solve the coupled system of nonlinear parabolic partial differential equations, it is followed by numerical experiments supported by a non-dimensionalising procedure. In Section \ref{sec:Extension}, two extensions of the model are proposed for intercropping. A numerical scheme is also proposed for numerical computation, which is based on a non-dimensionalised system included in the Appendix.
+%Their variational formulation is presented in the Appendix along a non-dimensionalising procedure for numerical computation. 
+Parameter choice for the barley-tobacco combination and subsequent numerical experimentation of the extended model can be found in Section \ref{sec:Results_Extension}. Existence results for the coupled ordinary differential and partial differential equation systems presented in this work is delayed until Section \ref{sec:Existence}, where a general approach shows the existence of a solution for all the studied models.
 
 \begin{figure}[!htb]
 %   \vspace{-1cm}
@@ -274,9 +280,9 @@ Within the absorption zone, roots absorb many different elements from the soil. 
 
 In the case of \ce{Zn}  absorption, the plant exudes a phytosiderophore, deoxymugineic acid (\ce{DMA}), which acts to increase the absorbtion of \ce{Zn} from soils in the form of \ce{Zn^{2+}} bound to soil particles, see Figure \ref{fig:Zinc} for a sketch of this process. In the case of phosphorus, the interaction is a little more complex. Studies have shown that in soil with limited \ce{P} availability, exudation of citrate by plant roots has improved \ce{P} solubilisation in soils
 allowing the inorganic \ce{P} to move from soil solid into solution \cite{McKayFletcher-2019}. In particular citrate, as an organic acid anion, lowers the pH of the previously neutral soil. This promotes competition in the ions that bind with metals in the soil, meaning they bind more with iron and aluminium. \ce{P} strongly adsorbs to soil particle surfaces (i.e. iron and aluminium), thus with more of those bound up into other compounds, more \ce{P} is free to move into solution \cite{McKayFletcher-2019}.
-Then we have the exudation of phytase enzymes which are responsible for the process of mineralising \ce{P}, i.e. converting organic \ce{P} into inorganic \ce{P}, which allows the plant to utilise it. Most importantly, research has shown that working in tandem, citrate, and phytase have a much larger effect on \ce{P} absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george}. The role of citrate and phytase in \ce{P} absorption by the root is further explained in Fig. \ref{fig:CitPhys}.
+Then we have the exudation of phytase enzymes which are responsible for the process of mineralising \ce{P}, i.e. converting organic \ce{P} into inorganic \ce{P}, which allows the plant to utilise it. Most importantly, research has shown that working in tandem, citrate, and phytase have a much larger effect on \ce{P} absorption than we can currently explain, thus we have chosen to model the exudation of both rather than taking models of each single exudate by itself \cite{giles_george}. The role of citrate and phytase in \ce{P} absorption by the root is further explained in Figure \ref{fig:CitPhys}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{subfigure}[t]{0.35\textwidth}
     \includegraphics[width=\textwidth]{Figures/RootZincDiagram.pdf}
@@ -341,7 +347,7 @@ By differentiating the resulting algebraic equations in \eqref{eq:2} and substit
     \label{eq:sys-Zn-Y-Omega}
 \end{align}
 Having derived the dynamics of $X_L$ and $Y_L$ in soil, we will now insert a plant root into the system by determining boundary conditions of our domain.
-The concentrations of $X_L$ and $Y_L$ depend upon the pair of spatial variables in $(r,z) \in \mathbb{R}^2$ which measure radial distance from the center of the root and length from the soil surface respectively as shown in Fig. \ref{fig:geom}, respectively. Furthermore, we specify the domain by restricting to $r \in [a,x]$ where $a$ is the diameter of the root and $x$ is radius of zone of root influence. Notice that we are modelling the region starting at the surface of the root and the root itself is not part of the domain. In the vertical direction, we will restrict to $z \in [-L_{t_{max}},0]$ as we assume the root growing into the downward direction, reaching length of the active zone of the root $L_{t_{max}}$ at the end of simulation at some time $t_{max}$. We note that we consider the active zone of the root to be the zone up to where the root cap begins, see Figure \ref{fig:zones}.
+The concentrations of $X_L$ and $Y_L$ depend upon the pair of spatial variables in $(r,z) \in \mathbb{R}^2$ which measure radial distance from the center of the root and length from the soil surface respectively as shown in Figure \ref{fig:geom}, respectively. Furthermore, we specify the domain by restricting to $r \in [a,x]$ where $a$ is the diameter of the root and $x$ is radius of zone of root influence. Notice that we are modelling the region starting at the surface of the root and the root itself is not part of the domain. In the vertical direction, we will restrict to $z \in [-L_{t_{\max}},0]$ as we assume the root growing into the downward direction, reaching length of the active zone of the root $L_{t_{\max}}$ at the end of simulation at some time $t_{\max}$. We note that we consider the active zone of the root to be the zone up to where the root cap begins, see Figure \ref{fig:zones}.
 The presence of a single plant root on one vertical edge (on the left-hand side of the domain) results in 
 \begin{align}
     D_X \partial_r X_L - \nu X_L &= \alpha X_L & \text{at } r &= a, \quad z \in [-L, -(L - \delta L_X)], \label{eq:sys-Zn-X-Gamma-a} 
@@ -349,7 +355,7 @@ The presence of a single plant root on one vertical edge (on the left-hand side 
     D_Y \partial_r Y_L - \nu Y_L &= -F_Y(t) &\text{at } r &= a, \quad z \in [-(L - \delta lt), -(L - \delta lt - \delta L_Y)].  \label{eq:sys-Zn-Y-Gamma-a} 
 \end{align}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.7]{Figures/First-plot.pdf}
     \caption{Sketch of the domain for system with one plant as modelled in \cite{Ptashnyk-2011} with $L_0$ being the length of root at the beginning of simulation and $G$ being the growth rate of the root. The root portrayed is curly for illustration purposes.}
@@ -380,10 +386,10 @@ Boundary condition \eqref{eq:sys-Zn-Y-Gamma-a}  represents the exudation of \ce{
     \\ \midrule
     $\theta$ & Solution volume fraction \\
     $f$ & Diffusion impedance factor \\
-    $D_{LX}$ & Diffusion coefficient of nutrient $X$  in free solution \\
-    $D_{LY}$ & Diffusion coefficient of exudate $Y$  in free solution \\
-    $D_X$ & Diffusion of the the nutrient $X$ in the soil, $D_X = D_{LX} \theta f$  \\  
-	$D_{Y}$ &  Diffusion of the exudate $Y$ in the soil, $D_{Y} = D_{LY} \theta f$  \\ 
+    $D_{L,X}$ & Diffusion coefficient of nutrient $X$  in free solution \\
+    $D_{L,Y}$ & Diffusion coefficient of exudate $Y$  in free solution \\
+    $D_X$ & Diffusion of the the nutrient $X$ in the soil, $D_X = D_{L,X} \theta f$  \\  
+	$D_{Y}$ &  Diffusion of the exudate $Y$ in the soil, $D_{Y} = D_{L,Y} \theta f$  \\ 
 	$\nu$ & Water flux\\
 	$g_X$ & Function for the immobilisation of nutrient $X$ \\
 	$g_{Y}$ & Function for decomposition of the exudate $Y$ \\
@@ -445,7 +451,7 @@ where $L = L_0 + G t$. For the rest of the boundary, we have zero-flux condition
     D_Y \partial_r Y_L - \nu Y_L = 0.
 \end{align}
 Moreover, $r \in [a,x]$, 
-and $z \in [0, L_{t_{\mathrm{max}} }]$. The meaning of these parameters is presented in Table \ref{t:First-model-params}. 
+and $z \in [0, L_{t_{\mathrm{\max}} }]$. The meaning of these parameters is presented in Table \ref{t:First-model-params}. 
 \end{subequations}
 \end{comment}
 
@@ -988,7 +994,7 @@ Using parameters from Table 1 in \cite{Ptashnyk-2011}, we can experiment with th
 
 \subsubsection{Benchmark result}
 
-For the benchmark solution we choose parameters as in \cite{Ptashnyk-2011} and run the model with both roots having the same characteristics. Our domain is symmetrical with one root on either side with equal parameters. This is evident as shown in Fig. \ref{fig:OneCn} which plots the cumulative \ce{Zn} uptake over 24 hours. The concentrations of \ce{DMA} and \ce{Zn} in the soil solution after 24 hours can be found in Fig. \ref{fig:baseorig_DMA} and \ref{fig:baseorig_Zn}, respectively. We show the final frames after 24 hours to give a snapshot of the results after a significant period of time. As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The \ce{DMA} exuded from the left root has diffused in the direction of the root on the right and vice versa, which is causing more \ce{Zn} to be made available to both roots. Since the domain is symmetric and the roots are placed so that their zones of root influence intersect, interaction of this sort between the two roots was expected. Thus it is intuitive to consider what happens when the roots are moved further apart and whether this band of increased \ce{Zn} concentration is maintained over distance.  
+For the benchmark solution we choose parameters as in \cite{Ptashnyk-2011} and run the model with both roots having the same characteristics. Our domain is symmetrical with one root on either side with equal parameters. This is evident as shown in Figure \ref{fig:OneCn} which plots the cumulative \ce{Zn} uptake over 24 hours. The concentrations of \ce{DMA} and \ce{Zn} in the soil solution after 24 hours can be found in Figure \ref{fig:baseorig_DMA} and \ref{fig:baseorig_Zn}, respectively. We show the final frames after 24 hours to give a snapshot of the results after a significant period of time. As we can see in this base model we observe a good amount of cooperation occurring between the two roots. The \ce{DMA} exuded from the left root has diffused in the direction of the root on the right and vice versa, which is causing more \ce{Zn} to be made available to both roots. Since the domain is symmetric and the roots are placed so that their zones of root influence intersect, interaction of this sort between the two roots was expected. Thus it is intuitive to consider what happens when the roots are moved further apart and whether this band of increased \ce{Zn} concentration is maintained over distance.  
 
  \begin{figure}[h]
      \centering
@@ -1014,7 +1020,7 @@ For the benchmark solution we choose parameters as in \cite{Ptashnyk-2011} and r
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Increased distance between roots}
- Now that the roots have been planted so that their rhizospheres are separated by a large amount of soil area, we can observe they have a weaker effect upon each other. In Fig. \ref{fig:wup_DMA} we see that the areas with increased \ce{DMA} concentrations at each root no longer meet in between the roots. Fig. \ref{fig:wup_Zn} showing \ce{Zn} concentration also reflects this, there is no longer a central band of accessible \ce{Zn} within the soil, instead we see two separate zones of increased \ce{Zn} concentration, perhaps connected very weakly even at this distance as is shown in the very slight band of yellowing within the green area of the soil.
+ Now that the roots have been planted so that their rhizospheres are separated by a large amount of soil area, we can observe they have a weaker effect upon each other. In Figure \ref{fig:wup_DMA} we see that the areas with increased \ce{DMA} concentrations at each root no longer meet in between the roots. Figure \ref{fig:wup_Zn} showing \ce{Zn} concentration also reflects this, there is no longer a central band of accessible \ce{Zn} within the soil, instead we see two separate zones of increased \ce{Zn} concentration, perhaps connected very weakly even at this distance as is shown in the very slight band of yellowing within the green area of the soil.
  \begin{figure}[h]
      \centering
      \begin{subfigure}[t]{0.31\textwidth}
@@ -1039,7 +1045,7 @@ For the benchmark solution we choose parameters as in \cite{Ptashnyk-2011} and r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Increased DMA exudation}
 
-With a larger exudation rate of \ce{DMA} by the plants, $F_Y$, we see a larger amount of \ce{Zn} in the soil as could be intuitively expected. The bands we see in Fig. \ref{fig:Fup_DMA} and \ref{fig:Fup_Zn} are larger and more concentrated in these conditions compared to the benchmark solution, which resulted in more \ce{Zn} absorbed by the root as is shown in Fig. \ref{fig:Fup_cum}. This suggests that rice plants with a stronger expression of the genes linked with \ce{DMA} exudation may be better at accessing \ce{Zn} in soil and leads us to question whether they would allow an increased distance between plants before this positive cooperation would fade, which can be investigated further.
+With a larger exudation rate of \ce{DMA} by the plants, $F_Y$, we see a larger amount of \ce{Zn} in the soil as could be intuitively expected. The bands we see in Figure \ref{fig:Fup_DMA} and \ref{fig:Fup_Zn} are larger and more concentrated in these conditions compared to the benchmark solution, which resulted in more \ce{Zn} absorbed by the root as is shown in Figure \ref{fig:Fup_cum}. This suggests that rice plants with a stronger expression of the genes linked with \ce{DMA} exudation may be better at accessing \ce{Zn} in soil and leads us to question whether they would allow an increased distance between plants before this positive cooperation would fade, which can be investigated further.
  \begin{figure}[h]
      \centering
      \begin{subfigure}[t]{0.31\textwidth}
@@ -1064,8 +1070,8 @@ With a larger exudation rate of \ce{DMA} by the plants, $F_Y$, we see a larger a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Increased distance between roots and DMA exudation rate}
-The comparison of \ce{Zn} uptake at $w=0.15$ \si{dm} with original (dashed line) and increased (solid line) exudation rate is shown in Fig. \ref{fig:Fwup_cum}. We see that at this distance, the root absorbs more \ce{Zn} when the exudation rate is larger. 
-In Fig. \ref{fig:Fwup_Zn} we see that more \ce{Zn} is available to each plant. The amount of \ce{Zn} absorbed is still not as large as in the benchmark result with roots closer together. An examination of the relationship between a suitable exudation rate and root proximity to achieve a desired amount of \ce{Zn} absorbed by the root would be interesting in future work.
+The comparison of \ce{Zn} uptake at $w=0.15$ \si{dm} with original (dashed line) and increased (solid line) exudation rate is shown in Figure \ref{fig:Fwup_cum}. We see that at this distance, the root absorbs more \ce{Zn} when the exudation rate is larger. 
+In Figure \ref{fig:Fwup_Zn} we see that more \ce{Zn} is available to each plant. The amount of \ce{Zn} absorbed is still not as large as in the benchmark result with roots closer together. An examination of the relationship between a suitable exudation rate and root proximity to achieve a desired amount of \ce{Zn} absorbed by the root would be interesting in future work.
 Of course, this would have to allow for the total amount of \ce{Zn} in the soil as a limiting factor, keeping in mind realistic limits on the amount of \ce{DMA} possible for the plants to exude. 
 
  \begin{figure}[h]
@@ -1093,9 +1099,9 @@ Of course, this would have to allow for the total amount of \ce{Zn} in the soil 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsubsection{Increased Zn absorption power}
  
-If instead we increase the power of \ce{Zn} absorption by the rice plant $\alpha$, we see that the concentration plots in Fig. \ref{fig:absup_DMA} and \ref{fig:absup_Zn} remain very similar compared to the benchmark result, although we see increase in \ce{Zn} uptake in Fig. \ref{fig:absup_cum}. Thus, in the case of allowing a plant to better utilise the \ce{Zn} around it, this model suggests that when it comes to breeding rice plants it is better to focus on increasing the expression of genes geared towards \ce{DMA} exudation than to increase transporter strength which would mirror the simulated increase in maximum \ce{Zn} uptake here. Increased \ce{DMA} exudation rate by just 1e$^{-11}$ \si{mol.dm^2.s^{-1}}  has a much larger impact upon \ce{Zn} uptake than the larger increase of 5e$^{-3}$mols plotted here giving an observably larger increase in \ce{Zn} transported. Numerically, at the final 24 hours time in Fig. \ref{fig:absup_cum} the root has a cumulative intake of 6.990e$^{8}$ with the original parameters, while with the increased \ce{Zn} absorption the uptake increases to 7.176e$^{8}$, an increase of $2.661\%$.
+If instead we increase the power of \ce{Zn} absorption by the rice plant $\alpha$, we see that the concentration plots in Figure \ref{fig:absup_DMA} and \ref{fig:absup_Zn} remain very similar compared to the benchmark result, although we see increase in \ce{Zn} uptake in Figure \ref{fig:absup_cum}. Thus, in the case of allowing a plant to better utilise the \ce{Zn} around it, this model suggests that when it comes to breeding rice plants it is better to focus on increasing the expression of genes geared towards \ce{DMA} exudation than to increase transporter strength which would mirror the simulated increase in maximum \ce{Zn} uptake here. Increased \ce{DMA} exudation rate by just 1e$^{-11}$ \si{mol.dm^2.s^{-1}}  has a much larger impact upon \ce{Zn} uptake than the larger increase of 5e$^{-3}$ \si{mol} plotted here giving an observably larger increase in \ce{Zn} transported. Numerically, at the final 24 hours time in Figure \ref{fig:absup_cum} the root has a cumulative intake of 6.990e$^{8}$ with the original parameters, while with the increased \ce{Zn} absorption the uptake increases to 7.176e$^{8}$, an increase of $2.661\%$.
 
- \begin{figure}[h]
+ \begin{figure}[ht]
      \centering
      \begin{subfigure}[t]{0.31\textwidth}
      \includegraphics[width=\textwidth]{Figures/testpics/IncreasedZnAbsorbDMA24.png}
@@ -1143,7 +1149,9 @@ with the involved parameters presented in Table \ref{t:Second-model-params}. Nex
 	\partial Y_{S,2} &= \xi_1 Y_{L,2} - \xi_2 Y_{S,2} - \xi_3 Y_{S,2} X_L,
 \end{align}	
 \end{subequations}
-where $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\gamma_3$, $\xi_1$, $\xi_2$, and $\xi_3$ are reaction rate coefficients. At equilibrium, equations \eqref{sys:eq-mod-2} satisfy $\partial_t X_S = \partial_t Y_{S,1} = \partial_t Y_{S,2} = 0$, therefore
+where $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\gamma_3$, $\xi_1$, $\xi_2$, and $\xi_3$ are reaction rate coefficients. The existence of solutions of this coupled ODE-PDE system is studied in Section \ref{sec:Existence}. 
+
+At equilibrium, equations \eqref{sys:eq-mod-2} satisfy $\partial_t X_S = \partial_t Y_{S,1} = \partial_t Y_{S,2} = 0$, therefore
 \begin{align}
 \label{x_2} 
 	X_S = \frac{\beta_1 X_L}{\beta_2 + \beta_3Y_{L,1} + \beta_4 Y_{L,2}}, 
@@ -1475,8 +1483,8 @@ In thie following subsections we discuss the selection of parameters in Table \r
 	$\nu$ & Water flux & $1 \times 10^{-6}$ \si{dm .s^{-1}}\\
 	$g_X$ & Function for phosphate immobilisation & 0 \\
 	$g_{Y,1}$ & Function for phytase decomposition & 0 \\
-	$g_{Y,2}$ & Function for citrate decomposition & $\frac{\rho V_{max} Y_{L,2} }{K_M + Y_{L,2} }$ where $V_{max} = 0$ or $V_{max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1} .s^{-1}}, \\
-	 & & $K_M=10^{-8}$ \si{M} \\
+	$g_{Y,2}$ & Function for citrate decomposition & $\frac{\rho V_{\max} Y_{L,2} }{K_M + Y_{L,2} }$ where $V_{\max} = 0$ or \\
+	 & & $V_{\max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1} .s^{-1}}, $K_M=10^{-8}$ \si{M} \\
 	$b_X$ & Phosphate buffer power & 300 -- 2200 \\
 	$b_{Y,1}$ & Phytase buffer power & 1 \\
 	$b_{Y,2}$ & Citrate buffer power & 1 \\
@@ -1513,19 +1521,19 @@ In thie following subsections we discuss the selection of parameters in Table \r
 We choose the water content in soil $\theta$ to be in the range $0.2$ to $0.3$ which should be in accordance with real-life conditions in which tobacco and barley are cultivated, along with estimated soil bulk density $\rho=1.2$ \si{kg\per dm^{-3}}. We keep the impedance factor the same as in \cite{Ptashnyk-2011}, i.e. $f=0.5$.
 
 \subsubsection{Diffusion coefficients}
-We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{LX} = 9 \times 10^{-8}$ \si{dm^2 .s^{-1}} and from \cite{McKayFletcher-2019} where $D_{LX} = 7 \times 10^{-8}$ \si{dm^2.s^{-1}}. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{LY,2} = 2.1 \times 10^{-8}$ \si{dm^2.s^{-1}}. We estimate phytase diffusion to be half of phosphate diffusion, i.e. $D_{LY,1}$ in the range $3.5-4.5 \times 10^{-8}$ \si{dm^2.s^{-1}}, as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{LX} f \theta$, $D_{Y,1} = D_{LY,1} f \theta$, and $D_{Y,2} = D_{LY,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, following the findings in \cite{Ptashnyk-2011} we consider $\nu=0$. 
+We take the range of phosphate diffusion in water from \cite{Ptashnyk-2010} where $D_{L,X} = 9 \times 10^{-8}$ \si{dm^2 .s^{-1}} and from \cite{McKayFletcher-2019} where $D_{L,X} = 7 \times 10^{-8}$ \si{dm^2.s^{-1}}. In \cite{McKayFletcher-2019} we also have citrate diffusion in free solution $D_{L,Y,2} = 2.1 \times 10^{-8}$ \si{dm^2.s^{-1}}. We estimate phytase diffusion to be half of phosphate diffusion, i.e. $D_{L,Y,1}$ in the range $3.5-4.5 \times 10^{-8}$ \si{dm^2.s^{-1}}, as its molecules are bigger so it might diffuse more slowly. Diffusion of the micronutrients in soil is calculated as $D_X = D_{L,X} f \theta$, $D_{Y,1} = D_{L,Y,1} f \theta$, and $D_{Y,2} = D_{L,Y,2}f\theta$. In the table we also state the value for water flux coefficient $\nu$, however, following the findings in \cite{Ptashnyk-2011} we consider $\nu=0$. 
 
 \subsubsection{Parameters for sorption, mutual interaction, and decomposition}
 From the derivation of the extended model we recall that the phosphate buffer power is $b_X = \beta_1 / \beta_2$, where $\beta_1$, $\beta_2$ are parameters for adsorption and desorption to and from soil particles, respectively. The typical range for $b_X$ is taken from \cite{Ptashnyk-2010}. For further derivation we take $\beta_1$, $\beta_2$ from \cite{Ptashnyk-2010} where $\beta_1 = 3.7 \times 10^{-6}$ \si{s^{-1}}, $\beta_2 = 4.68 \times 10^{-9}$ \si{s^{-1}}. For simplicity we assume $b_{Y,1}=b_{Y,2} = 1$. The parameter for $X-Y_2$ interaction is $\kappa_{X,2} = \beta_4 / \beta_1$ where $\beta_4$ is phosphate enhanced desorption from soil solid due to absorbed citrate. The value $\beta_4 = 3.41 \times 10^{-4}$ is from \cite{McKayFletcher-2019}, and it gives us $\kappa_{X,2} = 92.16$ \si{dm^3. mol^{-1}}. We estimate the coefficient for $X-Y_1$ interaction, $\kappa_{X,1}$, to be 5-fold smaller than $\kappa_{X,2}$. Furthermore, we consider the parameters for interaction of the exudates with phosphate ($\kappa_{Y,1}$ and $\kappa_{Y,2}$) to be zero. 
 %as the amount the exudates reacting with the soil is much larger than the amount of phosphate taken by the roots. 
 
-Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the soil that involve decomposition of phosphate, i.e. $g_X = 0$. For the decomposition of citrate we might consider a Michaelis-Menten-type term $g_{Y,2} = V_{max} Y_{L,2} / (K_M + Y_{L,2})$, however, sorption of citrate to soil particles causes up to 99\% reduction in biodegradation rate \cite{McKayFletcher-2019}. We therefore choose $V_{max} = 0$ and experiment with non-zero values similar to those in \cite{Ptashnyk-2011}. For phytase we also set $g_{Y,1} = 0$ since we assume no microbial consumption of this nutrient.
+Similarly to \cite{Ptashnyk-2011}, we assume that there are no reactions in the soil that involve decomposition of phosphate, i.e. $g_X = 0$. For the decomposition of citrate we might consider a Michaelis-Menten-type term $g_{Y,2} = V_{\max} Y_{L,2} / (K_M + Y_{L,2})$, however, sorption of citrate to soil particles causes up to 99\% reduction in biodegradation rate \cite{McKayFletcher-2019}. We therefore choose $V_{\max} = 0$ and experiment with non-zero values similar to those in \cite{Ptashnyk-2011}. For phytase we also set $g_{Y,1} = 0$ since we assume no microbial consumption of this nutrient.
 
 \subsubsection{Absorption power and exudation rates}
 The coefficients for exudation rates in barley are taken from \cite{Ruiz-2020}. Tobacco exudation rates were obtained from \cite{giles_george} where we tried to estimate the root surface by using root radius being half of barley root radius (i.e. $a_2 = 2.5 \times 10^{-3}$) and the length of the root 100 \si{dm}, approximating the root(s) as a cylinder. However, this way both $F_{Y,1,2}$ and $F_{Y,2,2}$ were of order $10^{-6}$ which is much larger than the order of magnitude of $F_{Y,1,1}$ and $F_{Y,2,1}$ being $10^{-10}$. These relatively large exudation rates caused issues in the numerical simulations. We therefore didn't use the computed values $F_{Y,1,2}$ and $F_{Y,2,2}$ as described above, but we multiplied them by $10^{-4}$ so that all the exudation rates are of order $10^{-10}$.
 
 \subsubsection{Geometry of the domain}
-The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Figure \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ \si{dm}. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2 \si{cm} long exudation zone to be 2 \si{cm} behind the root tip (i.e. before the root cap), see Fig. \ref{fig:zones}.
+The domain's main axes are $r$ (horizontal) and $z$ (vertical), see Figure \ref{fig:2roots-b}. For the simulations we chose the distance between the two roots (i.e. the width of the simulation window) to be $w = 0.04$ \si{dm}. The height of the simulation window is chosen to be the length of one of the roots after 3-day growth. In both plants, phosphate is absorbed along the whole length of root. For the exudation we choose to locate the 2 \si{cm} long exudation zone to be 2 \si{cm} behind the root tip (i.e. before the root cap), see Figure \ref{fig:zones}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \subsection{Numerical experiments}
@@ -1563,7 +1571,7 @@ In this section, we will numerically solve the non-dimensionalised version of mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Citrate consumption by microbes}
 \label{sec:numexp_vmax}
-The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1}.s^{-1}} in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Figure \ref{fig:numexp_vmax1} with Figure \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Figure \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
+The first parameter change we experiment with is the assumption that citrate gets consumed by microbes in the soil, which we achieve by setting $V_{\max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1}.s^{-1}} in the term for $Y_2$ decomposition $g_{Y,2} = \rho V_{\max} Y_{L,2}/(K_M+Y_{L,2})$. Comparing the values in the colourbar of Figure \ref{fig:numexp_vmax1} with Figure \ref{fig:baseparams_X} we see that the maximum concentration of phosphate in the soil solution decreased by $\sim 30\%$. More important information on how much phosphate was actually absorbed by the root is shown in Figure \ref{fig:numexp_vmax2} where we can see curves showing cumulative uptake in comparison with the benchmark result. The difference in phosphate uptake caused by citrate microbial consumption is shown in Table \ref{t:numexp_results}, reaching $-2.9\%$ and $-5.08\%$ in the left and right root, respectively. The amount of drop in phosphate absorption depends mainly on the uptake power of each of the roots (which are the same in this set-up) and on the citrate exudation rate of the corresponding root which is the reason why there was larger drop in the root on the right. The value of $V_{\max}$ and the form of the citrate decompositon function was taken from the \ce{Zn-DMA} model in \cite{Ptashnyk-2011}, therefore the real dynamics for the actual decomposition of citrate may differ slightly.
 
 \begin{figure}[!htb]
 \centering
@@ -1583,7 +1591,7 @@ The first parameter change we experiment with is the assumption that citrate get
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_vmax2}
 \end{subfigure}
-\caption{$V_{max} = 2.5 \times 10^{-9}$ mol kg$^{-1}$ s$^{-1}$, i.e. citrate gets consumed by microbes. In (a) concentration of phosphate and (b) citrate in soil solution between the two roots after 24 hours in $\mu$M; (c) comparison of phosphate absorbed by each of the roots with original (dashed line) and changed parameters (solid line).}
+\caption{$V_{\max} = 2.5 \times 10^{-9}$ \si{mol.kg^{-1}.s^{-1}}, i.e. citrate gets consumed by microbes. In (a) concentration of phosphate and (b) citrate in soil solution between the two roots after 24 hours in $\mu$M; (c) comparison of phosphate absorbed by each of the roots with original (dashed line) and changed parameters (solid line).}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1677,9 +1685,9 @@ We may consider the opposite of the previous scenario and divide $b_X$ by two, i
 \subsubsection{Exudates buffer power}
 Now we examine the effect of change in buffer power of each of the exudates. Although we assumed $b_{Y,1}=b_{Y,2}=1$, we can still try to play with these values to see what effect they have on phosphate uptake. 
 
-Previously we have seen that an increase in $b_X$ resulted in more phosphate absorbed by the roots. While $b_X$ was located in multiple non-linear terms in the system and its effect on the result was not clear at first sight, we can see that $b_{Y,1}$ and $b_{Y,2}$ are only present in the coefficient multiplying the time derivative of $Y_{L,1}$ and $Y_{L,2}$, respectively, since we took $k_{Y,1}=k_{Y,2}=0$ for simplification. If we divide the equation by this coefficient, we see that a higher buffer power will cause smaller change in the exudate concentration throughout time. We therefore expect a decrease in phosphate uptake with increased $b_{Y,1}$ and $b_{Y,2}$, and vice versa. The numerical experiments support this hypothesis - in Fig. \ref{fig:numexp_by1up2} and \ref{fig:numexp_by2up2} we can see that an increase in $b_{Y,1}$ and $b_{Y,2}$ resulted in less phosphate absorbed by the root, while the opposite trend can be seen in Fig. \ref{fig:numexp_by1down2} and \ref{fig:numexp_by2down2} where we decreased these parameters. 
+Previously we have seen that an increase in $b_X$ resulted in more phosphate absorbed by the roots. While $b_X$ was located in multiple non-linear terms in the system and its effect on the result was not clear at first sight, we can see that $b_{Y,1}$ and $b_{Y,2}$ are only present in the coefficient multiplying the time derivative of $Y_{L,1}$ and $Y_{L,2}$, respectively, since we took $k_{Y,1}=k_{Y,2}=0$ for simplification. If we divide the equation by this coefficient, we see that a higher buffer power will cause smaller change in the exudate concentration throughout time. We therefore expect a decrease in phosphate uptake with increased $b_{Y,1}$ and $b_{Y,2}$, and vice versa. The numerical experiments support this hypothesis - in Figure \ref{fig:numexp_by1up2} and \ref{fig:numexp_by2up2} we can see that an increase in $b_{Y,1}$ and $b_{Y,2}$ resulted in less phosphate absorbed by the root, while the opposite trend can be seen in Figure \ref{fig:numexp_by1down2} and \ref{fig:numexp_by2down2} where we decreased these parameters. 
 
-Looking at the concentration plots of the exudates we notice that for higher buffer powers (Fig. \ref{fig:numexp_by1up1} and \ref{fig:numexp_by2up1}) the chemicals didn't reach the middle of the domain, i.e. this change prohibited the exudates to get further away from the root. This resulted in less phosphate solubilised and absorbed by the roots, compared to the opposite scenario where the decrease of buffer powers enhanced the transport of the exudates in the rhizosphere (Fig. \ref{fig:numexp_by1down1} and \ref{fig:numexp_by2down1} ), which resulted in an increase in uptake by both roots. If we think of the buffer power again as a ratio between the absorption and desorption rate of the exudate, we can explain this effect by noticing that an increase in absorption rate (i.e. increase in buffer power) keeps the exudates more fixed to the soil particles which prohibits their diffusion in the rhizosphere.
+Looking at the concentration plots of the exudates we notice that for higher buffer powers (Figures \ref{fig:numexp_by1up1} and \ref{fig:numexp_by2up1}) the chemicals didn't reach the middle of the domain, i.e. this change prohibited the exudates to get further away from the root. This resulted in less phosphate solubilised and absorbed by the roots, compared to the opposite scenario where the decrease of buffer powers enhanced the transport of the exudates in the rhizosphere (Figures \ref{fig:numexp_by1down1} and \ref{fig:numexp_by2down1} ), which resulted in an increase in uptake by both roots. If we think of the buffer power again as a ratio between the absorption and desorption rate of the exudate, we can explain this effect by noticing that an increase in absorption rate (i.e. increase in buffer power) keeps the exudates more fixed to the soil particles which prohibits their diffusion in the rhizosphere.
 \vspace{-0.3cm}
 \begin{figure}[!htb]
 \centering
@@ -1754,7 +1762,7 @@ Looking at the concentration plots of the exudates we notice that for higher buf
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Diffusion coefficients}
-We can experiment with the effect of an increase of diffusion coefficients (in free solution) on the transport of the chemicals in the rhizosphere. We start with the diffusion coefficient of phosphate $D_{LX}$ - in Fig. \ref{fig:numexp_DLXup2} and Table \ref{t:numexp_results} we see that increased phosphate diffusion had a positive effect on phosphate uptake. This might be explained by the exudates being secreted at the exudation zone of the root solubilising $P$ and the following diffusion of phosphate into the surrounding area, making it accessible closer to the root. However, we do not see any visible change when comparing Fig. \ref{fig:numexp_DLXup1} with the benchmark Fig. \ref{fig:baseparams_X}.
+We can experiment with the effect of an increase of diffusion coefficients (in free solution) on the transport of the chemicals in the rhizosphere. We start with the diffusion coefficient of phosphate $D_{L,X}$ - in Figures \ref{fig:numexp_DLXup2} and Table \ref{t:numexp_results} we see that increased phosphate diffusion had a positive effect on phosphate uptake. This might be explained by the exudates being secreted at the exudation zone of the root solubilising \ce{P} and the following diffusion of phosphate into the surrounding area, making it accessible closer to the root. However, we do not see any visible change when comparing Figure \ref{fig:numexp_DLXup1} with the benchmark Figure \ref{fig:baseparams_X}.
 
 \begin{figure}[!htb]
 \centering
@@ -1770,11 +1778,11 @@ We can experiment with the effect of an increase of diffusion coefficients (in f
     \label{fig:numexp_DLXup2}
 \end{subfigure}
 
-\caption{Phosphate diffusion coefficient $D_{LX}$ increased by 20\%. In (a) concentration of phosphate between the two roots after 24 hours in $\mu$M; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
+\caption{Phosphate diffusion coefficient $D_{L,X}$ increased by 20\%. In (a) concentration of phosphate between the two roots after 24 hours in $\mu$M; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
 \label{fig:numexp_DLXup}
 \end{figure}
 
-Similarly, we want to see what effect does increased diffusion of an exudate, e.g. $D_{LY,1}$, have on phosphate uptake. Although not visible in Fig. \ref{fig:numexp_DLY1up2}, in Table \ref{t:numexp_results} we see a very small decrease in phosphate absorption. This can be explained by phytase being diffused further away from the root, therefore $P$ is solubilised further away from the root and it takes it longer to reach its surface. By comparing the values in Fig. \ref{fig:numexp_DLY1up1} with \ref{fig:baseparams_Y1} we see that with increased diffusion, the exudate doesn't reach concentrations as high as with the original parameter setup. We also experimented with increasing both $D_{LY,1}$ and $D_{LY,2}$ by 20\% at the same time, which as expected resulted in a decrease in phosphate uptake. Although an increase in all three diffusion coefficients resulted in an overall increased phosphate uptake (+8.1\% and +7.52\%), this value was lower than when considering only increased $D_{LX}$ (+8.8\% and +8.61\%), see Table \ref{t:numexp_results} for results of all numerical experiments.
+Similarly, we want to see what effect does increased diffusion of an exudate, e.g. $D_{L,Y,1}$, have on phosphate uptake. Although not visible in Figure \ref{fig:numexp_DLY1up2}, in Table \ref{t:numexp_results} we see a very small decrease in phosphate absorption. This can be explained by phytase being diffused further away from the root, therefore \ce{P} is solubilised further away from the root and it takes it longer to reach its surface. By comparing the values in Figure \ref{fig:numexp_DLY1up1} with \ref{fig:baseparams_Y1} we see that with increased diffusion, the exudate doesn't reach concentrations as high as with the original parameter setup. We also experimented with increasing both $D_{L,Y,1}$ and $D_{L,Y,2}$ by 20\% at the same time, which as expected resulted in a decrease in phosphate uptake. Although an increase in all three diffusion coefficients resulted in an overall increased phosphate uptake (+8.1\% and +7.52\%), this value was lower than when considering only increased $D_{L,X}$ (+8.8\% and +8.61\%), see Table \ref{t:numexp_results} for results of all numerical experiments.
 
 \begin{figure}[!htb]
 \centering
@@ -1790,7 +1798,7 @@ Similarly, we want to see what effect does increased diffusion of an exudate, e.
     \label{fig:numexp_DLY1up2}
 \end{subfigure}
 
-\caption{Phytase diffusion coefficient $D_{LY,1}$ increased by 20\%. In (a) concentration of phosphate between the two roots after 24 hours in $\mu$M; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
+\caption{Phytase diffusion coefficient $D_{L,Y,1}$ increased by 20\%. In (a) concentration of phosphate between the two roots after 24 hours in $\mu$M; (b) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
 \label{fig:numexp_DLY1up}
 \end{figure}
 
@@ -1798,9 +1806,9 @@ Similarly, we want to see what effect does increased diffusion of an exudate, e.
 \subsubsection{Phytase exudation rate}
 \label{sec:numexp_F11}
 
-Possibly one of the most important factors that have effect on phosphate uptake is the rate at which the exudates are secreted from the roots as this is directly linked to solubilising $P$ and therefore making more phosphate available for the root. We will experiment with changing exudation rate of phytase at the left root, i.e. $F_{Y,1,1}$, and combine it with changes in the diffusion coefficients.
+Possibly one of the most important factors that have effect on phosphate uptake is the rate at which the exudates are secreted from the roots as this is directly linked to solubilising \ce{P} and therefore making more phosphate available for the root. We will experiment with changing exudation rate of phytase at the left root, i.e. $F_{Y,1,1}$, and combine it with changes in the diffusion coefficients.
 
-First, we consider a 10-fold increase in phytase exudation rate at left root, i.e. $F_{Y,1,1}$. As one may have expected, this has an effect primarily on the root concerned, see Fig. \ref{fig:numexp_FY11up2}. We also notice a 1\% increase in uptake at the right root, see Table \ref{t:numexp_results}, which is one of the benefits of intercropping - a stronger exudation rate at one plant can help the neighbouring plant to absorb more nutrients. The amount by which the root on the left helps root on the right in this scenario might depend on more factors, for example the proximity of the roots ($w$), and the diffusion coefficient of the exudate. 
+First, we consider a 10-fold increase in phytase exudation rate at left root, i.e. $F_{Y,1,1}$. As one may have expected, this has an effect primarily on the root concerned, see Figure \ref{fig:numexp_FY11up2}. We also notice a 1\% increase in uptake at the right root, see Table \ref{t:numexp_results}, which is one of the benefits of intercropping - a stronger exudation rate at one plant can help the neighbouring plant to absorb more nutrients. The amount by which the root on the left helps root on the right in this scenario might depend on more factors, for example the proximity of the roots ($w$), and the diffusion coefficient of the exudate. 
 
 \begin{figure}[!htb]
 \centering
@@ -1821,7 +1829,7 @@ First, we consider a 10-fold increase in phytase exudation rate at left root, i.
 
 Interestingly, in Table \ref{t:numexp_results} we see that increasing diffusion of phytase by 20\% really contributed positively towards phosphate uptake at the opposite root, while less nutrient was absorbed at the left root than without increasing diffusion. Thus, with increased diffusion and exudation at the left root, more phosphate gets absorbed at the right root at the price of less phosphate being absorbed at the left root.
 
-In Fig. \ref{fig:numexp_F11w} we see the effect of the distance between the roots before and after increasing $F_{Y,1,1}$. Shortening the distance between the roots by half resulted in $>100\%$ increase in phosphate uptake at both roots. Combining this with higher $F_{Y,1,1}$, we gain even more phosphate into each of the roots, this can be best seen by comparing Fig. \ref{fig:numexp_FY11up2}, \ref{fig:numexp_w2} and \ref{fig:numexp_FY11w2} and corresponding values in Table \ref{t:numexp_results}. We can see that with roots closer to each other and exudation rate increased, the root on the left actually gets more phosphate overall than the root on the right, which hasn't happened in any of the previous experiments.
+In Figure \ref{fig:numexp_F11w} we see the effect of the distance between the roots before and after increasing $F_{Y,1,1}$. Shortening the distance between the roots by half resulted in $>100\%$ increase in phosphate uptake at both roots. Combining this with higher $F_{Y,1,1}$, we gain even more phosphate into each of the roots, this can be best seen by comparing Figures \ref{fig:numexp_FY11up2}, \ref{fig:numexp_w2}, and \ref{fig:numexp_FY11w2} and corresponding values in Table \ref{t:numexp_results}. We can see that with roots closer to each other and exudation rate increased, the root on the left actually gets more phosphate overall than the root on the right, which hasn't happened in any of the previous experiments.
 
 \begin{figure}[!htb]
 \centering
@@ -1858,9 +1866,9 @@ In Fig. \ref{fig:numexp_F11w} we see the effect of the distance between the root
 
 Since the role of the phosphate-phytase ($\kappa_{X,1}$) and phosphate-citrate ($\kappa_{X,2}$) interaction coefficients is not clear, we will vary their values to try to understand their role in the system. Since we have defined $\kappa_{X,1}=\kappa_{X,2} / 5$, it is enough for us to change the value of $\kappa_{X,2}$ as this has effect on both parameters.
 
-In Fig. \ref{fig:numexp_kup2} and \ref{fig:numexp_kdown2} we see that a 20\% increase in interaction coefficients results in more phosphate absorbed, with the opposite effect resulting from decreasing the coefficients by 20\%. Comparing the values of phosphate concentration in Fig. \ref{fig:numexp_kup1} and \ref{fig:numexp_kdown1} we notice that increased interaction enabled more phosphate to accumulate at certain place in the domain, while decreased interaction 
+In Figures \ref{fig:numexp_kup2} and \ref{fig:numexp_kdown2} we see that a 20\% increase in interaction coefficients results in more phosphate absorbed, with the opposite effect resulting from decreasing the coefficients by 20\%. Comparing the values of phosphate concentration in Figures \ref{fig:numexp_kup1} and \ref{fig:numexp_kdown1} we notice that increased interaction enabled more phosphate to accumulate at certain place in the domain, while decreased interaction 
 
-The interaction coefficient $\kappa_{X,2}$ is mathematically defined as the ratio $\beta_4 / \beta_1$, where $\beta_4$ is phosphate desorption from soil solid due to absorbed citrate, and $\beta_1$ is adsorption of phosphate to soil particles. Thus, by increasing $\kappa_{X,2}$ we also increase $\beta_4$ which results in citrate pushing more phosphate from soil solid into soil solution, therefore there is more phosphate available to be utilised by the root (as phytase has more $P$ to solubilise in the soil liquid). We can apply similar reasoning to the coefficient $\kappa_{X,1}$, although the underlying biological explanation may be different. 
+The interaction coefficient $\kappa_{X,2}$ is mathematically defined as the ratio $\beta_4 / \beta_1$, where $\beta_4$ is phosphate desorption from soil solid due to absorbed citrate, and $\beta_1$ is adsorption of phosphate to soil particles. Thus, by increasing $\kappa_{X,2}$ we also increase $\beta_4$ which results in citrate pushing more phosphate from soil solid into soil solution, therefore there is more phosphate available to be utilised by the root (as phytase has more \ce{P} to solubilise in the soil liquid). We can apply similar reasoning to the coefficient $\kappa_{X,1}$, although the underlying biological explanation may be different. 
 
 \begin{figure}[!htb]
 \centering
@@ -1889,13 +1897,13 @@ The interaction coefficient $\kappa_{X,2}$ is mathematically defined as the rati
 \end{subfigure}
 
 \caption{Change in interaction coefficients $k_{X,1}$ and $k_{X,2}$ (with $k_{X,1} = k_{X,2}/5$). In (a) and (c) concentration of phosphate between the two roots after 24 hours in $\mu$M; (b) and (d) comparison of phosphate absorbed by each of the roots with original and changed parameters.}
-\label{fig:numexp_F11w}
+\label{fig:numexp_F11w-k}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
 
 \fontsize{9.5}{7}\selectfont
@@ -1907,28 +1915,28 @@ The interaction coefficient $\kappa_{X,2}$ is mathematically defined as the rati
  \hline
   \textbf{Num. experiment} & \textbf{Parameter change} & \textbf{Left root} & \textbf{Right root} & \textbf{Left root}  & \textbf{Right root}\\
  \hline 
-Benchmark solution & Base parameters & 9.689e$^{-9}$ &  1.103e$^{-8}$& - &- \\
-Citrate biodegradation & $V_{max}=2.5 \times 10^{-9}$ & 9.409e$^{-9}$ & 1.047e$^{-8}$ & -2.9\% & -5.08\%\\
-Uptake power& $\alpha_1 \times 10$ & 1.188e$^{-8}$ & 1.103e$^{-8}$ & 22.6\% & 0.00\% \\
-Uptake power & $\alpha_1 / 10$  & 9.087e$^{-9}$ & 1.103e$^{-8}$ & -6.2\% & 0.00\% \\
-Phosphate buffer power & $b_X \times 2$ & 1.521e$^{-8}$ & 1.806e$^{-8}$ & 57.0\% & 63.74\% \\
-Phosphate buffer power & $b_X / 2$  & 6.495e$^{-9}$ & 7.095e$^{-9}$ & -33.0\% & -35.68\% \\
-Phytase buffer power & $b_{Y,1} \times 2$ &  9.593e$^{-9}$ & 1.097e$^{-8}$ & -1.0\% & -0.54\%  \\
-Phytase buffer power & $b_{Y,1} / 2$ & 9.810e$^{-9}$ & 1.110e$^{-8}$ & 1.2\% & 0.63\%   \\
-Citrate buffer power & $b_{Y,2} \times 2$ &  9.416e$^{-9}$ & 1.045e$^{-8}$ & -2.8\% & -5.26\% \\
-Citrate buffer power & $b_{Y,2} / 2$ & 1.004e$^{-8}$ & 1.166e$^{-8}$ & 3.6\% & 5.71\% \\
-Diffusion coefficients & $D_{L,X}\times 1.2$ &  1.054e$^{-8}$ & 1.198e$^{-8}$ & 8.8\% & 8.61\% \\
-Diffusion coefficients & $D_{L,Y,1}\times 1.2$ & 9.669e$^{-9}$ & 1.102e$^{-8}$ & -0.2\% & -0.09\% \\
-Diffusion coefficients & $\{D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & 9.619e$^{-9}$& 1.091e$^{-8}$ & -0.7\% & -1.09\% \\
-Diffusion coefficients & $\{D_{L,X}, D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & 1.047e$^{-8}$ & 1.186e$^{-8}$ & 8.1\% & 7.52\% \\
-Exudation rate & $F_{Y,1,1}\times 10$ & 1.187e$^{-8}$ & 1.114e$^{-8}$ & 22.5\% & 1.00\% \\
-Exudation rate & $F_{Y,1,1}\times 10\text{ and } D_{LY,1}\times 1.2$ & 1.173e$^{-8}$ & 1.117e$^{-8}$ & 21.1\% & 1.27\%   \\
-Exudation rate & $F_{Y,1,1}\times 10\text{ and } D_{LX}\times 1.2$ & 1.288e$^{-8}$ & 1.210e$^{-8}$ & 32.9\% & 9.70\% \\
-Exudation rate & $F_{Y,1,1}\times 10\text{ and } \{D_{L,X}, D_{Y,1}\}\times 1.2$ & 1.273e$^{-8}$ & 1.214e$^{-8}$  & 31.4\% & 10.06\% \\
-Exudation rate & $F_{Y,1,1}\times 10\text{ and } w/2$ & 2.423e$^{-8}$ & 2.374e$^{-8}$ & 150.1\% & 115.23\% \\
-Distance & $w/2$ & 1.997e$^{-8}$ & 2.231e$^{-8}$ & 106.1\% & 102.27\% \\
-Interaction coefficients & $k_{X,1} \times 1.2$ & 9.914e$^{-9}$ & 1.138e$^{-8}$ & 2.3\% & 3.17\% \\
-Interaction coefficients & $k_{X,1} \times 0.8$ & 9.451e$^{-9}$ & 1.064e$^{-8}$  & -2.5\% & -3.54\% \\
+Benchmark solution & Base parameters & \num{9.689e-9} &  \num{1.103e-8} & - &- \\
+Citrate biodegradation & $V_{\max}=2.5 \times 10^{-9}$ & \num{9.409e-9} & \num{1.047e-8} & -2.9\% & -5.08\% \\
+Uptake power& $\alpha_1 \times 10$ & \num{1.188e-8} & \num{1.103e-8} & 22.6\% & 0.00\% \\
+Uptake power & $\alpha_1 / 10$  & \num{9.087e-9} & \num{1.103e-8} & -6.2\% & 0.00\% \\
+Phosphate buffer power & $b_X \times 2$ & \num{1.521e-8} & \num{1.806e-8} & 57.0\% & 63.74\% \\
+Phosphate buffer power & $b_X / 2$  & \num{6.495e-9} & \num{7.095e-9} & -33.0\% & -35.68\% \\
+Phytase buffer power & $b_{Y,1} \times 2$ &  \num{9.593e-9} & \num{1.097e-8} & -1.0\% & -0.54\%  \\
+Phytase buffer power & $b_{Y,1} / 2$ & \num{9.810e-9} & \num{1.110e-8} & 1.2\% & 0.63\%   \\
+Citrate buffer power & $b_{Y,2} \times 2$ &  \num{9.416e-9} & \num{1.045e-8} & -2.8\% & -5.26\% \\
+Citrate buffer power & $b_{Y,2} / 2$ & \num{1.004e-8} & \num{1.166e-8} & 3.6\% & 5.71\% \\
+Diffusion coefficients & $D_{L,X}\times 1.2$ &  \num{1.054e-8} & \num{1.198e-8} & 8.8\% & 8.61\% \\
+Diffusion coefficients & $D_{L,Y,1}\times 1.2$ & \num{9.669e-9} & \num{1.102e-8} & -0.2\% & -0.09\% \\
+Diffusion coefficients & $\{D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & \num{9.619e-9} & \num{1.091e-8} & -0.7\% & -1.09\% \\
+Diffusion coefficients & $\{D_{L,X}, D_{L,Y,1}, D_{L,Y,2} \}\times 1.2$ & \num{1.047e-8} & \num{1.186e-8} & 8.1\% & 7.52\% \\
+Exudation rate & $F_{Y,1,1}\times 10$ & \num{1.187e-8} & \num{1.114e-8} & 22.5\% & 1.00\% \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } D_{L,Y,1}\times 1.2$ & \num{1.173e-8} & \num{1.117e-8} & 21.1\% & 1.27\%   \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } D_{L,X}\times 1.2$ & \num{1.288e-8} & \num{1.210e-8} & 32.9\% & 9.70\% \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } \{D_{L,X}, D_{Y,1}\}\times 1.2$ & \num{1.273e-8} & \num{1.214e-8}  & 31.4\% & 10.06\% \\
+Exudation rate & $F_{Y,1,1}\times 10\text{ and } w/2$ & \num{2.423e-8} & \num{2.374e-8} & 150.1\% & 115.23\% \\
+Distance & $w/2$ & \num{1.997e-8} & \num{2.231e-8} & 106.1\% & 102.27\% \\
+Interaction coefficients & $k_{X,1} \times 1.2$ & \num{9.914e-9} & \num{1.138e-8} & 2.3\% & 3.17\% \\
+Interaction coefficients & $k_{X,1} \times 0.8$ & \num{9.451e-9} & \num{1.064e-8}  & -2.5\% & -3.54\% \\
 \bottomrule
 \end{tabular}
 \caption{Total phosphate absorbed in each of the roots after 24 hours and relative change of resulting values with respect to results obtained by using the original (base) parameters defined in Table \ref{t:Second-model-params}. \label{t:numexp_results}}
@@ -2569,17 +2577,37 @@ Hence, by Schauder fixed-point theorem \cite{Zeidler-1998}, there exists a fixed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+%\newpage
 \section{Author contributions}
-\noindent Karolína Benková: derivation of the extended model, numerical experiments
 
-\noindent Liz Howell:
 
-\noindent Andrés Miniguano Trujillo:
+As a group we varied what we contributed, all members contributed to both the modelling side and the computational side. All three modelled the first extension of the base model for two roots and one exudate. Karolína and Andrés produced the initial code for computational experimentation. Later Andrés worked on the non-dimensionalised version of the models and wrote code for two roots and one exudate. Karolína derived the extended model for two exudates and extended the non-dimensionalised code to solve this model. Karolína and Liz worked together on planning, performing, and analysing numerical experiments of the models in this work. Liz worked on the biological background of the models. She worked on an extensive literature review that allowed a comprehensive description of the numerical results, while also providing most parameter values (and ranges) for the models. Andrés and Liz worked together on producing high quality diagrams describing root interaction and dynamics. Andrés also worked on proving the results on existence of solutions for the coupled systems of differential equations, providing further properties regarding positiveness and boundedness of solutions for all the proposed models. He also worked on revising the whole project report for consistency and aided on improving the overall presentation of all figures.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\newpage
+%\clearpage
+%\newpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2588,8 +2616,8 @@ Hence, by Schauder fixed-point theorem \cite{Zeidler-1998}, there exists a fixed
 
 
 % \bibliography{Cites}
-\newpage
-\nocite{*} 
+%\newpage
+%\nocite{*} 
 \addcontentsline{toc}{section}{References}
 \printbibliography
 
@@ -2609,10 +2637,18 @@ Hence, by Schauder fixed-point theorem \cite{Zeidler-1998}, there exists a fixed
 
 \subsection{Availability of data, material, and code}
 \label{app:one}
-All the files and this document are available as in the following repository:
+All the files and this document are available in the following repository:
 \begin{quote}
-    \noindent \href{https://github.com/Defining-Good-Neighbours/}{\texttt{https://github.com/Defining-Good-Neighbours/}}
+    \noindent \href{https://github.com/Defining-Good-Neighbours/}{\texttt{https://github.com/Defining-Good-Neighbours/Report}}
 \end{quote}
+
+All data files generated or analysed during this study are available as additional files in the following repository:
+\begin{quote}
+    \noindent \href{https://github.com/Defining-Good-Neighbours/}{\texttt{https://github.com/Defining-Good-Neighbours/Code}}
+\end{quote}
+
+The images presented in this study were either created by the authors, product of internal communication, or cited accordingly from their original sources.
+
 
 \subsection{Parameter values used for numerical experiments}
 \label{app:parametertable}
@@ -2627,7 +2663,7 @@ All the files and this document are available as in the following repository:
   \textbf{Parameter} & \textbf{Value} & \textbf{Parameter} & \textbf{Value}  \\
  \hline 
 $\theta$ & 0.25 \si{dm^3} \si{dm^{-3}} & $f$ & 0.5 \\
-$\rho$ & 1.2 kg dm$^{-3}$ & $D_{L,X}$ & $9 \times 10^{-8}$ \si{dm^2.s^{-1}} \\
+$\rho$ & 1.2 \si{kg.dm^{-3}} & $D_{L,X}$ & $9 \times 10^{-8}$ \si{dm^2.s^{-1}} \\
 $D_{L,Y,1}$  & $4.5 \times 10^{-8}$ \si{dm^2 . s^{-1}} & $D_{L,Y,2}$ & $2.1 \times 10^{-8}$ \si{dm^2 .s^{-1}} \\
 $\nu$ & 0 & $g_X$ & 0 \\
 $g_{Y,1}$ & 0 & $g_{Y,2}$ & 0 \\

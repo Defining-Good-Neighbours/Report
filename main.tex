@@ -394,7 +394,7 @@ Boundary condition \eqref{eq:sys-Zn-Y-Gamma-a}  represents the exudation of \ce{
 \label{sec:Base}
 
 
-In this section, we will continue studying the original model from \cite{Ptashnyk-2011}. First, we extend the model to include two roots secreting an exudate $Y$ in order to facilitate absorption of a nutrient $X$ from the soil. Second, a non-dimensionalisation procedure is presented. Third, a numerical approach is discussed to approximate solutions of the coupled partial differential equation systems. Finally, we finish with a set of numerical simulations for the original model \eqref{eq:system-Zinc} and the two roots model.
+In this section, we will continue studying the original model from \cite{Ptashnyk-2011}. First, we extend the model to include two roots secreting an exudate $Y$ in order to facilitate absorption of a nutrient $X$ from the soil. Second, a non-dimensionalisation procedure is presented. Third, a numerical approach is discussed to approximate solutions of the coupled partial differential equation systems. Finally, we finish with a set of numerical simulations for the two roots model.
 
 %For the purpose of the next sections, we now generalise the system introduced in section \ref{sec:bio_basemodel} to model a root secreting an exudate $Y$ in order to facilitate absorption of a nutrient $X$ from the soil. 
 
@@ -440,10 +440,17 @@ We can extend model \eqref{eq:system-Zinc} by applying symmetry in the boundary 
 \begin{subequations}
 \label{sys:extension-two-roots}
 \begin{align}
-    D_X \partial_r X_L - \nu X_L &= \alpha_1 X_L & \text{at } r &= a, & z &\in [-L_1, -(L_1 - \delta L_{X,1})], \\
-    D_Y \partial_r Y_L - \nu Y_L &= -F_{Y,1}(t) &\text{at } r &= a, &z &\in [-({L}_1 - \delta {lt}_1), -({L}_1 - \delta {lt}_1 - \delta {L}_{Y,1})], \\
-    D_X \partial_r X_L - \nu X_L &= -\alpha_2 X_L & \text{at } r &= w+a, &z &\in [-L_2, -(L_2 - \delta L_{X,2})], \\
+    D_X \partial_r X_L - \nu X_L &= \alpha_1 X_L & \text{at } r &= a, & z &\in [-L_1, -(L_1 - \delta L_{X,1})], 
+    \label{eq:sys-2Zn-X-Gamma-a}
+    \\
+    D_Y \partial_r Y_L - \nu Y_L &= -F_{Y,1}(t) &\text{at } r &= a, &z &\in [-({L}_1 - \delta {lt}_1), -({L}_1 - \delta {lt}_1 - \delta {L}_{Y,1})], 
+    \label{eq:sys-2Zn-Y-Gamma-a}
+    \\
+    D_X \partial_r X_L - \nu X_L &= -\alpha_2 X_L & \text{at } r &= w+a, &z &\in [-L_2, -(L_2 - \delta L_{X,2})], 
+    \label{eq:sys-2Zn-Xw}
+    \\
     D_Y \partial_r Y_L - \nu Y_L &= F_{Y,2}(t) &\text{at } r &= w+a, &z &\in [-({L}_2 - \delta {lt}_2), -({L}_2 - \delta {lt}_2 - \delta {L}_{Y,2})],
+    \label{eq:sys-2Zn-Yw}
 \end{align}
 \end{subequations}
 where the parameters bear the same meanings as in Table \ref{t:First-model-params}, and they are indexed by the root they correspond to; i.e. 1 for the left-hand side of the domain and 2 for the right-hand side of the domain. We note that in this general setting the two plants can have different growth rates, i.e. $L_1 = L_{0,1} + G_1t$, $L_2 = L_{0,2} + G_2t$, where $L_{0,1}$, $L_{0,2}$ are root lengths at the beginning of the simulation. However, in the numerical experiment in this section we choose to model both roots with the same set of parameters as in \cite{Ptashnyk-2011}. The second root is located at $r = w+a$ where $w$ is the width of the space between the two roots. This distance can be manipulated so that the zones of root influence intersect with each other; thus allowing to model intercropping and the effect of the proximity of two roots on each other. For the rest of the boundary we consider zero-flux boundary conditions.
@@ -464,7 +471,9 @@ where the parameters bear the same meanings as in Table \ref{t:First-model-param
 
 %A drawback of model \eqref{eq:system-Zinc} is that numerical schemes for solving it might perform poorly if the parameters associated to the model are too small. This is actually the case, in the setting of Zinc uptake. As a result, 
 As a standard procedure,
-we will non-dimensionalise the variables of model \eqref{eq:system-Zinc} and its two-root extension \eqref{sys:extension-two-roots}. For this end, we introduce the following relations
+we will non-dimensionalise the variables of model
+%\eqref{eq:system-Zinc} and its two-root extension
+\eqref{sys:extension-two-roots}. For this end, we introduce the following relations
 \[
     r = \varepsilon_r \hat{r} + a,
     \qquad
@@ -557,59 +566,52 @@ introduce the non-dimensional quantity \( \frac{\varepsilon_x}{\varepsilon_t}\ha
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Boundary and initial conditions}
 
-Let us now discuss the non-dimensionalisation of the boundary conditions. For the one-root model \eqref{eq:system-Zinc}, we have that \eqref{eq:sys-Zn-X-Gamma-a} is equivalent to
+Let us now discuss the non-dimensionalisation of the boundary conditions. For the one-root model \eqref{eq:system-Zinc}, we have that \eqref{eq:sys-2Zn-X-Gamma-a} is equivalent to
 \[
     D_X \partial_r X_L - \nu X_L = 
-    \frac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r} \frac{\varepsilon_x}{\varepsilon_r} \pd{\hat{x}}{\hat{r}} - \frac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_r \varepsilon_x \hat{x} = \frac{\varepsilon_r \varepsilon_x}{\varepsilon_t} \hat{\alpha} \hat{x}
-    \qquad \text{at } r = a = a + \varepsilon_r \hat{r},\quad \varepsilon_z \hat{z} \in [-L, -(L - \delta L_X)],
+    \frac{\varepsilon_r^2}{\varepsilon_t} \hat{D}_{X,r} \frac{\varepsilon_x}{\varepsilon_r} \pd{\hat{x}}{\hat{r}} - \frac{\varepsilon_r}{\varepsilon_t} \hat{\nu}_r \varepsilon_x \hat{x} = \frac{\varepsilon_r \varepsilon_x}{\varepsilon_t} \hat{\alpha}_1 \hat{x}
+    \qquad \text{at } r = a = a + \varepsilon_r \hat{r},\quad \varepsilon_z \hat{z} \in [-L_1, -(L_1 - \delta L_{X,1})],
 \]
 or equivalently
 \begin{equation}
     \label{eq:sys-Zn-nond-a}
-    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = \hat{\alpha} \hat{x}
-    \qquad \text{at } \hat{r} = 0, \quad \hat{z} \in [-\hat{L}, -(\hat{L} - \delta \hat{L}_x)];
+    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = \hat{\alpha}_1 \hat{x}
+    \qquad \text{at } \hat{r} = 0, \quad \hat{z} \in [-\hat{L}_1, -(\hat{L}_1 - \delta \hat{L}_{x,1})];
 \end{equation}
-where we require \( \alpha = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\alpha}\), \( \hat{L} = \varepsilon_z^{-1} L\), and \( \delta\hat{L}_x = \varepsilon_z^{-1} \delta L_X\). Likewise for \eqref{eq:sys-Zn-Y-Gamma-a}, we get %\(\hat{F}_y = \frac{\varepsilon_t}{\varepsilon_r \varepsilon_y} F_y \)
+where we require \( \alpha_1 = \nicefrac{\varepsilon_r}{\varepsilon_t} \hat{\alpha}_1\), \( \hat{L}_1 = \varepsilon_z^{-1} L_1\), and \( \delta\hat{L}_{x,1} = \varepsilon_z^{-1} \delta L_{X,1}\). Likewise for \eqref{eq:sys-2Zn-Y-Gamma-a}, we get %\(\hat{F}_y = \frac{\varepsilon_t}{\varepsilon_r \varepsilon_y} F_y \)
 \begin{equation}
     \label{eq:sys-Zn-nond-b}
-    \hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} = -\hat{F}_y(t)     \qquad\text{at } \hat{r} = 0, \quad \hat{z} \in [-(\hat{L} - \delta \widehat{lt}), -(\hat{L} - \delta \widehat{lt} - \delta \hat{L}_y)].
+    \hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} = -\hat{F}_{y,1}(t)     \qquad\text{at } \hat{r} = 0, \quad \hat{z} \in [-(\hat{L}_1 - \delta \widehat{lt}_1), -(\hat{L}_1 - \delta \widehat{lt}_1 - \delta \hat{L}_{y,1})].
+    %\hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} = -\hat{F}_y(t)     \qquad\text{at } \hat{r} = 0, \quad \hat{z} \in [-(\hat{L} - \delta \widehat{lt}), -(\hat{L} - \delta \widehat{lt} - \delta \hat{L}_y)].
 \end{equation}
-Finally, condition \eqref{eq:sys-Zn-X-Gamma-x} is just
-\begin{equation}
-    \label{eq:sys-Zn-nond-x}
-    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} = 0
-    \qquad \text{at } \hat{r} = \frac{x-a}{\varepsilon_r}.
-\end{equation}
-
-Conditions \eqref{eq:sys-Zn-nond-a} and \eqref{eq:sys-Zn-nond-x} give us a hint of how we need to select \(\varepsilon_r\) and \(\varepsilon_z\). If we select \( \varepsilon_r = x-a\), then \( \hat{r} \) will be in the range \( [0,1]\). Similarly, if we pick \( \varepsilon_z = L_{t_{\max}}\), again \(\hat z \) will be in the range \([0,-1]\). This last selection implies that the maximum absolute value of \( \hat{L}\) should be \(1\) where we have
-\[
-    \hat{L} = \hat{L}(\hat t) = \frac{1}{\varepsilon_z} ( L_0 + G \varepsilon_t \hat t )
-    = \hat{L}_0 + \hat{G} \hat t,
-    \qquad 
-    \hat{L}_0 = \varepsilon^{-1}_z L_0,
-    \qquad
-    \hat{G} = \varepsilon_t \varepsilon_z^{-1} G;
-\]
-and we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat t\) in the range \( [0,1]\). 
-
-
-The treatment is similar for the two roots model \eqref{sys:extension-two-roots}. Using similar transformations as for \eqref{eq:sys-Zn-nond-a} and \eqref{eq:sys-Zn-nond-b}, where we get
-
+Finally, conditions \eqref{eq:sys-2Zn-Xw} and \eqref{eq:sys-2Zn-Yw} are just
 \begin{subequations}
+\label{eq:sys-Zn-nond-x}
 \begin{align}
-    \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} &= \hat{\alpha}_1 \hat{x}
-    &\text{at } \hat{r} &= 0, \quad \hat{z} \in [-\hat{L}_1,-(\hat{L}_1 - \delta \hat{L}_{x,1})],
-    \\
-    \hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} &= -\hat{F}_{y,1}(t)     &\text{at } \hat{r} &= 0, \quad \hat{z} \in [-(\hat{L}_1 - \delta \widehat{lt}_1), -(\hat{L}_1 - \delta \widehat{lt}_1 - \delta \hat{L}_{y,1})],
-    \\
     \hat{D}_{X,r} \pd{\hat{x}}{\hat{r}} - \hat{\nu}_r \hat{x} &= \hat{\alpha}_2 \hat{x}
-    &\text{at } \hat{r} &= 1, \quad \hat{z} \in [-\hat{L}_2, -(\hat{L}_2 - \delta \hat{L}_{x,2})],
+    &\text{at } \hat{r} &= \frac{w}{\varepsilon_r}, \quad \hat{z} \in [-\hat{L}_2, -(\hat{L}_2 - \delta \hat{L}_{x,2})],
     \\
-    \hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} &= -\hat{F}_{y,2}(t)     &\text{at } \hat{r} &= 1, \quad \hat{z} \in [-(\hat{L}_2 - \delta \widehat{lt}_2), -(\hat{L}_2 - \delta \widehat{lt}_2 - \delta \hat{L}_{y,2})].
+    \hat{D}_{Y,r} \pd{\hat{y}}{\hat{r}}  - \hat{\nu}_r \hat{y} &= -\hat{F}_{y,2}(t)     &\text{at } \hat{r} &= \frac{w}{\varepsilon_r}, \quad \hat{z} \in [-(\hat{L}_2 - \delta \widehat{lt}_2), -(\hat{L}_2 - \delta \widehat{lt}_2 - \delta \hat{L}_{y,2})].
 \end{align}
 \end{subequations}
 
-Notice that in both models, we have selected scaling parameters such that the systems of partial differential equations are defined in \([0,1]\times [0,-1] \times [0,1]\). We will denote the scaled spatial domain as \(\Omega := [0,1]\times [0,-1]\) and its boundary \(\Gamma := \partial \Omega\).
+Conditions \eqref{eq:sys-Zn-nond-a} and \eqref{eq:sys-Zn-nond-x} give us a hint of how we need to select \(\varepsilon_r\) and \(\varepsilon_z\). If we select \( \varepsilon_r = w\), then \( \hat{r} \) will be in the range \( [0,1]\). Similarly, if we pick \( \varepsilon_z = \max \{L_{t_{\max},1},L_{t_{\max},2}\}\), again \(\hat z \) will be in the range \([0,-1]\). This last selection implies that the maximum absolute value of \( \hat{L}\) should be \(1\) where we have
+\[
+    \hat{L}_i = \hat{L}_i (\hat t) = \frac{1}{\varepsilon_z} ( L_{0,i} + G_i \varepsilon_t \hat t )
+    = \hat{L}_{0,i} + \hat{G} \hat t,
+    \qquad 
+    \hat{L}_{0,i} = \varepsilon^{-1}_z L_{0,i},
+    \qquad
+    \hat{G}_i = \varepsilon_t \varepsilon_z^{-1} G_i,
+\]
+for \(i \in \{1,2\}\). Furthermore, we can further select \( \varepsilon_t = t_{\max}\) to finally have \( \hat t\) in the range \( [0,1]\). 
+
+
+%The treatment is similar for the two roots model \eqref{sys:extension-two-roots}. Using similar transformations as for \eqref{eq:sys-Zn-nond-a} and \eqref{eq:sys-Zn-nond-b}, where we get
+
+
+
+Notice that we have selected scaling parameters such that the system of partial differential equations is defined in \([0,1]\times [0,-1] \times [0,1]\). We will denote the scaled spatial domain as \(\Omega := [0,1]\times [0,-1]\) and its boundary \(\Gamma := \partial \Omega\).
 Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_0) = (\varepsilon_x^{-1} X^0_L, \varepsilon_y^{-1} Y^0_L) \). 
 
 
@@ -621,19 +623,16 @@ Lastly, the initial conditions are scaled as \( (\hat{x}_0,\hat{y}_0) = (\vareps
 \subsection{Numerical approximation scheme}
 \label{sec:Numerics-base}
 
-In order to get numerical solutions of the coupled system of partial differential equations \eqref{eq:sys-Zn-X-Omega}--\eqref{eq:sys-Zn-Y-Omega} with boundary conditions \eqref{eq:sys-Zn-X-Gamma-a}--\eqref{eq:sys-Zn-Y-Gamma-a} or \eqref{sys:extension-two-roots}, we will use a decoupling scheme.
+In order to get numerical solutions of the coupled system of partial differential equations \eqref{eq:sys-Zn-X-Omega}--\eqref{eq:sys-Zn-Y-Omega} with boundary conditions \eqref{eq:sys-Zn-X-Gamma-a}--\eqref{eq:sys-Zn-Y-Gamma-a} or \eqref{sys:extension-two-roots}, we will use a decoupling scheme by linearisation.
 %
-Operator splitting is an attractive technique for solving coupled systems of differential equations, since complex equation systems may be split into smaller parts that are easier to solve.
-As a result, this is a standard technique in the literature, for instance see \cite{Farrell-2019}, \cite{Sundnes-2006}, and the references therein. 
-%The ideas of splitting coupled systems are not new in the literature.
-%Previously, \cite{Farrell-2019} and \cite{Sundnes-2006} discussed a Leap-Frog-kind splitting method. Formally, the Strang splitting method aims to solve systems of the form
+%Operator splitting is an attractive technique for solving coupled systems of differential equations, since complex equation systems may be split into smaller parts that are easier to solve. As a result, this is a standard technique in the literature, for instance see \cite{Farrell-2019}, \cite{Sundnes-2006}, and the references therein. 
 Defining \(u:= (\hat{x},\hat{y})\), we aim to solve a system of the form
-\begin{equation}
-    \label{ec:splitting}
-	\pd{u}{t} = A_1(u) + A_2(u) 	\qquad \text{with} \qquad u(0) = u_0.
-\end{equation}
+\(
+    %\label{ec:splitting}
+	\pd{\hat{x}}{t} = A_1(u), \pd{\hat y}{t} = A_2(u) 	\) with \( u(0) = u_0.
+\)
 % As pointed out in \cite{Farrell-2019}, this is not trivial for software as FEniCS \cite{AlnaesBlechta2015a}. 
-An approach, as shown in  \cite{Sundnes-2006}, is to select the operators \(A_1\) and \(A_2\) in \eqref{ec:splitting} such that we solve a linear system of PDEs for \(\hat{y}\) and then a subsequent linear system of PDEs for \(\hat{x}\). Here we must highlight that the representation of \(A_1\) and \(A_2\) in \eqref{ec:splitting} as a sum is merely for notational purposes.
+An approach, as shown in  \cite{Sundnes-2006}, is to select the operators \(A_1\) and \(A_2\)  such that we solve a linear system of PDEs for \(\hat{y}\) and then a subsequent linear system of PDEs for \(\hat{x}\). %Here we must highlight that the representation of \(A_1\) and \(A_2\) in \eqref{ec:splitting} as a sum is merely for notational purposes.
 
 The general approach is as follows. We start discretising the time domain with steps of length \(\Delta \hat{t}\). At step \(m = 0\), we solve the reduced problem 
 \(
@@ -647,7 +646,7 @@ The solution, labelled \(\hat{y}^{m+1}\), is then used to solve
 	\pd{\hat{x}}{t} = \tilde{A}_2(\hat{x},\hat{y}^{m+1}; \hat{x}^m) 
 \) with 
 \( \hat{x}(m\Delta \hat{t}) = \hat{x}^m, \)
-and \( t\in [m\Delta \hat{t},(m+1)\Delta \hat{t}]\). Then we repeat the process for the next steps. This is a Godunov-like splitting, which is a first order approximation \cite{Sundnes-2006}. 
+and \( t\in [m\Delta \hat{t},(m+1)\Delta \hat{t}]\). Then we repeat the process for the next steps. %This is a Godunov-like splitting, which is a first order approximation \cite{Sundnes-2006}. 
 
 \begin{comment}
 Here, we discretise the time domain with steps of length \(\Delta t\) and start solving the reduced problem
@@ -676,7 +675,7 @@ Additionally, we will approximate the time derivatives using simple backward dif
 \label{sus:non-dim-base}
 
 
-The existence of a solution to the model \eqref{eq:system-Zinc} and its extension with boundary conditions \eqref{sys:extension-two-roots} is presented in Section \ref{sec:Existence}. 
+The existence of a solution to the model \eqref{eq:system-Zinc} with boundary conditions \eqref{sys:extension-two-roots} is presented in Section \ref{sec:Existence}. 
 %
 For now, let us suppose that there is a sufficiently smooth solution pair $(\hat x, \hat y)$ for each time \(\hat{t}\in [0,1]\). Now, let us fix \(\hat{t} \in (0,1)\). We introduce the nonlinear terms
 \begin{align}
@@ -690,34 +689,36 @@ For now, let us suppose that there is a sufficiently smooth solution pair $(\hat
 \end{align}
 where we have used the scaled constants \(\hat{\kappa}_X = \varepsilon_y \kappa_X\), \(\hat{\kappa}_Y = \varepsilon_x \kappa_Y\). 
 
-Multiply the scaled equations of the parabolic system by a $v \in \mathcal{C}^1 (\bar\Omega)$ function and integrate this with respect to the pair \((r,z)\) using the Lebesgue measure \(\mu\). Using the Divergence Theorem \cite{Evans-2010}, we have
+Multiply the scaled equations of the parabolic system by two $v_a,v_b \in \mathcal{C}^1 (\bar\Omega)$ functions and integrate this with respect to the pair \((r,z)\) using the Lebesgue measure \(\mu\). Using the Divergence Theorem \cite{Evans-2010}, we have
 \begin{equation}
 \label{eq:var-time-base}
 \begin{aligned}
     \int\limits_\Omega
-    A(\hat y) \pd{\hat{x}}{\hat{t}} v 
+    A(\hat y) \pd{\hat{x}}{\hat{t}} v_a 
     -
-    B(\hat x, \hat y) \pd{\hat y}{\hat t} v
+    B(\hat x, \hat y) \pd{\hat y}{\hat t} v_a
     \dif\mu
     &=
-    -\int\limits_\Omega 
-    \big( \hat{D}_x \hat{\nabla} \hat{x} - \hat{x}\hat{\nu}\big) \cdot \hat{\nabla} v \dif\mu
-    -\int\limits_\Omega \hat{g}_x v \dif\mu
-    +\int\limits_{\Gamma}    \big( \hat{D}_x \hat{\nabla} \hat{x} - \hat{x}\hat{\nu}\big) \cdot \vec{n}  v    \dif \sigma,
+    \int\limits_\Omega 
+    \big( \hat{x}\hat{\nu} - \hat{D}_x \hat{\nabla} \hat{x}  \big) \cdot \hat{\nabla} v_a %\dif\mu
+    -%\int\limits_\Omega 
+    \hat{g}_x v \dif\mu
+    +\int\limits_{\Gamma}    \big( \hat{D}_x \hat{\nabla} \hat{x} - \hat{x}\hat{\nu}\big) \cdot \vec{n}  v_a    \dif \sigma,
     \\
     \int\limits_\Omega
-    C(\hat{x})  \pd{\hat{y}}{\hat{t}} v 
+    C(\hat{x})  \pd{\hat{y}}{\hat{t}} v_b 
     -
-    E(\hat{x},\hat{y})  \pd{\hat x}{\hat t} v
+    E(\hat{x},\hat{y})  \pd{\hat x}{\hat t} v_b
     \dif\mu
     &=
-    -\int\limits_\Omega 
-    \big(\hat{D}_y \hat{\nabla} \hat{y} - \hat{y}\hat{\nu} \big) \cdot \hat{\nabla} v \dif\mu
-    -\int\limits_\Omega \hat{g}_y v \dif\mu
-    +\int\limits_{\Gamma}  \big(\hat{D}_y \hat{\nabla} \hat{y} - \hat{y}\hat{\nu} \big) \cdot \vec{n} v    \dif \sigma;
+    \int\limits_\Omega 
+    \big( \hat{y}\hat{\nu} - \hat{D}_y \hat{\nabla} \hat{y} \big) \cdot \hat{\nabla} v_b %\dif\mu
+    -%\int\limits_\Omega 
+    \hat{g}_y v_b \dif\mu
+    +\int\limits_{\Gamma}  \big(\hat{D}_y \hat{\nabla} \hat{y} - \hat{y}\hat{\nu} \big) \cdot \vec{n} v_b    \dif \sigma;
 \end{aligned}
 \end{equation}
-where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector, and $\sigma$ the surface measure on $\Gamma$. Moreover, we have used the scaled quantities \(\hat{g}_x = \frac{\varepsilon_t}{\varepsilon_x} g_X \) and \( \hat{g}_y = \frac{\varepsilon_t}{\varepsilon_y} {g}_Y \).
+where $\Gamma$ is the boundary of $\Omega$, $\vec{n}$ its normal vector, and $\sigma$ the surface measure on $\Gamma$. %Moreover, we have used the scaled quantities \(\hat{g}_x = \frac{\varepsilon_t}{\varepsilon_x} g_X \) and \( \hat{g}_y = \frac{\varepsilon_t}{\varepsilon_y} {g}_Y \).
 \begin{comment}
 , the constant scaled vector 
 \(
@@ -765,7 +766,7 @@ and the constant matrices
         0 &  \varepsilon_z^{-2}
     \end{pmatrix}.
 \]
-\end{comment}
+
 
 The resulting equations for the model of \cite{Ptashnyk-2011} are
 \begin{equation}
@@ -795,41 +796,48 @@ The resulting equations for the model of \cite{Ptashnyk-2011} are
 \end{aligned}
 \end{equation}
 Here we have identified the two segments $\Gamma_{x} = \{0\}\times [-\hat{L}, -(\hat{L}-\delta \hat{L}_x)]$ and $\Gamma_{y} = \{0\}\times [-(\hat{L} - \delta \widehat{lt}), -(\hat{L} - \delta \widehat{lt} - \delta \hat{L}_y)]$. Observe that they depend on the current time \(\hat t\).
-
-In contrast, the additional boundary terms in \eqref{sys:extension-two-roots} yield the following equations for the two-root extension:
+\end{comment}
+%
+%In contrast, the additional boundary terms in
+The resulting equations for the extended model
+\eqref{sys:extension-two-roots} yield 
+%the following equations for the two-root extension:
 \begin{equation}
 \label{eq:var-time-model-2}
 \begin{aligned}
     \int\limits_\Omega
-    A(\hat y) \pd{\hat{x}}{\hat{t}} v 
+    A(\hat y) \pd{\hat{x}}{\hat{t}} v_a 
     -
-    B(\hat x, \hat y) \pd{\hat y}{\hat t} v
+    B(\hat x, \hat y) \pd{\hat y}{\hat t} v_a
     \dif\mu
     &=
     \int\limits_\Omega 
-    \big( \hat{x}\hat{\nu} - \hat{D}_x \hat{\nabla} \hat{x}\big) \cdot \hat{\nabla} v \dif\mu
-    -\int\limits_\Omega \hat{g}_x v \dif\mu
-    -\int\limits_{\Gamma_{1,x}}    \hat{\alpha}_1 \hat{x} v    \dif \sigma
-    -\int\limits_{\Gamma_{2,x}}    \hat{\alpha}_2 \hat{x} v    \dif \sigma,
+    \big( \hat{x}\hat{\nu} - \hat{D}_x \hat{\nabla} \hat{x}\big) \cdot \hat{\nabla} v_a %\dif\mu
+    -%\int\limits_\Omega 
+    \hat{g}_x v_a \dif\mu
+    -\int\limits_{\Gamma_{1,x}}    \hat{\alpha}_1 \hat{x} v_a    \dif \sigma
+    -\int\limits_{\Gamma_{2,x}}    \hat{\alpha}_2 \hat{x} v_a    \dif \sigma,
     %
     \\
     \int\limits_\Omega
-    C(\hat{x})  \pd{\hat{y}}{\hat{t}} v 
+    C(\hat{x})  \pd{\hat{y}}{\hat{t}} v_b 
     -
-    E(\hat{x},\hat{y})  \pd{\hat x}{\hat t} v
+    E(\hat{x},\hat{y})  \pd{\hat x}{\hat t} v_b
     \dif\mu
     &=
     \int\limits_\Omega 
-    \big(\hat{y}\hat{\nu} - \hat{D}_y \hat{\nabla} \hat{y} \big) \cdot \hat{\nabla} v \dif\mu
-    -\int\limits_\Omega \hat{g}_y v \dif\mu
-    +\int\limits_{\Gamma_{1,y}}    \hat{F}_{y,1} v    \dif \sigma
-    +\int\limits_{\Gamma_{2,y}}    \hat{F}_{y,2} v    \dif \sigma.
+    \big(\hat{y}\hat{\nu} - \hat{D}_y \hat{\nabla} \hat{y} \big) \cdot \hat{\nabla} v_b %\dif\mu
+    -%\int\limits_\Omega 
+    \hat{g}_y v \dif\mu
+    +\int\limits_{\Gamma_{1,y}}    \hat{F}_{y,1} v_b    \dif \sigma
+    +\int\limits_{\Gamma_{2,y}}    \hat{F}_{y,2} v_b    \dif \sigma.
 \end{aligned}
 \end{equation}
-Here we have two segments for each root at time \(\hat t\). For the first, there are \(\Gamma_{1,x} = \{0\}\times [-\hat{L}_1,-(\hat{L}_1 - \delta \hat{L}_{x,1})]\) and \(\Gamma_{1,y} = \{0\}\times [-(\hat{L}_1 - \delta \widehat{lt}_1), -(\hat{L}_1 - \delta \widehat{lt}_1 - \delta \hat{L}_{y,1})] \). While for the second, we have \( \Gamma_{2,x} = \{1\}\times [-\hat{L}_2, -(\hat{L}_2 - \delta \hat{L}_{x,2})]\) and \(\Gamma_{2,y} = \{1\} \times [-(\hat{L}_2 - \delta \widehat{lt}_2), -(\hat{L}_2 - \delta \widehat{lt}_2 - \delta \hat{L}_{y,2})]\). 
+Here we have two segments for each root at time \(\hat t\). For the first, there are \(\Gamma_{1,x} = \{0\}\times [-\hat{L}_1,-(\hat{L}_1 - \delta \hat{L}_{x,1})]\) and \(\Gamma_{1,y} = \{0\}\times [-(\hat{L}_1 - \delta \widehat{lt}_1), -(\hat{L}_1 - \delta \widehat{lt}_1 - \delta \hat{L}_{y,1})] \). While for the second, we have \( \Gamma_{2,x} = \{1\}\times [-\hat{L}_2, -(\hat{L}_2 - \delta \hat{L}_{x,2})]\) and \(\Gamma_{2,y} = \{1\} \times [-(\hat{L}_2 - \delta \widehat{lt}_2), -(\hat{L}_2 - \delta \widehat{lt}_2 - \delta \hat{L}_{y,2})]\). Notice that they depend on the current time \(\hat t\).
 
 
-Observe that \eqref{eq:var-time-model-1} and \eqref{eq:var-time-model-2} hold, by density, for any \(v \in H^1(\Omega)\). This assumes that \(\hat x\) and \(\hat y\), and their corresponding time derivatives, are defined pointwise in time. 
+%Observe that \eqref{eq:var-time-model-1} and \eqref{eq:var-time-model-2} hold, 
+Observe that \eqref{eq:var-time-model-2} holds, by density, for any \(v_a,v_b \in H^1(\Omega)\). This assumes that \(\hat x\) and \(\hat y\), and their corresponding time derivatives, are defined pointwise in time. 
 % However, they no longer require to be defined pointwise for every \( (r,z) \in \Omega\).
 
 
@@ -846,7 +854,9 @@ To do this, we discretise the time domain by \(N+1\) uniform steps of length \(\
 for all \( n \in \{0,\ldots, N \}\).
 
 
-Inserting this in the variational system, and applying the splitting technique discussed for \eqref{ec:splitting}, we get that the base model of \cite{Ptashnyk-2011} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( \hat{y}^{n+1}\) such that
+Inserting this in the variational system, and applying the splitting technique discussed for \eqref{ec:splitting}, we get that 
+\begin{comment}
+the base model of \cite{Ptashnyk-2011} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( \hat{y}^{n+1}\) such that
 \begin{subequations}
 \label{eq:var-time-model-1-alg}
 \begin{equation}
@@ -885,7 +895,9 @@ for every \(v\in H^1(\Omega)\). (B) Proceed on finding \( \hat{x}^{n+1}\) such t
 for every \(v\in H^1(\Omega)\). %(C) Until the iterations have finished, go back to step (A).
 
 
-Correspondingly, the extension for two roots with boundary conditions \eqref{sys:extension-two-roots} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( \hat y^{n+1}\) such that
+Correspondingly, 
+\end{comment}
+the extension for two roots with boundary conditions \eqref{sys:extension-two-roots} is approximated by the following scheme. Initialising \(\hat{x}^{0} = \hat{x}^{-1} = \hat{x}_0\) and \(\hat{y}^{0}=\hat{y}_0\), then for every \(n \in \{0,\ldots,N\}\): (A) Solve the variational problem of finding \( \hat y^{n+1}\) such that
 \begin{subequations}
 \label{eq:var-time-model-2-alg}
 \begin{equation}
@@ -926,7 +938,8 @@ for every \(v\in H^1(\Omega)\). (B) Proceed on finding \( \hat x^{n+1}\) such th
 for every \(v\in H^1(\Omega)\). %(C) Until the iterations have finished, go back to step (A).
 
 \vspace{1\baselineskip}
-In both approximation schemes, each contributing subset of \(\Gamma\) is updated for the current time step. For instance, segment \(\Gamma_{1,y}^{n+1}\) is the segment \(\Gamma_{1,y}\) at time \( \hat{t}_{n+1} = (n+1)\Delta \hat t\).
+%In both approximation schemes, each contributing subset of \(\Gamma\) is updated for the current time step. For instance, segment \(\Gamma_{1,y}^{n+1}\) is the segment \(\Gamma_{1,y}\) at time \( \hat{t}_{n+1} = (n+1)\Delta \hat t\).
+In the approximation scheme, each contributing subset of \(\Gamma\) is updated for the current time step. For instance, segment \(\Gamma_{1,y}^{n+1}\) is the segment \(\Gamma_{1,y}\) at time \( \hat{t}_{n+1} = (n+1)\Delta \hat t\).
 
 
 
@@ -936,14 +949,14 @@ In both approximation schemes, each contributing subset of \(\Gamma\) is updated
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Implementation comments}
 
-The varational problems in \eqref{eq:var-time-model-1-alg} and \eqref{eq:var-time-model-2-alg} will be solved using FEniCS \cite{AlnaesBlechta2015a} with its Python interface. 
+The variational problems in \eqref{eq:var-time-model-2-alg} will be solved using FEniCS \cite{AlnaesBlechta2015a} with its Python interface. 
 FEniCS is a framework for PDE modeling, continuum mechanics, and physics simulations, and it enables users to translate the mathematical problem into Python code and solve it efficiently using the finite element method \cite{fenics}. The main benefits of this software are that the code is close to the mathematical formulation and that the implementation of the model does not get much more difficult as the complexity of the model increases.
 The code and related files are available in the repository of this project as mentioned in Appendix \ref{app:one}.
 
 %To numerically solve the system in FEniCS, we use the variational formulation discretised in time defined in the previous subsections. Since the problem is nonlinear, we can linearise it by using the solution computed in the previous time step. First, we solve the equation for $Y$, (insert eq), followed by the equation for $X$ \textcolor{red}{FINISH the computational formulation}.
 
 In FEniCS, we define the boundaries as the edges of the rectangular domain. However, neither of our boundary conditions is valid on the whole edge but only on a part of it (along the whole root or a segment).
-Let us first consider the original model from \cite{Ptashnyk-2011} in its non-dimensionalised version. Here the segments \(\Gamma_x\) and \(\Gamma_y\) are defined by indicator functions. 
+Let us first consider the original model from \cite{Ptashnyk-2011} in its non-dimensionalised version, which is identical to the one derived above. Here the segments \(\Gamma_x\) and \(\Gamma_y\) are defined by indicator functions. 
 The first indicator function should attain value one along the whole root except the root cap (i.e. where the uptake of a nutrient happens). Thus, the indicator function should act on the interval 
 \(
     0 \geq \hat{z} \geq -(\hat{L}_0 + \hat{G} \hat{t} ),
@@ -1768,14 +1781,14 @@ Similarly, we want to see what effect does increased diffusion of an exudate, e.
 
 \begin{figure}[!htb]
 \centering
-\begin{subfigure}[t]{0.35\textwidth}
+\begin{subfigure}[t]{0.3\textwidth}
     \includegraphics[width=\textwidth]{Figures/Y1_DY1up20.png}
     \caption{Phytase ($Y_1$)}
     \label{fig:numexp_DLY1up1}
 \end{subfigure}
 \qquad
-\begin{subfigure}[t]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{Figures/DY1up20.eps}
+\begin{subfigure}[t]{0.55\textwidth} \centering
+    \includegraphics[width=0.6\textwidth]{Figures/DY1up20.eps}
     \caption{Cumulative uptake of phosphate by the left (L) and right (R) root.}
     \label{fig:numexp_DLY1up2}
 \end{subfigure}
@@ -2620,7 +2633,7 @@ As a group we varied what we contributed, all members contributed to both the mo
 \label{app:one}
 All the files and this document are available in the following repository:
 \begin{quote}
-    \noindent \href{https://github.com/Defining-Good-Neighbours/}{\texttt{https://github.com/Defining-Good-Neighbours/Report}}
+    \noindent \href{https://github.com/Defining-Good-Neighbours/Report}{\texttt{https://github.com/Defining-Good-Neighbours/Report}}
 \end{quote}
 
 All data files generated or analysed during this study are available as additional files in the following repository:

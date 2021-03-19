@@ -1,6 +1,3 @@
-# Defining good neighbours
+# Defining Good Neighbours: Modelling Root Traits for Beneficial Plant-Plant Interactions - Report files
 
-LaTeX report file
-
-The file can be further edited at:
-https://www.overleaf.com/1826261174yjqbqjbgrzbh
+In this repository, you can find the supporting files to elaborate the `LaTeX` report file.
